@@ -17,7 +17,7 @@
                         <div class="tool-badge">{{ $tool['category'] }}</div>
                         <h3 style="margin-top:14px;">{{ $tool['title'] }}</h3>
                         <p>{{ $tool['description'] }}</p>
-                        <a class="card-link" href="{{ url('/tools/' . $tool['slug']) }}">Open tool</a>
+                        <a class="card-link" href="{{ url('/tools/' . $tool['slug']) }}">Open tool <span aria-hidden="true">→</span></a>
                     </article>
                 @endforeach
             </div>
@@ -40,7 +40,7 @@
                         <div class="tool-badge">{{ $tool['category'] }}</div>
                         <h3 style="margin-top:14px;">{{ $tool['title'] }}</h3>
                         <p>{{ $tool['summary'] }}</p>
-                        <a class="card-link" href="{{ url('/tools/' . $tool['slug']) }}">Try this tool</a>
+                        <a class="card-link" href="{{ url('/tools/' . $tool['slug']) }}">Try this tool <span aria-hidden="true">→</span></a>
                     </article>
                 @endforeach
             </div>
@@ -115,7 +115,7 @@
                         <div class="tool-icon">G{{ $index + 1 }}</div>
                         <h3 style="margin-top:14px;">{{ $guide['title'] }}</h3>
                         <p>{{ $guide['seo_description'] }}</p>
-                        <a class="card-link" href="{{ url('/guides/' . $guide['slug']) }}">Read guide</a>
+                        <a class="card-link" href="{{ url('/guides/' . $guide['slug']) }}">Read guide <span aria-hidden="true">→</span></a>
                     </article>
                 @endforeach
             </div>

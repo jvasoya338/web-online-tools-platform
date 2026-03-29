@@ -354,7 +354,7 @@
                                 <div class="tool-icon">{{ $related['icon'] }}</div>
                                 <h3 style="margin-top:12px;">{{ $related['title'] }}</h3>
                                 <p>{{ $related['summary'] }}</p>
-                                <a class="card-link" href="{{ url('/tools/' . $related['slug']) }}">Open tool</a>
+                                <a class="card-link" href="{{ url('/tools/' . $related['slug']) }}">Open tool <span aria-hidden="true">→</span></a>
                             </div>
                         @endforeach
                     </div>
@@ -370,7 +370,7 @@
                                 <div class="tool-icon">GD</div>
                                 <h3 style="margin-top:12px;">{{ $guide['title'] }}</h3>
                                 <p>{{ $guide['seo_description'] }}</p>
-                                <a class="card-link" href="{{ url('/guides/' . $guide['slug']) }}">Read guide</a>
+                                <a class="card-link" href="{{ url('/guides/' . $guide['slug']) }}">Read guide <span aria-hidden="true">→</span></a>
                             </div>
                         @endforeach
                     </div>
