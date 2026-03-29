@@ -350,7 +350,7 @@
                     <h3>Related tools</h3>
                     <div class="page-grid" style="margin-top:18px;">
                         @foreach ($tool['related'] as $related)
-                            <div class="card">
+                            <div class="card click-card">
                                 <div class="tool-icon">{{ $related['icon'] }}</div>
                                 <h3 style="margin-top:12px;">{{ $related['title'] }}</h3>
                                 <p>{{ $related['summary'] }}</p>
@@ -366,7 +366,7 @@
                     <h3>Helpful guides</h3>
                     <div class="page-grid" style="margin-top:18px;">
                         @foreach ($tool['related_guides'] as $guide)
-                            <div class="card">
+                            <div class="card click-card">
                                 <div class="tool-icon">GD</div>
                                 <h3 style="margin-top:12px;">{{ $guide['title'] }}</h3>
                                 <p>{{ $guide['seo_description'] }}</p>

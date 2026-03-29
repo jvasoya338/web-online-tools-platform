@@ -234,6 +234,22 @@
         .tool-icon, .tool-side-icon { margin-bottom: 16px; }
         .card h3, .tool-panel h3 { margin-bottom: 12px; font-size: 1.3rem; }
 
+        .click-card {
+            position: relative;
+            transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+        }
+
+        .click-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 24px 54px rgba(0, 58, 104, 0.16);
+            border-color: rgba(0, 109, 191, 0.22);
+        }
+
+        .click-card:focus-within {
+            border-color: rgba(0, 109, 191, 0.34);
+            box-shadow: 0 0 0 3px rgba(0, 109, 191, 0.12);
+        }
+
         .card-link {
             display: inline-flex;
             align-items: center;
@@ -241,6 +257,13 @@
             margin-top: 14px;
             color: var(--brand-dark);
             font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+        }
+
+        .card-link::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
         }
 
         .tool-layout > div:first-child, .page-layout > div:first-child { flex: 1.15; }

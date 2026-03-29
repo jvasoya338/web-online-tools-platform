@@ -12,7 +12,7 @@
             </div>
             <div class="tool-grid">
                 @foreach ($tools as $tool)
-                    <article class="card">
+                    <article class="card click-card">
                         <div class="tool-icon">{{ $tool['icon'] }}</div>
                         <div class="tool-badge">{{ $tool['category'] }}</div>
                         <h3 style="margin-top:14px;">{{ $tool['title'] }}</h3>
@@ -35,7 +35,7 @@
             </div>
             <div class="tool-grid">
                 @foreach ($featuredTools as $tool)
-                    <article class="card">
+                    <article class="card click-card">
                         <div class="tool-icon">{{ $tool['icon'] }}</div>
                         <div class="tool-badge">{{ $tool['category'] }}</div>
                         <h3 style="margin-top:14px;">{{ $tool['title'] }}</h3>
@@ -111,7 +111,7 @@
             </div>
             <div class="tool-grid">
                 @foreach ($latestGuides as $index => $guide)
-                    <article class="card">
+                    <article class="card click-card">
                         <div class="tool-icon">G{{ $index + 1 }}</div>
                         <h3 style="margin-top:14px;">{{ $guide['title'] }}</h3>
                         <p>{{ $guide['seo_description'] }}</p>
