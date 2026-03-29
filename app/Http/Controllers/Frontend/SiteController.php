@@ -28,6 +28,7 @@ class SiteController extends Controller
                 'keywords' => 'developer tools online, pdf tools online, json formatter, jwt decoder, regex tester, uuid generator, pdf page counter, pdf metadata viewer, webtoolsstation',
                 'canonical' => url('/'),
                 'type' => 'website',
+                'image' => url('/images/logo/webtoolsstation-logo.png'),
             ],
             'schema' => [
                 '@context' => 'https://schema.org',
@@ -35,6 +36,7 @@ class SiteController extends Controller
                 'name' => 'WebToolsStation',
                 'url' => url('/'),
                 'description' => 'A tool platform by TJVerce with developer utilities and PDF tools.',
+                'image' => url('/images/logo/webtoolsstation-logo.png'),
                 'publisher' => [
                     '@type' => 'Organization',
                     'name' => 'TJVerce',
@@ -61,6 +63,7 @@ class SiteController extends Controller
                 'keywords' => implode(', ', $tool['keywords']),
                 'canonical' => url('/tools/' . $tool['slug']),
                 'type' => 'website',
+                'image' => url('/images/logo/webtoolsstation-logo.png'),
             ],
             'schema' => [
                 '@context' => 'https://schema.org',
@@ -70,6 +73,7 @@ class SiteController extends Controller
                 'operatingSystem' => 'Web Browser',
                 'description' => $tool['seo_description'],
                 'url' => url('/tools/' . $tool['slug']),
+                'image' => url('/images/logo/webtoolsstation-logo.png'),
                 'publisher' => [
                     '@type' => 'Organization',
                     'name' => 'TJVerce',
@@ -134,6 +138,19 @@ class SiteController extends Controller
                 ['title' => 'Focus', 'value' => 'Useful online tools with clear design'],
                 ['title' => 'Contact', 'value' => 'webtoolsstation@gmail.com'],
             ],
+            'schema' => [
+                '@context' => 'https://schema.org',
+                '@type' => 'AboutPage',
+                'name' => 'About WebToolsStation',
+                'url' => url('/about'),
+                'description' => 'Learn about WebToolsStation, what it publishes, and how TJVerce approaches tool quality and trust.',
+                'image' => url('/images/logo/webtoolsstation-logo.png'),
+                'publisher' => [
+                    '@type' => 'Organization',
+                    'name' => 'TJVerce',
+                    'url' => url('/'),
+                ],
+            ],
         ], [
             'title' => 'About WebToolsStation - TJVerce',
             'description' => 'Learn about WebToolsStation by TJVerce, including our mission, design approach, platform direction, and how we build useful online tools.',
@@ -152,12 +169,14 @@ class SiteController extends Controller
                 'keywords' => 'contact webtoolsstation, contact tjverce, webtoolsstation support email',
                 'canonical' => url('/contact'),
                 'type' => 'article',
+                'image' => url('/images/logo/webtoolsstation-logo.png'),
             ],
             'schema' => [
                 '@context' => 'https://schema.org',
                 '@type' => 'ContactPage',
                 'name' => 'Contact WebToolsStation',
                 'url' => url('/contact'),
+                'image' => url('/images/logo/webtoolsstation-logo.png'),
             ],
             'contact' => [
                 'company' => 'TJVerce',
@@ -210,6 +229,8 @@ class SiteController extends Controller
 
         abort_if(!$guide, 404);
 
+        $guide = $this->prepareGuide($guide);
+
         return view('site.article', [
             'article' => $guide,
             'guides' => $this->guides(),
@@ -220,21 +241,30 @@ class SiteController extends Controller
                 'keywords' => implode(', ', $guide['keywords']),
                 'canonical' => url('/guides/' . $guide['slug']),
                 'type' => 'article',
+                'image' => $guide['image'],
             ],
             'schema' => [
                 '@context' => 'https://schema.org',
                 '@type' => 'Article',
                 'headline' => $guide['title'],
                 'description' => $guide['seo_description'],
+                'image' => [$guide['image']],
                 'author' => [
-                    '@type' => 'Organization',
-                    'name' => 'TJVerce',
+                    '@type' => 'Person',
+                    'name' => $guide['author']['name'],
+                    'url' => $guide['author']['url'],
                 ],
                 'publisher' => [
                     '@type' => 'Organization',
                     'name' => 'TJVerce',
+                    'logo' => [
+                        '@type' => 'ImageObject',
+                        'url' => url('/images/logo/webtoolsstation-logo.png'),
+                    ],
                 ],
                 'mainEntityOfPage' => url('/guides/' . $guide['slug']),
+                'datePublished' => $guide['published_at'],
+                'dateModified' => $guide['updated_at'],
             ],
         ]);
     }
@@ -301,6 +331,19 @@ class SiteController extends Controller
                 ['title' => 'Website', 'value' => 'WebToolsStation'],
                 ['title' => 'Primary Contact', 'value' => 'webtoolsstation@gmail.com'],
                 ['title' => 'Policy Scope', 'value' => 'Website usage, browser tools, and communication'],
+            ],
+            'schema' => [
+                '@context' => 'https://schema.org',
+                '@type' => 'WebPage',
+                'name' => 'Privacy Policy',
+                'url' => url('/privacy-policy'),
+                'description' => 'Privacy policy for WebToolsStation covering browser-based tools, contact communication, and website usage.',
+                'image' => url('/images/logo/webtoolsstation-logo.png'),
+                'publisher' => [
+                    '@type' => 'Organization',
+                    'name' => 'TJVerce',
+                    'url' => url('/'),
+                ],
             ],
         ], [
             'title' => 'Privacy Policy - WebToolsStation',
@@ -374,6 +417,19 @@ class SiteController extends Controller
                 ['title' => 'Use Standard', 'value' => 'Lawful, respectful, non-abusive use only'],
                 ['title' => 'Questions', 'value' => 'webtoolsstation@gmail.com'],
             ],
+            'schema' => [
+                '@context' => 'https://schema.org',
+                '@type' => 'WebPage',
+                'name' => 'Terms of Use',
+                'url' => url('/terms-of-use'),
+                'description' => 'Terms of Use for WebToolsStation covering acceptable use, website limits, and user responsibilities.',
+                'image' => url('/images/logo/webtoolsstation-logo.png'),
+                'publisher' => [
+                    '@type' => 'Organization',
+                    'name' => 'TJVerce',
+                    'url' => url('/'),
+                ],
+            ],
         ], [
             'title' => 'Terms of Use - WebToolsStation',
             'description' => 'Read the Terms of Use for WebToolsStation by TJVerce, including acceptable use, platform limits, output responsibility, and website rules.',
@@ -411,73 +467,66 @@ class SiteController extends Controller
     {
         return view('site.page', [
             'page' => $page,
-            'seo' => $seo,
-            'schema' => [
+            'seo' => array_merge([
+                'image' => url('/images/logo/webtoolsstation-logo.png'),
+            ], $seo),
+            'schema' => $page['schema'] ?? [
                 '@context' => 'https://schema.org',
-                '@type' => 'Organization',
-                'name' => 'TJVerce',
-                'url' => url('/'),
-                'email' => 'webtoolsstation@gmail.com',
+                '@type' => 'WebPage',
+                'name' => $seo['title'],
+                'url' => $seo['canonical'],
+                'description' => $seo['description'],
+                'image' => url('/images/logo/webtoolsstation-logo.png'),
+                'publisher' => [
+                    '@type' => 'Organization',
+                    'name' => 'TJVerce',
+                    'url' => url('/'),
+                    'email' => 'webtoolsstation@gmail.com',
+                ],
             ],
         ]);
     }
 
+    private function prepareGuide(array $guide): array
+    {
+        $metadata = $this->guideMetadata();
+        $guideMeta = $metadata['guides'][$guide['slug']] ?? [];
+
+        $guide['author'] = $metadata['default_author'];
+        $guide['reviewer'] = $metadata['default_reviewer'];
+        $guide['published_at'] = $guideMeta['published_at'] ?? now()->toDateString();
+        $guide['updated_at'] = $guideMeta['updated_at'] ?? $guide['published_at'];
+        $guide['reading_time'] = $guideMeta['reading_time'] ?? '4 min read';
+        $guide['image'] = $metadata['image'];
+
+        return $guide;
+    }
+
     private function prepareTool(array $tool): array
     {
-        $tool['how_to_use'] = [
-            'Open the tool page and review the short description so you know what the tool is meant to do.',
-            'Paste, type, or upload the required input depending on the tool interface.',
-            'Run the tool, review the output carefully, and copy or reuse the result when it matches your need.',
+        $editorial = $this->toolEditorial()[$tool['slug']] ?? [];
+
+        $tool['use_steps'] = $editorial['use_steps'] ?? [
+            'Review the description so you know what the tool is meant to do before entering data.',
+            'Paste, type, or upload the required input and run the tool once the source looks complete.',
+            'Check the result carefully before copying it into another system or workflow.',
         ];
 
-        $tool['why_it_helps'] = [
-            'It removes repetitive manual work and makes small digital tasks faster to complete.',
-            'It keeps the workflow in the browser, which is useful when you want quick results without installing extra software.',
-            'It gives a focused page for a specific task, which helps visitors understand the tool immediately.',
+        $tool['use_cases'] = $editorial['use_cases'] ?? [
+            'Quick browser-based checks when you need an answer faster than opening a larger application.',
+            'Daily work that benefits from one focused page instead of a crowded multi-feature interface.',
+            'Short utility tasks where speed and clarity matter more than deep enterprise automation.',
         ];
 
-        $tool['best_for'] = [
-            'Developers, students, creators, and business users who need a quick utility in the browser.',
-            'Fast checks, formatting, conversion, or lightweight inspection work during daily tasks.',
-            'Situations where speed and clarity matter more than a large complicated application.',
+        $tool['watch_out_for'] = $editorial['watch_out_for'] ?? [
+            'Review the output in context, especially when the source data comes from another system.',
+            'Lightweight browser tools are helpful for fast checks, but they do not replace full professional workflows in every case.',
+            'If the input contains sensitive information, handle the result carefully even when the tool runs locally.',
         ];
 
-        $tool['faqs'] = [
-            [
-                'question' => 'Is this tool free to use?',
-                'answer' => 'Yes. This tool is available directly on WebToolsStation without requiring a separate paid workflow.',
-            ],
-            [
-                'question' => 'Do I need to install anything first?',
-                'answer' => 'No. The tool is designed to work in a normal web browser so you can use it quickly.',
-            ],
-            [
-                'question' => 'Who is this tool useful for?',
-                'answer' => $tool['title'] . ' is useful for people who need a practical browser-based utility for quick everyday digital work.',
-            ],
-        ];
-
-        if (str_starts_with($tool['slug'], 'pdf-')) {
-            $tool['why_it_helps'] = [
-                'It gives a simple way to inspect PDF-related details without opening a heavyweight desktop workflow.',
-                'It is useful when you need a quick document check before sharing, storing, or reviewing a file.',
-                'It supports lightweight browser-side PDF work for people who want speed and convenience.',
-            ];
-
-            $tool['best_for'] = [
-                'Office work, document review, admin tasks, and basic PDF inspection.',
-                'Fast browser checks when you need a lightweight PDF utility.',
-                'People who want simple document tools without downloading another application.',
-            ];
-        }
-
-        if ($tool['slug'] === 'password-generator') {
-            $tool['faqs'][2]['answer'] = 'It is useful for creating stronger passwords for websites, accounts, internal tools, and everyday security tasks.';
-        }
-
-        if ($tool['slug'] === 'word-counter') {
-            $tool['faqs'][2]['answer'] = 'It is especially helpful for writers, editors, students, and anyone who needs to measure text quickly.';
-        }
+        $tool['example_title'] = $editorial['example_title'] ?? 'Practical example';
+        $tool['example_body'] = $editorial['example_body'] ?? 'This tool is most useful when you need a focused answer quickly and want to keep the workflow simple.';
+        $tool['privacy_note'] = $editorial['privacy_note'] ?? 'This tool is designed to keep the workflow lightweight and browser-first.';
 
         $tool['related'] = collect($this->tools())
             ->reject(fn (array $item): bool => $item['slug'] === $tool['slug'])
@@ -518,8 +567,18 @@ class SiteController extends Controller
         return app(WebToolsStationCatalog::class)->tools();
     }
 
+    private function toolEditorial(): array
+    {
+        return app(WebToolsStationCatalog::class)->toolEditorial();
+    }
+
+    private function guideMetadata(): array
+    {
+        return app(WebToolsStationCatalog::class)->guideMetadata();
+    }
+
     private function guides(): array
     {
-        return app(WebToolsStationCatalog::class)->guides();
+        return array_map(fn (array $guide): array => $this->prepareGuide($guide), app(WebToolsStationCatalog::class)->guides());
     }
 }

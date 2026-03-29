@@ -311,15 +311,15 @@
                 <div class="tool-panel">
                     <h3>How to use {{ $tool['title'] }}</h3>
                     <ul class="detail-list">
-                        @foreach ($tool['how_to_use'] as $item)
+                        @foreach ($tool['use_steps'] as $item)
                             <li>{{ $item }}</li>
                         @endforeach
                     </ul>
                 </div>
                 <aside class="tool-panel">
-                    <h3>Why people use this tool</h3>
+                    <h3>Where this tool helps most</h3>
                     <ul class="detail-list">
-                        @foreach ($tool['why_it_helps'] as $item)
+                        @foreach ($tool['use_cases'] as $item)
                             <li>{{ $item }}</li>
                         @endforeach
                     </ul>
@@ -328,21 +328,20 @@
 
             <div class="tool-layout" style="margin-top:24px;">
                 <div class="tool-panel">
-                    <h3>Best use cases</h3>
+                    <h3>{{ $tool['example_title'] }}</h3>
+                    <p>{{ $tool['example_body'] }}</p>
+                    <div class="mini-card" style="margin-top:18px;">
+                        <strong>Privacy note</strong>
+                        <p style="margin-top:10px;">{{ $tool['privacy_note'] }}</p>
+                    </div>
+                </div>
+                <aside class="tool-panel">
+                    <h3>Things to check before relying on the result</h3>
                     <ul class="detail-list">
-                        @foreach ($tool['best_for'] as $item)
+                        @foreach ($tool['watch_out_for'] as $item)
                             <li>{{ $item }}</li>
                         @endforeach
                     </ul>
-                </div>
-                <aside class="tool-panel">
-                    <h3>Common questions</h3>
-                    @foreach ($tool['faqs'] as $faq)
-                        <div style="margin-bottom:18px;">
-                            <strong>{{ $faq['question'] }}</strong>
-                            <p style="margin-top:8px;">{{ $faq['answer'] }}</p>
-                        </div>
-                    @endforeach
                 </aside>
             </div>
 

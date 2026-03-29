@@ -121,4 +121,82 @@
             </div>
         </div>
     </section>
+
+    <section class="page-section">
+        <div class="shell page-layout">
+            <div class="page-copy">
+                <div class="page-header-block">
+                    <div class="section-kicker">Why This Site Exists</div>
+                    <h2 style="margin-top:16px;">WebToolsStation is meant to be useful before it tries to be big.</h2>
+                    <p style="margin-top:16px;">
+                        This project is built for the moments when a person needs one focused answer quickly: format a payload,
+                        check a token, clean a slug, inspect a PDF, or convert a small file without opening a much larger workflow.
+                        The goal is not to overwhelm visitors with hundreds of shallow pages. The goal is to make each tool understandable,
+                        readable, and genuinely helpful the first time someone lands on it.
+                    </p>
+                </div>
+
+                <div class="page-sections">
+                    <article class="page-section-card">
+                        <h3>What we try to publish</h3>
+                        <p>
+                            We prefer tools that solve a clear problem, explain the expected input and output, and help a visitor move
+                            on with their work faster. That means each page should do more than exist for a keyword. It should explain
+                            what the tool is for, where it helps, and what a user should double-check before relying on the result.
+                        </p>
+                        <p>
+                            We also try to support tools with practical guides so the site is not just a directory of buttons.
+                            Some visitors need a fast utility. Others need context, examples, and a clearer understanding of how
+                            to use the tool well. Both audiences matter.
+                        </p>
+                    </article>
+                    <article class="page-section-card">
+                        <h3>How we think about trust</h3>
+                        <p>
+                            Useful tools should not feel anonymous or careless. That is why we keep public pages such as About,
+                            Contact, Privacy Policy, and Terms of Use visible and written as real parts of the platform. We want
+                            the site to feel maintained, understandable, and responsible instead of looking like a random collection
+                            of scripts with no owner behind it.
+                        </p>
+                        <p>
+                            When a tool handles text, links, tokens, or files, we want the page to make the workflow clear. If a result
+                            is only a quick check and not a full professional verdict, the page should say so. That kind of honesty is
+                            part of the product quality we want visitors to feel.
+                        </p>
+                    </article>
+                </div>
+            </div>
+
+            <aside class="page-copy">
+                <div class="page-side-stack">
+                    <div>
+                        <div class="section-kicker">Editorial Standards</div>
+                        <h3 style="margin-top:14px;">What we review before a page earns its place</h3>
+                    </div>
+                    <div class="page-grid">
+                        <div class="card">
+                            <div class="tool-icon">CL</div>
+                            <h3 style="margin-top:12px;">Clear purpose</h3>
+                            <p>Every tool page should explain what problem it solves and who it is actually helpful for.</p>
+                        </div>
+                        <div class="card">
+                            <div class="tool-icon">EX</div>
+                            <h3 style="margin-top:12px;">Real examples</h3>
+                            <p>Pages need practical use cases, not only feature labels or short generic blurbs.</p>
+                        </div>
+                        <div class="card">
+                            <div class="tool-icon">CK</div>
+                            <h3 style="margin-top:12px;">Check points</h3>
+                            <p>We call out limitations and review notes so visitors know what to double-check.</p>
+                        </div>
+                        <div class="card">
+                            <div class="tool-icon">TR</div>
+                            <h3 style="margin-top:12px;">Trust signals</h3>
+                            <p>Company identity, policies, contact details, and clear page ownership are part of the product.</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
 @endsection

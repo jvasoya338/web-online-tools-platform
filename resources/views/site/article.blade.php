@@ -7,6 +7,10 @@
                 <div class="page-header-block">
                     <div class="section-kicker">Guide</div>
                     <h1 style="margin-top:16px;">{{ $article['title'] }}</h1>
+                    <p class="meta-copy" style="margin-top:14px;">
+                        By {{ $article['author']['name'] }} · Published {{ \Illuminate\Support\Carbon::parse($article['published_at'])->format('F j, Y') }}
+                        · Updated {{ \Illuminate\Support\Carbon::parse($article['updated_at'])->format('F j, Y') }} · {{ $article['reading_time'] }}
+                    </p>
                     <p style="margin-top:16px;">{{ $article['intro'] }}</p>
                 </div>
 
@@ -44,6 +48,13 @@
                     <div>
                         <div class="section-kicker">More Reading</div>
                         <h3 style="margin-top:14px;">Helpful pages on WebToolsStation</h3>
+                    </div>
+                    <div class="card">
+                        <div class="tool-icon">AU</div>
+                        <h3 style="margin-top:12px;">Article review</h3>
+                        <p>Author: {{ $article['author']['name'] }}</p>
+                        <p>Reviewed by: {{ $article['reviewer']['name'] }}</p>
+                        <p>Review focus: {{ $article['reviewer']['role'] }}</p>
                     </div>
                     <div class="page-grid">
                         @foreach (collect($guides)->reject(fn ($guide) => $guide['slug'] === $article['slug'])->take(4) as $guide)

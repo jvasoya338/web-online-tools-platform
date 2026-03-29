@@ -18,4 +18,14 @@ class WebToolsStationCatalog
     {
         return require app_path('Data/guides.php');
     }
+
+    public function toolEditorial(): array
+    {
+        return require app_path('Data/tool-editorial.php');
+    }
+
+    public function guideMetadata(): array
+    {
+        return require app_path('Data/guide-metadata.php');
+    }
 }

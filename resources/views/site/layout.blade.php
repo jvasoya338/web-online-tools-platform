@@ -12,9 +12,12 @@
     <meta property="og:type" content="{{ $seo['type'] }}">
     <meta property="og:url" content="{{ $seo['canonical'] }}">
     <meta property="og:site_name" content="WebToolsStation">
+    <meta property="og:image" content="{{ $seo['image'] ?? url('/images/logo/webtoolsstation-logo.png') }}">
+    <meta property="og:image:alt" content="WebToolsStation preview image">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $seo['title'] }}">
     <meta name="twitter:description" content="{{ $seo['description'] }}">
+    <meta name="twitter:image" content="{{ $seo['image'] ?? url('/images/logo/webtoolsstation-logo.png') }}">
     <link rel="canonical" href="{{ $seo['canonical'] }}">
     <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-icon-60x60.png">
