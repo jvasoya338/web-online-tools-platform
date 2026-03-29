@@ -1,0 +1,52 @@
+<?php
+
+namespace Tests\Feature;
+
+use Tests\TestCase;
+
+class PublicPagesTest extends TestCase
+{
+    public function test_core_public_pages_return_successful_responses(): void
+    {
+        $routes = [
+            '/',
+            '/about',
+            '/contact',
+            '/privacy-policy',
+            '/terms-of-use',
+            '/sitemap.xml',
+            '/robots.txt',
+        ];
+
+        foreach ($routes as $route) {
+            $this->get($route)->assertOk();
+        }
+    }
+
+    public function test_tool_pages_render_known_catalog_content(): void
+    {
+        $this->get('/tools/json-formatter')
+            ->assertOk()
+            ->assertSee('JSON Formatter')
+            ->assertSee('Format JSON');
+
+        $this->get('/tools/pdf-page-counter')
+            ->assertOk()
+            ->assertSee('PDF Page Counter')
+            ->assertSee('Analyze PDF');
+    }
+
+    public function test_guide_pages_render_known_content(): void
+    {
+        $this->get('/guides/how-to-format-json-without-errors')
+            ->assertOk()
+            ->assertSee('How to Format JSON Without Errors')
+            ->assertSee('Guide');
+    }
+
+    public function test_unknown_tool_and_guide_pages_return_not_found(): void
+    {
+        $this->get('/tools/not-a-real-tool')->assertNotFound();
+        $this->get('/guides/not-a-real-guide')->assertNotFound();
+    }
+}

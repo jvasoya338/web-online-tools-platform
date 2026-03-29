@@ -1,0 +1,26 @@
+<?php
+
+return [
+            'json-formatter' => ['how-to-format-json-without-errors'],
+            'base64-encode-decode' => ['when-to-use-base64-encoding-and-decoding'],
+            'jwt-decoder' => ['best-way-to-check-a-jwt-token'],
+            'regex-tester' => ['common-regex-mistakes-beginners-make'],
+            'password-generator' => ['how-to-use-a-password-generator-well'],
+            'pdf-page-counter' => ['what-pdf-metadata-can-tell-you'],
+            'pdf-metadata-viewer' => ['what-pdf-metadata-can-tell-you'],
+            'pdf-text-finder' => ['what-pdf-metadata-can-tell-you'],
+            'pdf-security-checker' => ['what-pdf-metadata-can-tell-you'],
+            'slug-generator' => ['how-to-clean-text-for-urls-and-slugs'],
+            'url-parser' => ['how-to-clean-text-for-urls-and-slugs'],
+            'color-converter' => ['how-to-use-hex-and-rgb-colors-correctly'],
+            'hex-to-rgb-converter' => ['how-to-use-hex-and-rgb-colors-correctly'],
+            'rgb-to-hex-converter' => ['how-to-use-hex-and-rgb-colors-correctly'],
+            'favicon-generator' => ['how-to-use-hex-and-rgb-colors-correctly'],
+            'text-diff-checker' => ['how-to-compare-text-differences-quickly'],
+            'line-sorter' => ['how-to-compare-text-differences-quickly'],
+            'text-to-binary-converter' => ['when-to-use-base64-encoding-and-decoding'],
+            'binary-to-text-converter' => ['when-to-use-base64-encoding-and-decoding'],
+            'jpg-to-png-converter' => ['how-to-use-hex-and-rgb-colors-correctly'],
+            'png-to-jpg-converter' => ['how-to-use-hex-and-rgb-colors-correctly'],
+            'csv-to-json-converter' => ['best-way-to-clean-csv-before-converting-to-json', 'how-to-format-json-without-errors'],
+        ];
