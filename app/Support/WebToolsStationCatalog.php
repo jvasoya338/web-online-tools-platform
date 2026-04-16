@@ -28,4 +28,9 @@ class WebToolsStationCatalog
     {
         return require app_path('Data/guide-metadata.php');
     }
+
+    public function toolDepth(): array
+    {
+        return require app_path('Data/tool-depth.php');
+    }
 }

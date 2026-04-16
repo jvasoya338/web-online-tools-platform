@@ -505,6 +505,7 @@ class SiteController extends Controller
     private function prepareTool(array $tool): array
     {
         $editorial = $this->toolEditorial()[$tool['slug']] ?? [];
+        $depth = $this->toolDepth()[$tool['slug']] ?? [];
 
         $tool['use_steps'] = $editorial['use_steps'] ?? [
             'Review the description so you know what the tool is meant to do before entering data.',
@@ -527,6 +528,9 @@ class SiteController extends Controller
         $tool['example_title'] = $editorial['example_title'] ?? 'Practical example';
         $tool['example_body'] = $editorial['example_body'] ?? 'This tool is most useful when you need a focused answer quickly and want to keep the workflow simple.';
         $tool['privacy_note'] = $editorial['privacy_note'] ?? 'This tool is designed to keep the workflow lightweight and browser-first.';
+        $tool['common_mistakes'] = $depth['common_mistakes'] ?? [];
+        $tool['better_alternative'] = $depth['better_alternative'] ?? [];
+        $tool['output_notes'] = $depth['output_notes'] ?? [];
 
         $tool['related'] = collect($this->tools())
             ->reject(fn (array $item): bool => $item['slug'] === $tool['slug'])
@@ -575,6 +579,11 @@ class SiteController extends Controller
     private function guideMetadata(): array
     {
         return app(WebToolsStationCatalog::class)->guideMetadata();
+    }
+
+    private function toolDepth(): array
+    {
+        return app(WebToolsStationCatalog::class)->toolDepth();
     }
 
     private function guides(): array

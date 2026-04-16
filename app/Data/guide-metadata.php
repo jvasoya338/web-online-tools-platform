@@ -62,5 +62,55 @@ return [
             'updated_at' => '2026-03-29',
             'reading_time' => '4 min read',
         ],
+        'how-to-read-unix-timestamps-in-real-logs' => [
+            'published_at' => '2026-03-08',
+            'updated_at' => '2026-04-14',
+            'reading_time' => '5 min read',
+        ],
+        'why-decoding-a-jwt-is-not-the-same-as-verifying-it' => [
+            'published_at' => '2026-03-10',
+            'updated_at' => '2026-04-14',
+            'reading_time' => '5 min read',
+        ],
+        'how-to-check-if-a-password-is-actually-strong' => [
+            'published_at' => '2026-03-12',
+            'updated_at' => '2026-04-13',
+            'reading_time' => '5 min read',
+        ],
+        'what-makes-a-url-slug-good-for-users-and-seo' => [
+            'published_at' => '2026-03-15',
+            'updated_at' => '2026-04-13',
+            'reading_time' => '5 min read',
+        ],
+        'how-to-tell-if-color-conversion-results-are-correct' => [
+            'published_at' => '2026-03-18',
+            'updated_at' => '2026-04-13',
+            'reading_time' => '5 min read',
+        ],
+        'why-pdf-text-search-fails-on-some-files' => [
+            'published_at' => '2026-03-21',
+            'updated_at' => '2026-04-14',
+            'reading_time' => '5 min read',
+        ],
+        'how-to-review-pdf-metadata-before-sharing-a-file' => [
+            'published_at' => '2026-03-24',
+            'updated_at' => '2026-04-14',
+            'reading_time' => '5 min read',
+        ],
+        'how-to-use-a-word-counter-for-real-editing-work' => [
+            'published_at' => '2026-03-27',
+            'updated_at' => '2026-04-15',
+            'reading_time' => '5 min read',
+        ],
+        'how-line-sorting-helps-clean-messy-lists-fast' => [
+            'published_at' => '2026-04-01',
+            'updated_at' => '2026-04-15',
+            'reading_time' => '4 min read',
+        ],
+        'when-to-use-url-encoding-in-api-and-form-work' => [
+            'published_at' => '2026-04-04',
+            'updated_at' => '2026-04-15',
+            'reading_time' => '5 min read',
+        ],
     ],
 ];

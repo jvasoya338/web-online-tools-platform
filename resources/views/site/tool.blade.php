@@ -345,6 +345,48 @@
                 </aside>
             </div>
 
+            @if (!empty($tool['common_mistakes']) || !empty($tool['better_alternative']) || !empty($tool['output_notes']))
+                <div class="tool-layout" style="margin-top:24px;">
+                    <div class="tool-panel">
+                        <h3>Common mistakes people make</h3>
+                        @if (!empty($tool['common_mistakes']))
+                            <ul class="detail-list">
+                                @foreach ($tool['common_mistakes'] as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <p>Review the source input carefully before assuming the tool output is the problem.</p>
+                        @endif
+                    </div>
+                    <aside class="tool-panel">
+                        <h3>How to read the output well</h3>
+                        @if (!empty($tool['output_notes']))
+                            <ul class="detail-list">
+                                @foreach ($tool['output_notes'] as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <p>The strongest results come when you compare the output with the source task and not just the raw text.</p>
+                        @endif
+                    </aside>
+                </div>
+
+                <div class="tool-panel" style="margin-top:24px;">
+                    <h3>When to use a different workflow</h3>
+                    @if (!empty($tool['better_alternative']))
+                        <ul class="detail-list">
+                            @foreach ($tool['better_alternative'] as $item)
+                                <li>{{ $item }}</li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <p>Browser-based tools are best for quick checks. For deeper audits, repeated batch work, or sensitive workflows, move into your full production tooling.</p>
+                    @endif
+                </div>
+            @endif
+
             @if (!empty($tool['related']))
                 <div class="tool-panel" style="margin-top:24px;">
                     <h3>Related tools</h3>
