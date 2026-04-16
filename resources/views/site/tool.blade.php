@@ -420,6 +420,8 @@
             @endif
         </div>
     </section>
+
+    <div id="copy-toast" class="toast" role="status" aria-live="polite"></div>
 @endsection
 
 @section('scripts')
@@ -437,10 +439,35 @@
             el.style.color = isError ? "#b91c1c" : "#171717";
         }
 
+        let toastTimer;
+
+        function showToast(message, isError = false) {
+            const toast = document.getElementById("copy-toast");
+            if (!toast) return;
+
+            toast.textContent = message;
+            toast.classList.toggle("error", isError);
+            toast.classList.add("show");
+
+            window.clearTimeout(toastTimer);
+            toastTimer = window.setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2200);
+        }
+
         async function copyOutput(id) {
             const text = document.getElementById(id).textContent || "";
-            if (!text.trim()) return;
-            await navigator.clipboard.writeText(text);
+            if (!text.trim()) {
+                showToast("There is no output to copy yet.", true);
+                return;
+            }
+
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast("Output copied to your clipboard.");
+            } catch (error) {
+                showToast("Copy failed. Please try again.", true);
+            }
         }
 
         function formatJson() {

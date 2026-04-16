@@ -422,6 +422,37 @@
             border: 1px solid rgba(0, 109, 191, 0.12);
         }
 
+        .toast {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 80;
+            min-width: 240px;
+            max-width: min(360px, calc(100% - 32px));
+            padding: 14px 16px;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 109, 191, 0.14);
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 22px 50px rgba(0, 58, 104, 0.16);
+            color: var(--ink);
+            font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+            opacity: 0;
+            transform: translateY(12px);
+            pointer-events: none;
+            transition: opacity 180ms ease, transform 180ms ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast.error {
+            border-color: rgba(185, 28, 28, 0.18);
+            background: rgba(254, 242, 242, 0.98);
+            color: #991b1b;
+        }
+
         .color-preview {
             height: 120px;
             border-radius: 18px;
