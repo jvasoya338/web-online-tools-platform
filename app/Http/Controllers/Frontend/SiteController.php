@@ -111,6 +111,13 @@ class SiteController extends Controller
                     ],
                 ],
                 [
+                    'heading' => 'Who runs this website',
+                    'paragraphs' => [
+                        'WebToolsStation is operated by TJVerce. The site is maintained as a focused tools and publishing project rather than an anonymous script directory. That means we review how pages read, how tools behave in the browser, and whether the surrounding explanations are clear enough for normal users to trust what they are seeing.',
+                        'The goal is not to publish as many pages as possible. The goal is to publish tools and supporting guides that solve practical problems in a way that feels understandable, maintained, and honest about limitations. When a page needs more explanation, examples, or review notes, we would rather improve it than pretend a thin page is finished.',
+                    ],
+                ],
+                [
                     'heading' => 'How we think about quality',
                     'paragraphs' => [
                         'At TJVerce, we care about the difference between having a page and having a useful page. A useful page answers questions, solves tasks, and reduces friction. We review our tools with that mindset. If a tool feels vague, visually messy, or hard to trust, it needs more work. If content feels thin, it needs more substance. If a page creates confusion, it needs simplification.',
@@ -131,11 +138,19 @@ class SiteController extends Controller
                         'As the platform grows, we will keep refining the tool set, page structure, and content quality. We want visitors to feel that the website has direction and care behind it. WebToolsStation is not meant to be a random collection of scripts. It is meant to become a stable and attractive online destination for practical work. That is the standard TJVerce wants to build toward.',
                     ],
                 ],
+                [
+                    'heading' => 'How pages are reviewed',
+                    'paragraphs' => [
+                        'Before a page earns a stable place on the site, we look at more than whether the button works. We ask whether the purpose is clear, whether the page gives enough context for real use, whether examples and limitations are explained honestly, and whether the visitor can understand what to double-check before relying on the result.',
+                        'That review approach matters because many utility websites stop at the widget. WebToolsStation is being built to go further than that by pairing tools with practical guidance, connected articles, visible policy pages, and a clearer sense of ownership than low-effort tool directories usually provide.',
+                    ],
+                ],
             ],
             'cards' => [
                 ['title' => 'Company', 'value' => 'TJVerce'],
                 ['title' => 'Platform', 'value' => 'WebToolsStation'],
-                ['title' => 'Focus', 'value' => 'Useful online tools with clear design'],
+                ['title' => 'Operator', 'value' => 'TJVerce editorial and product team'],
+                ['title' => 'Focus', 'value' => 'Useful online tools with clear design and practical guidance'],
                 ['title' => 'Contact', 'value' => 'webtoolsstation@gmail.com'],
             ],
             'schema' => [
@@ -149,6 +164,12 @@ class SiteController extends Controller
                     '@type' => 'Organization',
                     'name' => 'TJVerce',
                     'url' => url('/'),
+                ],
+                'mainEntity' => [
+                    '@type' => 'Organization',
+                    'name' => 'TJVerce',
+                    'url' => url('/'),
+                    'email' => 'webtoolsstation@gmail.com',
                 ],
             ],
         ], [
