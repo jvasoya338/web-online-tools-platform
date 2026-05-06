@@ -486,7 +486,7 @@
             </a>
             <div class="nav-links">
                 <a href="{{ url('/') }}">Tools</a>
-                <a href="{{ url('/guides/how-to-format-json-without-errors') }}">Guides</a>
+                <a href="{{ url('/guides') }}">Guides</a>
                 <a href="{{ url('/about') }}">About</a>
                 <a href="{{ url('/contact') }}">Contact</a>
                 <a href="{{ url('/privacy-policy') }}">Privacy</a>
@@ -528,7 +528,7 @@
                 <h3>Platform Links</h3>
                 <div class="footer-links">
                     <a href="{{ url('/') }}">Home</a>
-                    <a href="{{ url('/guides/how-to-format-json-without-errors') }}">Guides</a>
+                    <a href="{{ url('/guides') }}">Guides</a>
                     <a href="{{ url('/about') }}">About Us</a>
                     <a href="{{ url('/contact') }}">Contact</a>
                     <a href="{{ url('/privacy-policy') }}">Privacy Policy</a>

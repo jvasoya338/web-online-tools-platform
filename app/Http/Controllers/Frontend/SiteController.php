@@ -181,6 +181,38 @@ class SiteController extends Controller
         ]);
     }
 
+    public function guidesIndex(): View
+    {
+        $guides = $this->guides();
+
+        return view('site.guides', [
+            'guides' => $guides,
+            'featuredGuides' => array_slice($guides, -8),
+            'guideCount' => count($guides),
+            'seo' => [
+                'title' => 'Guides and Articles - WebToolsStation',
+                'description' => 'Browse WebToolsStation guides covering JSON, JWT, Base64, passwords, timestamps, PDF checks, color conversion, slugs, and other practical web workflows.',
+                'keywords' => 'webtoolsstation guides, developer tool guides, pdf tool guides, json jwt base64 articles',
+                'canonical' => url('/guides'),
+                'type' => 'website',
+                'image' => url('/images/logo/webtoolsstation-logo.png'),
+            ],
+            'schema' => [
+                '@context' => 'https://schema.org',
+                '@type' => 'CollectionPage',
+                'name' => 'WebToolsStation Guides',
+                'url' => url('/guides'),
+                'description' => 'A collection of practical guides and articles that support WebToolsStation tools and browser-based workflows.',
+                'image' => url('/images/logo/webtoolsstation-logo.png'),
+                'publisher' => [
+                    '@type' => 'Organization',
+                    'name' => 'TJVerce',
+                    'url' => url('/'),
+                ],
+            ],
+        ]);
+    }
+
     public function contact(): View
     {
         return view('site.contact', [
