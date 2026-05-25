@@ -464,6 +464,19 @@
             background: #fff;
         }
 
+        .breadcrumbs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 18px;
+            color: var(--muted);
+            font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+            font-size: 0.94rem;
+        }
+
+        .breadcrumbs a { color: var(--brand-dark); }
+
         .cookie-banner {
             position: fixed;
             left: 0;
@@ -559,7 +572,10 @@
     <div id="cookie-banner" class="cookie-banner">
         <div class="cookie-inner">
             <span>We use cookies for basic site functions and analytics. <a href="{{ url('/privacy-policy') }}">Learn more</a></span>
-            <button type="button" onclick="document.getElementById('cookie-banner').style.display='none'; localStorage.setItem('cookie_ok', '1');">Accept</button>
+            <span style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button type="button" onclick="document.getElementById('cookie-banner').style.display='none'; localStorage.setItem('cookie_ok', '0');">Reject</button>
+                <button type="button" onclick="document.getElementById('cookie-banner').style.display='none'; localStorage.setItem('cookie_ok', '1');">Accept</button>
+            </span>
         </div>
     </div>
     <script>

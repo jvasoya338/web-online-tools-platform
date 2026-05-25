@@ -2,9 +2,9 @@
 
 return [
     'default_author' => [
-        'name' => 'TJVerce Editorial Team',
-        'role' => 'Editorial review and tool documentation',
-        'url' => 'https://webtoolsstation.com/about',
+        'name' => 'TJ Verse',
+        'role' => 'Founder and product editor at WebToolsStation',
+        'url' => 'https://www.webtoolsstation.com/authors/tj-verse',
     ],
     'default_reviewer' => [
         'name' => 'TJVerce Product Review',

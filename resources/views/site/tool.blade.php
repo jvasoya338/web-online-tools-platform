@@ -3,10 +3,16 @@
 @section('content')
     <section class="tool-page">
         <div class="shell">
+            <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a href="{{ url('/') }}">Home</a>
+                <span aria-hidden="true">/</span>
+                <span>{{ $tool['title'] }}</span>
+            </nav>
             <div class="tool-hero">
                 <div>
                     <div class="tool-badge">{{ $tool['category'] }}</div>
                     <h1 style="margin-top:14px;">{{ $tool['title'] }}</h1>
+                    <p class="meta-copy" style="margin-top:10px;">Last updated {{ \Illuminate\Support\Carbon::parse($tool['updated_at'])->format('F j, Y') }}</p>
                     <p class="lede" style="max-width:760px;">{{ $tool['description'] }}</p>
                 </div>
                 <div class="tool-side-icon">{{ $tool['icon'] }}</div>

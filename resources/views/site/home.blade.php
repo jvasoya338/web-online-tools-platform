@@ -1,52 +1,6 @@
 @extends('site.layout')
 
 @section('content')
-    <section class="page-section" id="tool-grid">
-        <div class="shell">
-            <div class="section-head">
-                <div>
-                    <div class="section-kicker">All Tools</div>
-                    <h2>Explore the tools available on the platform</h2>
-                </div>
-                <p>Browse the collection and open the tool that fits your task. Each page keeps the experience simple and easy to follow.</p>
-            </div>
-            <div class="tool-grid">
-                @foreach ($tools as $tool)
-                    <article class="card click-card">
-                        <div class="tool-icon">{{ $tool['icon'] }}</div>
-                        <div class="tool-badge">{{ $tool['category'] }}</div>
-                        <h3 style="margin-top:14px;">{{ $tool['title'] }}</h3>
-                        <p>{{ $tool['description'] }}</p>
-                        <a class="card-link" href="{{ url('/tools/' . $tool['slug']) }}">Open tool <span aria-hidden="true">→</span></a>
-                    </article>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
-    <section class="page-section">
-        <div class="shell">
-            <div class="section-head">
-                <div>
-                    <div class="section-kicker">Popular Tools</div>
-                    <h2>Strong starting points for common tasks</h2>
-                </div>
-                <p>These pages are some of the easiest ways for new visitors to understand what WebToolsStation offers and get value quickly.</p>
-            </div>
-            <div class="tool-grid">
-                @foreach ($featuredTools as $tool)
-                    <article class="card click-card">
-                        <div class="tool-icon">{{ $tool['icon'] }}</div>
-                        <div class="tool-badge">{{ $tool['category'] }}</div>
-                        <h3 style="margin-top:14px;">{{ $tool['title'] }}</h3>
-                        <p>{{ $tool['summary'] }}</p>
-                        <a class="card-link" href="{{ url('/tools/' . $tool['slug']) }}">Try this tool <span aria-hidden="true">→</span></a>
-                    </article>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
     <section class="hero">
         <div class="shell hero-grid">
             <div class="hero-card">
@@ -57,7 +11,7 @@
                     The platform keeps the focus on practical tools, readable pages, and a calmer browsing experience.
                 </p>
                 <div class="hero-actions">
-                    <a class="button button-primary" href="{{ url('/about') }}">Learn About The Platform</a>
+                    <a class="button button-primary" href="#tool-grid">Explore Tools</a>
                     <a class="button button-secondary" href="{{ url('/contact') }}">Suggest A Tool</a>
                 </div>
                 <div class="hero-stats">
@@ -77,7 +31,7 @@
             </div>
             <div class="hero-side">
                 <span class="mini-kicker">Platform Overview</span>
-                <h3 style="margin:16px 0 12px;">A simple structure that keeps tools first and support pages easy to find.</h3>
+                <h2 style="margin:16px 0 12px;">A simple structure that keeps tools first and support pages easy to find.</h2>
                 <p>
                     We shaped the website to feel more direct and easier to trust. Visitors can reach tools quickly,
                     while pages like About, Contact, Privacy Policy, and Terms of Use remain clearly available.
@@ -85,17 +39,40 @@
                 <div class="mini-stack" style="margin-top:18px;">
                     <div class="mini-card">
                         <strong>Fast access</strong>
-                        <p>The main tool directory appears first so visitors immediately see the platform purpose.</p>
+                        <p>The tool directory is organized by practical task so visitors can open the right utility quickly.</p>
                     </div>
                     <div class="mini-card">
-                        <strong>Clean reading</strong>
-                        <p>Layouts are designed to feel calmer, simpler, and more readable across desktop and mobile.</p>
+                        <strong>Guide support</strong>
+                        <p>Related guides explain examples, limitations, and review steps for common workflows.</p>
                     </div>
                     <div class="mini-card">
-                        <strong>Professional presence</strong>
-                        <p>Brand, contact details, and policy pages are visible so the website feels complete and reliable.</p>
+                        <strong>Trust signals</strong>
+                        <p>Author, contact, privacy, terms, sitemap, and crawl files are kept visible and maintained.</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page-section" id="tool-grid">
+        <div class="shell">
+            <div class="section-head">
+                <div>
+                    <div class="section-kicker">All Tools</div>
+                    <h2>Explore the tools available on the platform</h2>
+                </div>
+                <p>Browse the collection and open the tool that fits your task. Each page keeps the experience simple and easy to follow.</p>
+            </div>
+            <div class="tool-grid">
+                @foreach ($tools as $tool)
+                    <article class="card click-card">
+                        <div class="tool-icon">{{ $tool['icon'] }}</div>
+                        <div class="tool-badge">{{ $tool['category'] }}</div>
+                        <h3 style="margin-top:14px;">{{ $tool['title'] }}</h3>
+                        <p>{{ $tool['description'] }}</p>
+                        <a class="card-link" href="{{ url('/tools/' . $tool['slug']) }}">Open tool <span aria-hidden="true">→</span></a>
+                    </article>
+                @endforeach
             </div>
         </div>
     </section>
@@ -129,39 +106,34 @@
                     <div class="section-kicker">Why This Site Exists</div>
                     <h2 style="margin-top:16px;">WebToolsStation is meant to be useful before it tries to be big.</h2>
                     <p style="margin-top:16px;">
-                        This project is built for the moments when a person needs one focused answer quickly: format a payload,
+                        This project is built for moments when a person needs one focused answer quickly: format a payload,
                         check a token, clean a slug, inspect a PDF, or convert a small file without opening a much larger workflow.
-                        The goal is not to overwhelm visitors with hundreds of shallow pages. The goal is to make each tool understandable,
-                        readable, and genuinely helpful the first time someone lands on it.
+                        The goal is to make each tool understandable, readable, and genuinely helpful the first time someone lands on it.
                     </p>
                 </div>
 
                 <div class="page-sections">
                     <article class="page-section-card">
-                        <h3>What we try to publish</h3>
+                        <h2>What we try to publish</h2>
                         <p>
                             We prefer tools that solve a clear problem, explain the expected input and output, and help a visitor move
-                            on with their work faster. That means each page should do more than exist for a keyword. It should explain
-                            what the tool is for, where it helps, and what a user should double-check before relying on the result.
+                            on with their work faster. Each page should explain what the tool is for, where it helps, and what a user
+                            should double-check before relying on the result.
                         </p>
                         <p>
-                            We also try to support tools with practical guides so the site is not just a directory of buttons.
-                            Some visitors need a fast utility. Others need context, examples, and a clearer understanding of how
-                            to use the tool well. Both audiences matter.
+                            We also support tools with practical guides so the site is not just a directory of buttons. Some visitors
+                            need a fast utility. Others need context, examples, and a clearer understanding of how to use the tool well.
                         </p>
                     </article>
                     <article class="page-section-card">
-                        <h3>How we think about trust</h3>
+                        <h2>How we think about trust</h2>
                         <p>
                             Useful tools should not feel anonymous or careless. That is why we keep public pages such as About,
-                            Contact, Privacy Policy, and Terms of Use visible and written as real parts of the platform. We want
-                            the site to feel maintained, understandable, and responsible instead of looking like a random collection
-                            of scripts with no owner behind it.
+                            Contact, Privacy Policy, Terms of Use, and the author profile visible and written as real parts of the platform.
                         </p>
                         <p>
-                            When a tool handles text, links, tokens, or files, we want the page to make the workflow clear. If a result
-                            is only a quick check and not a full professional verdict, the page should say so. That kind of honesty is
-                            part of the product quality we want visitors to feel.
+                            When a tool handles text, links, tokens, or files, the page should make the workflow clear. If a result is
+                            only a quick check and not a full professional verdict, the page should say so.
                         </p>
                     </article>
                 </div>
@@ -171,7 +143,7 @@
                 <div class="page-side-stack">
                     <div>
                         <div class="section-kicker">Editorial Standards</div>
-                        <h3 style="margin-top:14px;">What we review before a page earns its place</h3>
+                        <h2 style="margin-top:14px;">What we review before a page earns its place</h2>
                     </div>
                     <div class="page-grid">
                         <div class="card">
@@ -192,7 +164,7 @@
                         <div class="card">
                             <div class="tool-icon">TR</div>
                             <h3 style="margin-top:12px;">Trust signals</h3>
-                            <p>Company identity, policies, contact details, and clear page ownership are part of the product.</p>
+                            <p>Company identity, policies, contact details, crawl files, and clear page ownership are part of the product.</p>
                         </div>
                     </div>
                 </div>

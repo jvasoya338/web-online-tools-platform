@@ -4,6 +4,13 @@
     <section class="page-section">
         <div class="shell page-layout">
             <div class="page-copy">
+                <nav class="breadcrumbs" aria-label="Breadcrumb">
+                    <a href="{{ url('/') }}">Home</a>
+                    <span aria-hidden="true">/</span>
+                    <a href="{{ url('/guides') }}">Guides</a>
+                    <span aria-hidden="true">/</span>
+                    <span>{{ $article['title'] }}</span>
+                </nav>
                 <div class="page-header-block">
                     <div class="section-kicker">Guide</div>
                     <h1 style="margin-top:16px;">{{ $article['title'] }}</h1>
@@ -39,6 +46,18 @@
                         @if (!empty($article['example']))
                             <h2 style="margin-top:14px;">{{ $article['example']['title'] }}</h2>
                             <p>{{ $article['example']['body'] }}</p>
+                        @endif
+
+                        @if (!empty($article['code_examples']))
+                            <h2 style="margin-top:22px;">Code and input examples</h2>
+                            <div class="tool-stack" style="margin-top:14px;">
+                                @foreach ($article['code_examples'] as $example)
+                                    <div class="mini-card">
+                                        <strong>{{ $example['label'] }}</strong>
+                                        <pre class="tool-output" style="margin-top:10px;">{{ $example['code'] }}</pre>
+                                    </div>
+                                @endforeach
+                            </div>
                         @endif
 
                         @if (!empty($article['checklist']))

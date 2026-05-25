@@ -7,6 +7,7 @@
                 <div class="page-header-block">
                     <div class="section-kicker">{{ $page['label'] }}</div>
                     <h1 style="margin-top:16px;">{{ $page['title'] }}</h1>
+                    <p class="meta-copy" style="margin-top:14px;">Last updated May 25, 2026</p>
                     <p style="margin-top:16px;">{{ $page['intro'] }}</p>
                 </div>
 

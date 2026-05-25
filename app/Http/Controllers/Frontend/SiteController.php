@@ -98,6 +98,23 @@ class SiteController extends Controller
                             ],
                         ], $tool['faq']),
                     ],
+                    [
+                        '@type' => 'BreadcrumbList',
+                        'itemListElement' => [
+                            [
+                                '@type' => 'ListItem',
+                                'position' => 1,
+                                'name' => 'Home',
+                                'item' => url('/'),
+                            ],
+                            [
+                                '@type' => 'ListItem',
+                                'position' => 2,
+                                'name' => $tool['title'],
+                                'item' => url('/tools/' . $tool['slug']),
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ]);
@@ -396,6 +413,29 @@ class SiteController extends Controller
                             ],
                         ], $guide['faq']),
                     ],
+                    [
+                        '@type' => 'BreadcrumbList',
+                        'itemListElement' => [
+                            [
+                                '@type' => 'ListItem',
+                                'position' => 1,
+                                'name' => 'Home',
+                                'item' => url('/'),
+                            ],
+                            [
+                                '@type' => 'ListItem',
+                                'position' => 2,
+                                'name' => 'Guides',
+                                'item' => url('/guides'),
+                            ],
+                            [
+                                '@type' => 'ListItem',
+                                'position' => 3,
+                                'name' => $guide['title'],
+                                'item' => url('/guides/' . $guide['slug']),
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ]);
@@ -638,6 +678,7 @@ class SiteController extends Controller
         $guide['checklist'] = $guideDepth['checklist'] ?? [];
         $guide['mistakes'] = $guideDepth['mistakes'] ?? [];
         $guide['limits'] = $guideDepth['limits'] ?? null;
+        $guide['code_examples'] = $this->guideCodeExamples($guide['slug']);
         $guide['faq'] = [
             [
                 'question' => 'Who should read this guide?',
@@ -685,6 +726,7 @@ class SiteController extends Controller
         $tool['common_mistakes'] = $depth['common_mistakes'] ?? [];
         $tool['better_alternative'] = $depth['better_alternative'] ?? [];
         $tool['output_notes'] = $depth['output_notes'] ?? [];
+        $tool['updated_at'] = '2026-05-25';
         $tool['faq'] = [
             [
                 'question' => 'Is this ' . $tool['title'] . ' free to use?',
@@ -767,5 +809,113 @@ class SiteController extends Controller
     private function guides(): array
     {
         return array_map(fn (array $guide): array => $this->prepareGuide($guide), app(WebToolsStationCatalog::class)->guides());
+    }
+
+    private function guideCodeExamples(string $slug): array
+    {
+        return match ($slug) {
+            'how-to-format-json-without-errors' => [
+                [
+                    'label' => 'Invalid JSON with single quotes and trailing comma',
+                    'code' => "{\n  'platform': 'WebToolsStation',\n  'tools': ['json', 'jwt'],\n}",
+                ],
+                [
+                    'label' => 'Valid JSON after cleanup',
+                    'code' => "{\n  \"platform\": \"WebToolsStation\",\n  \"tools\": [\"json\", \"jwt\"]\n}",
+                ],
+            ],
+            'common-regex-mistakes-beginners-make' => [
+                [
+                    'label' => 'Too broad',
+                    'code' => '/.+@.+/g',
+                ],
+                [
+                    'label' => 'More careful email-like test',
+                    'code' => '/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/',
+                ],
+            ],
+            'best-way-to-clean-csv-before-converting-to-json' => [
+                [
+                    'label' => 'CSV input',
+                    'code' => "name,email,role\nAlex,alex@example.com,editor\nSam,sam@example.com,developer",
+                ],
+                [
+                    'label' => 'JSON output',
+                    'code' => "[\n  {\"name\":\"Alex\",\"email\":\"alex@example.com\",\"role\":\"editor\"},\n  {\"name\":\"Sam\",\"email\":\"sam@example.com\",\"role\":\"developer\"}\n]",
+                ],
+            ],
+            'best-way-to-check-a-jwt-token', 'why-decoding-a-jwt-is-not-the-same-as-verifying-it' => [
+                [
+                    'label' => 'JWT sections to inspect',
+                    'code' => "header.payload.signature\n\nCheck payload claims such as:\n{\n  \"iss\": \"https://example.com\",\n  \"aud\": \"web-app\",\n  \"exp\": 1770000000\n}",
+                ],
+            ],
+            'how-to-read-unix-timestamps-in-real-logs' => [
+                [
+                    'label' => 'Log timestamp examples',
+                    'code' => "Seconds:      1770000000\nMilliseconds: 1770000000000\nUTC output:   2026-02-02 16:00:00 UTC",
+                ],
+            ],
+            'when-to-use-url-encoding-in-api-and-form-work' => [
+                [
+                    'label' => 'Query value before and after encoding',
+                    'code' => "Raw value: PDF tools & JSON formatter\nEncoded:   PDF%20tools%20%26%20JSON%20formatter",
+                ],
+            ],
+            'when-to-use-base64-encoding-and-decoding' => [
+                [
+                    'label' => 'Base64 example',
+                    'code' => "Text: WebToolsStation\nBase64: V2ViVG9vbHNTdGF0aW9u",
+                ],
+            ],
+            'how-to-use-hex-and-rgb-colors-correctly', 'how-to-tell-if-color-conversion-results-are-correct' => [
+                [
+                    'label' => 'CSS color equivalents',
+                    'code' => "HEX: #006DBF\nRGB: rgb(0, 109, 191)\nHSL: hsl(206, 100%, 37%)",
+                ],
+            ],
+            'how-to-clean-text-for-urls-and-slugs', 'what-makes-a-url-slug-good-for-users-and-seo' => [
+                [
+                    'label' => 'Slug cleanup example',
+                    'code' => "Title: How to Format JSON Without Errors\nSlug:  how-to-format-json-without-errors",
+                ],
+            ],
+            'how-to-compare-text-differences-quickly' => [
+                [
+                    'label' => 'Two text versions',
+                    'code' => "Old: Upload a PDF and inspect metadata.\nNew: Upload a PDF and inspect document metadata.",
+                ],
+            ],
+            'how-line-sorting-helps-clean-messy-lists-fast' => [
+                [
+                    'label' => 'Before and after sorting',
+                    'code' => "Before:\nzebra\nApple\nbanana\n\nAfter:\nApple\nbanana\nzebra",
+                ],
+            ],
+            'how-to-use-a-word-counter-for-real-editing-work' => [
+                [
+                    'label' => 'Editing measurement example',
+                    'code' => "Draft intro: 184 words\nFinal intro: 96 words\nReason: removed repeated setup before the practical steps",
+                ],
+            ],
+            'how-to-use-a-password-generator-well', 'how-to-check-if-a-password-is-actually-strong' => [
+                [
+                    'label' => 'Password habit comparison',
+                    'code' => "Weak pattern: Summer2026!\nBetter habit: unique generated password + password manager + MFA",
+                ],
+            ],
+            'what-pdf-metadata-can-tell-you', 'how-to-review-pdf-metadata-before-sharing-a-file', 'why-pdf-text-search-fails-on-some-files' => [
+                [
+                    'label' => 'PDF review signals',
+                    'code' => "File: contract-draft.pdf\nPages: 12\nAuthor: Internal User\nCreator: Office Export\nText layer: selectable or scanned image",
+                ],
+            ],
+            default => [
+                [
+                    'label' => 'Practical input and output check',
+                    'code' => "Input: paste the source value into the related WebToolsStation tool\nOutput: review the result, compare it with the original task, and double-check before production use",
+                ],
+            ],
+        };
     }
 }
