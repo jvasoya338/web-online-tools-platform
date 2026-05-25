@@ -29,6 +29,16 @@ class WebToolsStationCatalog
         return require app_path('Data/guide-metadata.php');
     }
 
+    public function guideDepth(): array
+    {
+        return require app_path('Data/guide-depth.php');
+    }
+
+    public function authors(): array
+    {
+        return require app_path('Data/authors.php');
+    }
+
     public function toolDepth(): array
     {
         return require app_path('Data/tool-depth.php');

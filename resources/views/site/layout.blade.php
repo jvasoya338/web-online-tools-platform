@@ -487,6 +487,7 @@
             <div class="nav-links">
                 <a href="{{ url('/') }}">Tools</a>
                 <a href="{{ url('/guides') }}">Guides</a>
+                <a href="{{ url('/authors/tj-verse') }}">Author</a>
                 <a href="{{ url('/about') }}">About</a>
                 <a href="{{ url('/contact') }}">Contact</a>
                 <a href="{{ url('/privacy-policy') }}">Privacy</a>
@@ -529,6 +530,7 @@
                 <div class="footer-links">
                     <a href="{{ url('/') }}">Home</a>
                     <a href="{{ url('/guides') }}">Guides</a>
+                    <a href="{{ url('/authors/tj-verse') }}">Author Profile</a>
                     <a href="{{ url('/about') }}">About Us</a>
                     <a href="{{ url('/contact') }}">Contact</a>
                     <a href="{{ url('/privacy-policy') }}">Privacy Policy</a>

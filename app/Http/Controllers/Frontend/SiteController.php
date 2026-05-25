@@ -213,6 +213,46 @@ class SiteController extends Controller
         ]);
     }
 
+    public function author(string $slug): View
+    {
+        $author = $this->authors()[$slug] ?? null;
+
+        abort_if(!$author, 404);
+
+        $guides = collect($this->guides())
+            ->filter(fn (array $guide): bool => ($guide['author']['slug'] ?? null) === $slug)
+            ->values()
+            ->all();
+
+        return view('site.author', [
+            'author' => $author,
+            'guides' => $guides,
+            'seo' => [
+                'title' => $author['name'] . ' - WebToolsStation Author',
+                'description' => $author['bio'],
+                'keywords' => 'webtoolsstation author, tj verse, tjverce editor, tool guides author',
+                'canonical' => url('/authors/' . $author['slug']),
+                'type' => 'profile',
+                'image' => url('/images/logo/webtoolsstation-logo.png'),
+            ],
+            'schema' => [
+                '@context' => 'https://schema.org',
+                '@type' => 'Person',
+                'name' => $author['name'],
+                'jobTitle' => $author['role'],
+                'url' => url('/authors/' . $author['slug']),
+                'email' => $author['email'],
+                'worksFor' => [
+                    '@type' => 'Organization',
+                    'name' => 'TJVerce',
+                    'url' => url('/'),
+                ],
+                'sameAs' => $author['same_as'],
+                'description' => $author['bio'],
+            ],
+        ]);
+    }
+
     public function contact(): View
     {
         return view('site.contact', [
@@ -497,6 +537,7 @@ class SiteController extends Controller
         $urls = [
             url('/'),
             url('/about'),
+            url('/authors/tj-verse'),
             url('/contact'),
             url('/privacy-policy'),
             url('/terms-of-use'),
@@ -544,13 +585,20 @@ class SiteController extends Controller
     {
         $metadata = $this->guideMetadata();
         $guideMeta = $metadata['guides'][$guide['slug']] ?? [];
+        $guideDepth = $this->guideDepth()[$guide['slug']] ?? [];
+        $author = $this->authors()['tj-verse'];
 
-        $guide['author'] = $metadata['default_author'];
+        $guide['author'] = $author;
         $guide['reviewer'] = $metadata['default_reviewer'];
         $guide['published_at'] = $guideMeta['published_at'] ?? now()->toDateString();
         $guide['updated_at'] = $guideMeta['updated_at'] ?? $guide['published_at'];
         $guide['reading_time'] = $guideMeta['reading_time'] ?? '4 min read';
         $guide['image'] = $metadata['image'];
+        $guide['field_note'] = $guideDepth['field_note'] ?? null;
+        $guide['example'] = $guideDepth['example'] ?? null;
+        $guide['checklist'] = $guideDepth['checklist'] ?? [];
+        $guide['mistakes'] = $guideDepth['mistakes'] ?? [];
+        $guide['limits'] = $guideDepth['limits'] ?? null;
 
         return $guide;
     }
@@ -632,6 +680,16 @@ class SiteController extends Controller
     private function guideMetadata(): array
     {
         return app(WebToolsStationCatalog::class)->guideMetadata();
+    }
+
+    private function guideDepth(): array
+    {
+        return app(WebToolsStationCatalog::class)->guideDepth();
+    }
+
+    private function authors(): array
+    {
+        return app(WebToolsStationCatalog::class)->authors();
     }
 
     private function toolDepth(): array

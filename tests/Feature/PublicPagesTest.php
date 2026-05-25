@@ -10,6 +10,7 @@ class PublicPagesTest extends TestCase
     {
         $routes = [
             '/',
+            '/authors/tj-verse',
             '/about',
             '/contact',
             '/privacy-policy',
@@ -41,7 +42,9 @@ class PublicPagesTest extends TestCase
         $this->get('/guides/how-to-format-json-without-errors')
             ->assertOk()
             ->assertSee('How to Format JSON Without Errors')
-            ->assertSee('Guide');
+            ->assertSee('Guide')
+            ->assertSee('TJ Verse')
+            ->assertSee('Before you rely on the result');
     }
 
     public function test_unknown_tool_and_guide_pages_return_not_found(): void

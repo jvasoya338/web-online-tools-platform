@@ -8,11 +8,19 @@
                     <div class="section-kicker">Guide</div>
                     <h1 style="margin-top:16px;">{{ $article['title'] }}</h1>
                     <p class="meta-copy" style="margin-top:14px;">
-                        By {{ $article['author']['name'] }} · Published {{ \Illuminate\Support\Carbon::parse($article['published_at'])->format('F j, Y') }}
+                        By <a href="{{ url('/authors/' . $article['author']['slug']) }}">{{ $article['author']['name'] }}</a> · Published {{ \Illuminate\Support\Carbon::parse($article['published_at'])->format('F j, Y') }}
                         · Updated {{ \Illuminate\Support\Carbon::parse($article['updated_at'])->format('F j, Y') }} · {{ $article['reading_time'] }}
                     </p>
                     <p style="margin-top:16px;">{{ $article['intro'] }}</p>
                 </div>
+
+                @if (!empty($article['field_note']))
+                    <div class="page-section-card" style="margin-bottom:24px;">
+                        <div class="section-kicker">Author Note</div>
+                        <h3 style="margin-top:14px;">Why this guide was reviewed</h3>
+                        <p>{{ $article['field_note'] }}</p>
+                    </div>
+                @endif
 
                 <div class="page-sections">
                     @foreach ($article['sections'] as $section)
@@ -24,6 +32,39 @@
                         </article>
                     @endforeach
                 </div>
+
+                @if (!empty($article['example']) || !empty($article['checklist']) || !empty($article['mistakes']) || !empty($article['limits']))
+                    <div class="page-section-card" style="margin-top:24px;">
+                        <div class="section-kicker">Practical Review</div>
+                        @if (!empty($article['example']))
+                            <h3 style="margin-top:14px;">{{ $article['example']['title'] }}</h3>
+                            <p>{{ $article['example']['body'] }}</p>
+                        @endif
+
+                        @if (!empty($article['checklist']))
+                            <h3 style="margin-top:22px;">Before you rely on the result</h3>
+                            <ul class="detail-list">
+                                @foreach ($article['checklist'] as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
+
+                        @if (!empty($article['mistakes']))
+                            <h3 style="margin-top:22px;">Common mistakes this guide helps prevent</h3>
+                            <ul class="detail-list">
+                                @foreach ($article['mistakes'] as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
+
+                        @if (!empty($article['limits']))
+                            <h3 style="margin-top:22px;">Where the tool stops being enough</h3>
+                            <p>{{ $article['limits'] }}</p>
+                        @endif
+                    </div>
+                @endif
 
                 @if (!empty($relatedTools))
                     <div class="page-section-card" style="margin-top:24px;">
@@ -51,8 +92,14 @@
                     </div>
                     <div class="card">
                         <div class="tool-icon">AU</div>
+                        <h3 style="margin-top:12px;">About the author</h3>
+                        <p><a href="{{ url('/authors/' . $article['author']['slug']) }}">{{ $article['author']['name'] }}</a></p>
+                        <p>{{ $article['author']['role'] }}</p>
+                        <p>{{ $article['author']['bio'] }}</p>
+                    </div>
+                    <div class="card">
+                        <div class="tool-icon">RV</div>
                         <h3 style="margin-top:12px;">Article review</h3>
-                        <p>Author: {{ $article['author']['name'] }}</p>
                         <p>Reviewed by: {{ $article['reviewer']['name'] }}</p>
                         <p>Review focus: {{ $article['reviewer']['role'] }}</p>
                     </div>

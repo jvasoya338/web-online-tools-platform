@@ -1,5 +1,6 @@
 {
- "name": "App",
+ "name": "WebToolsStation",
+ "short_name": "WebToolsStation",
  "icons": [
   {
    "src": "\/images\/favicons\/android-icon-36x36.png",
