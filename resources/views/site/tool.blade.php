@@ -14,7 +14,7 @@
 
             <div class="tool-layout">
                 <div class="tool-panel">
-                    <h3>Use this tool</h3>
+                    <h2>Use this {{ $tool['title'] }} online</h2>
 
                     @if ($tool['slug'] === 'json-formatter')
                         <div class="tool-stack">
@@ -294,7 +294,7 @@
                 </div>
 
                 <aside class="tool-panel">
-                    <h3>Tool details</h3>
+                    <h2>What is {{ $tool['title'] }}?</h2>
                     <p>{{ $tool['summary'] }}</p>
                     <ul class="detail-list">
                         @foreach ($tool['details'] as $detail)
@@ -309,7 +309,7 @@
 
             <div class="tool-layout" style="margin-top:24px;">
                 <div class="tool-panel">
-                    <h3>How to use {{ $tool['title'] }}</h3>
+                    <h2>How to use this {{ $tool['title'] }}</h2>
                     <ul class="detail-list">
                         @foreach ($tool['use_steps'] as $item)
                             <li>{{ $item }}</li>
@@ -317,7 +317,7 @@
                     </ul>
                 </div>
                 <aside class="tool-panel">
-                    <h3>Where this tool helps most</h3>
+                    <h2>Where this {{ $tool['title'] }} helps most</h2>
                     <ul class="detail-list">
                         @foreach ($tool['use_cases'] as $item)
                             <li>{{ $item }}</li>
@@ -328,7 +328,7 @@
 
             <div class="tool-layout" style="margin-top:24px;">
                 <div class="tool-panel">
-                    <h3>{{ $tool['example_title'] }}</h3>
+                    <h2>{{ $tool['example_title'] }}</h2>
                     <p>{{ $tool['example_body'] }}</p>
                     <div class="mini-card" style="margin-top:18px;">
                         <strong>Privacy note</strong>
@@ -336,7 +336,7 @@
                     </div>
                 </div>
                 <aside class="tool-panel">
-                    <h3>Things to check before relying on the result</h3>
+                    <h2>Things to check before relying on the result</h2>
                     <ul class="detail-list">
                         @foreach ($tool['watch_out_for'] as $item)
                             <li>{{ $item }}</li>
@@ -348,7 +348,7 @@
             @if (!empty($tool['common_mistakes']) || !empty($tool['better_alternative']) || !empty($tool['output_notes']))
                 <div class="tool-layout" style="margin-top:24px;">
                     <div class="tool-panel">
-                        <h3>Common mistakes people make</h3>
+                        <h2>Common mistakes people make</h2>
                         @if (!empty($tool['common_mistakes']))
                             <ul class="detail-list">
                                 @foreach ($tool['common_mistakes'] as $item)
@@ -360,7 +360,7 @@
                         @endif
                     </div>
                     <aside class="tool-panel">
-                        <h3>How to read the output well</h3>
+                        <h2>How to read the output well</h2>
                         @if (!empty($tool['output_notes']))
                             <ul class="detail-list">
                                 @foreach ($tool['output_notes'] as $item)
@@ -374,7 +374,7 @@
                 </div>
 
                 <div class="tool-panel" style="margin-top:24px;">
-                    <h3>When to use a different workflow</h3>
+                    <h2>When to use a different workflow</h2>
                     @if (!empty($tool['better_alternative']))
                         <ul class="detail-list">
                             @foreach ($tool['better_alternative'] as $item)
@@ -387,9 +387,21 @@
                 </div>
             @endif
 
+            <div class="tool-panel" style="margin-top:24px;">
+                <h2>Frequently Asked Questions</h2>
+                <div class="tool-stack" style="margin-top:18px;">
+                    @foreach ($tool['faq'] as $item)
+                        <details class="mini-card">
+                            <summary>{{ $item['question'] }}</summary>
+                            <p style="margin-top:10px;">{{ $item['answer'] }}</p>
+                        </details>
+                    @endforeach
+                </div>
+            </div>
+
             @if (!empty($tool['related']))
                 <div class="tool-panel" style="margin-top:24px;">
-                    <h3>Related tools</h3>
+                    <h2>Related tools</h2>
                     <div class="page-grid" style="margin-top:18px;">
                         @foreach ($tool['related'] as $related)
                             <div class="card click-card">
@@ -405,7 +417,7 @@
 
             @if (!empty($tool['related_guides']))
                 <div class="tool-panel" style="margin-top:24px;">
-                    <h3>Helpful guides</h3>
+                    <h2>Helpful guides</h2>
                     <div class="page-grid" style="margin-top:18px;">
                         @foreach ($tool['related_guides'] as $guide)
                             <div class="card click-card">

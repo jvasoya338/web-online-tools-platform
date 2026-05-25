@@ -6,6 +6,9 @@
     <title>{{ $seo['title'] }}</title>
     <meta name="description" content="{{ $seo['description'] }}">
     <meta name="keywords" content="{{ $seo['keywords'] }}">
+    @if (!empty($seo['author']))
+        <meta name="author" content="{{ $seo['author'] }}">
+    @endif
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="{{ $seo['title'] }}">
     <meta property="og:description" content="{{ $seo['description'] }}">
@@ -196,7 +199,7 @@
         .detail-grid { grid-template-columns: 1.15fr 0.85fr; }
         .page-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
-        .stat, .card, .tool-panel .mini-card {
+        .stat, .card, .tool-panel .mini-card, .page-section-card .mini-card {
             border: 1px solid var(--line);
             border-radius: 20px;
             background: rgba(255, 255, 255, 0.72);
@@ -232,7 +235,7 @@
         .section-head p { max-width: 560px; margin: 0; }
 
         .tool-icon, .tool-side-icon { margin-bottom: 16px; }
-        .card h3, .tool-panel h3 { margin-bottom: 12px; font-size: 1.3rem; }
+        .card h3, .tool-panel h2, .tool-panel h3 { margin-bottom: 12px; font-size: 1.3rem; }
 
         .click-card {
             position: relative;
@@ -400,6 +403,7 @@
             background: rgba(255, 255, 255, 0.72);
         }
 
+        .page-section-card h2,
         .page-section-card h3 {
             margin-bottom: 14px;
             font-size: 1.35rem;
@@ -460,6 +464,43 @@
             background: #fff;
         }
 
+        .cookie-banner {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            background: #171717;
+            color: #fff;
+            padding: 14px 18px;
+            box-shadow: 0 -14px 40px rgba(0, 0, 0, 0.18);
+        }
+
+        .cookie-inner {
+            width: min(1180px, 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+            font-size: 0.94rem;
+            line-height: 1.5;
+        }
+
+        .cookie-inner a { color: #90caf9; text-decoration: underline; }
+        .cookie-inner button {
+            border: 0;
+            border-radius: 8px;
+            background: #fff;
+            color: #111;
+            padding: 9px 16px;
+            cursor: pointer;
+            font: inherit;
+            white-space: nowrap;
+        }
+
         @media (max-width: 980px) {
             .hero-grid, .tool-layout, .page-layout, .section-head, .footer-row, .tool-hero { flex-direction: column; }
             .tool-grid, .hero-stats, .detail-grid, .page-grid, .footer-feature-grid { grid-template-columns: 1fr; }
@@ -470,6 +511,7 @@
             .tool-inline.two { grid-template-columns: 1fr; }
             .hero-card, .hero-side, .tool-panel, .page-copy, .card { padding: 18px; border-radius: 20px; }
             .footer-box { border-radius: 0; }
+            .cookie-inner { align-items: stretch; flex-direction: column; }
             .shell { width: min(100% - 18px, 1180px); }
         }
     </style>
@@ -499,47 +541,32 @@
 
     @yield('content')
 
-    <div class="footer-box">
-        <div class="footer-row">
-            <div class="footer-main">
-                <div class="section-kicker">TJVerce</div>
-                <h3 style="margin-top:14px;">WebToolsStation is a growing tools platform built around clarity, speed, and a calmer user experience.</h3>
-                <p>We focus on practical utilities, readable pages, and a platform structure that feels clean instead of crowded.</p>
-                <div class="footer-feature-grid">
-                    <div class="footer-feature">
-                        <strong>Clear Tool Pages</strong>
-                        <p>Each tool is easy to open, understand, and use without digging through distractions.</p>
-                    </div>
-                    <div class="footer-feature">
-                        <strong>Useful Categories</strong>
-                        <p>The platform includes developer utilities and PDF-focused pages for everyday work.</p>
-                    </div>
-                    <div class="footer-feature">
-                        <strong>Real Company Identity</strong>
-                        <p>TJVerce and WebToolsStation are presented with visible contact and policy pages.</p>
-                    </div>
-                    <div class="footer-feature">
-                        <strong>Ongoing Growth</strong>
-                        <p>We continue improving design quality, page clarity, and the range of useful tools.</p>
-                    </div>
-                </div>
-                <div class="footer-meta">WebToolsStation by TJVerce</div>
-            </div>
-            <div class="footer-side">
-                <h3>Platform Links</h3>
-                <div class="footer-links">
-                    <a href="{{ url('/') }}">Home</a>
-                    <a href="{{ url('/guides') }}">Guides</a>
-                    <a href="{{ url('/authors/tj-verse') }}">Author Profile</a>
-                    <a href="{{ url('/about') }}">About Us</a>
-                    <a href="{{ url('/contact') }}">Contact</a>
-                    <a href="{{ url('/privacy-policy') }}">Privacy Policy</a>
-                    <a href="{{ url('/terms-of-use') }}">Terms of Use</a>
-                    <a href="mailto:webtoolsstation@gmail.com">webtoolsstation@gmail.com</a>
-                </div>
-            </div>
+    <footer class="footer-box">
+        <div class="shell" style="padding:24px 0;">
+            <nav class="footer-links" aria-label="Footer navigation">
+                <a href="{{ url('/') }}">Home</a>
+                <a href="{{ url('/guides') }}">Guides</a>
+                <a href="{{ url('/authors/tj-verse') }}">Author</a>
+                <a href="{{ url('/about') }}">About</a>
+                <a href="{{ url('/contact') }}">Contact</a>
+                <a href="{{ url('/privacy-policy') }}">Privacy</a>
+                <a href="{{ url('/terms-of-use') }}">Terms</a>
+            </nav>
+            <p style="margin:16px 0 0;">&copy; 2026 WebToolsStation by TJVerce. Contact: <a href="mailto:webtoolsstation@gmail.com">webtoolsstation@gmail.com</a></p>
+        </div>
+    </footer>
+
+    <div id="cookie-banner" class="cookie-banner">
+        <div class="cookie-inner">
+            <span>We use cookies for basic site functions and analytics. <a href="{{ url('/privacy-policy') }}">Learn more</a></span>
+            <button type="button" onclick="document.getElementById('cookie-banner').style.display='none'; localStorage.setItem('cookie_ok', '1');">Accept</button>
         </div>
     </div>
+    <script>
+        if (localStorage.getItem('cookie_ok')) {
+            document.getElementById('cookie-banner').style.display = 'none';
+        }
+    </script>
 
     @yield('scripts')
 </body>

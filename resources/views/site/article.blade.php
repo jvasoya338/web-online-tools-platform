@@ -17,7 +17,7 @@
                 @if (!empty($article['field_note']))
                     <div class="page-section-card" style="margin-bottom:24px;">
                         <div class="section-kicker">Author Note</div>
-                        <h3 style="margin-top:14px;">Why this guide was reviewed</h3>
+                        <h2 style="margin-top:14px;">Why this guide was reviewed</h2>
                         <p>{{ $article['field_note'] }}</p>
                     </div>
                 @endif
@@ -25,7 +25,7 @@
                 <div class="page-sections">
                     @foreach ($article['sections'] as $section)
                         <article class="page-section-card">
-                            <h3>{{ $section['heading'] }}</h3>
+                            <h2>{{ $section['heading'] }}</h2>
                             @foreach ($section['paragraphs'] as $paragraph)
                                 <p>{{ $paragraph }}</p>
                             @endforeach
@@ -37,12 +37,12 @@
                     <div class="page-section-card" style="margin-top:24px;">
                         <div class="section-kicker">Practical Review</div>
                         @if (!empty($article['example']))
-                            <h3 style="margin-top:14px;">{{ $article['example']['title'] }}</h3>
+                            <h2 style="margin-top:14px;">{{ $article['example']['title'] }}</h2>
                             <p>{{ $article['example']['body'] }}</p>
                         @endif
 
                         @if (!empty($article['checklist']))
-                            <h3 style="margin-top:22px;">Before you rely on the result</h3>
+                            <h2 style="margin-top:22px;">Before you rely on the result</h2>
                             <ul class="detail-list">
                                 @foreach ($article['checklist'] as $item)
                                     <li>{{ $item }}</li>
@@ -51,7 +51,7 @@
                         @endif
 
                         @if (!empty($article['mistakes']))
-                            <h3 style="margin-top:22px;">Common mistakes this guide helps prevent</h3>
+                            <h2 style="margin-top:22px;">Common mistakes this guide helps prevent</h2>
                             <ul class="detail-list">
                                 @foreach ($article['mistakes'] as $item)
                                     <li>{{ $item }}</li>
@@ -60,11 +60,29 @@
                         @endif
 
                         @if (!empty($article['limits']))
-                            <h3 style="margin-top:22px;">Where the tool stops being enough</h3>
+                            <h2 style="margin-top:22px;">When not to use this as your only workflow</h2>
                             <p>{{ $article['limits'] }}</p>
                         @endif
                     </div>
                 @endif
+
+                <div class="page-section-card" style="margin-top:24px;">
+                    <h2>Common Questions</h2>
+                    <div class="tool-stack" style="margin-top:18px;">
+                        @foreach ($article['faq'] as $item)
+                            <details class="mini-card">
+                                <summary>{{ $item['question'] }}</summary>
+                                <p style="margin-top:10px;">{{ $item['answer'] }}</p>
+                            </details>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="page-section-card" style="margin-top:24px;">
+                    <h2>About the author</h2>
+                    <p>{{ $article['author']['name'] }} is the founder and product editor of WebToolsStation. This guide was reviewed for practical browser-tool usage, common mistakes, and clear limits before publication.</p>
+                    <p><a class="card-link" href="{{ url('/authors/' . $article['author']['slug']) }}">View author profile <span aria-hidden="true">→</span></a></p>
+                </div>
 
                 @if (!empty($relatedTools))
                     <div class="page-section-card" style="margin-top:24px;">

@@ -58,7 +58,7 @@ class SiteController extends Controller
             'tool' => $tool,
             'tools' => array_map(fn (array $item): array => $this->prepareTool($item), $this->tools()),
             'seo' => [
-                'title' => $tool['title'] . ' - WebToolsStation',
+                'title' => $tool['title'] . ' Online - Free Browser Tool | WebToolsStation',
                 'description' => $tool['seo_description'],
                 'keywords' => implode(', ', $tool['keywords']),
                 'canonical' => url('/tools/' . $tool['slug']),
@@ -67,16 +67,37 @@ class SiteController extends Controller
             ],
             'schema' => [
                 '@context' => 'https://schema.org',
-                '@type' => 'SoftwareApplication',
-                'name' => $tool['title'],
-                'applicationCategory' => $tool['category'],
-                'operatingSystem' => 'Web Browser',
-                'description' => $tool['seo_description'],
-                'url' => url('/tools/' . $tool['slug']),
-                'image' => url('/images/logo/webtoolsstation-logo.png'),
-                'publisher' => [
-                    '@type' => 'Organization',
-                    'name' => 'TJVerce',
+                '@graph' => [
+                    [
+                        '@type' => 'SoftwareApplication',
+                        'name' => $tool['title'],
+                        'applicationCategory' => $tool['category'],
+                        'operatingSystem' => 'Any',
+                        'description' => $tool['seo_description'],
+                        'url' => url('/tools/' . $tool['slug']),
+                        'image' => url('/images/logo/webtoolsstation-logo.png'),
+                        'offers' => [
+                            '@type' => 'Offer',
+                            'price' => '0',
+                            'priceCurrency' => 'USD',
+                        ],
+                        'publisher' => [
+                            '@type' => 'Organization',
+                            'name' => 'WebToolsStation',
+                            'url' => url('/'),
+                        ],
+                    ],
+                    [
+                        '@type' => 'FAQPage',
+                        'mainEntity' => array_map(fn (array $item): array => [
+                            '@type' => 'Question',
+                            'name' => $item['question'],
+                            'acceptedAnswer' => [
+                                '@type' => 'Answer',
+                                'text' => $item['answer'],
+                            ],
+                        ], $tool['faq']),
+                    ],
                 ],
             ],
         ]);
@@ -275,6 +296,7 @@ class SiteController extends Controller
                 'company' => 'TJVerce',
                 'platform' => 'WebToolsStation',
                 'email' => 'webtoolsstation@gmail.com',
+                'location' => 'India',
                 'topics' => [
                     'Bug reports and support questions',
                     'Tool suggestions and feature ideas',
@@ -335,29 +357,46 @@ class SiteController extends Controller
                 'canonical' => url('/guides/' . $guide['slug']),
                 'type' => 'article',
                 'image' => $guide['image'],
+                'author' => $guide['author']['name'] . ', WebToolsStation',
             ],
             'schema' => [
                 '@context' => 'https://schema.org',
-                '@type' => 'Article',
-                'headline' => $guide['title'],
-                'description' => $guide['seo_description'],
-                'image' => [$guide['image']],
-                'author' => [
-                    '@type' => 'Person',
-                    'name' => $guide['author']['name'],
-                    'url' => $guide['author']['url'],
-                ],
-                'publisher' => [
-                    '@type' => 'Organization',
-                    'name' => 'TJVerce',
-                    'logo' => [
-                        '@type' => 'ImageObject',
-                        'url' => url('/images/logo/webtoolsstation-logo.png'),
+                '@graph' => [
+                    [
+                        '@type' => 'Article',
+                        'headline' => $guide['title'],
+                        'description' => $guide['seo_description'],
+                        'image' => [$guide['image']],
+                        'author' => [
+                            '@type' => 'Person',
+                            'name' => $guide['author']['name'],
+                            'url' => url('/authors/' . $guide['author']['slug']),
+                        ],
+                        'publisher' => [
+                            '@type' => 'Organization',
+                            'name' => 'WebToolsStation',
+                            'url' => url('/'),
+                            'logo' => [
+                                '@type' => 'ImageObject',
+                                'url' => url('/images/logo/webtoolsstation-logo.png'),
+                            ],
+                        ],
+                        'mainEntityOfPage' => url('/guides/' . $guide['slug']),
+                        'datePublished' => $guide['published_at'],
+                        'dateModified' => $guide['updated_at'],
+                    ],
+                    [
+                        '@type' => 'FAQPage',
+                        'mainEntity' => array_map(fn (array $item): array => [
+                            '@type' => 'Question',
+                            'name' => $item['question'],
+                            'acceptedAnswer' => [
+                                '@type' => 'Answer',
+                                'text' => $item['answer'],
+                            ],
+                        ], $guide['faq']),
                     ],
                 ],
-                'mainEntityOfPage' => url('/guides/' . $guide['slug']),
-                'datePublished' => $guide['published_at'],
-                'dateModified' => $guide['updated_at'],
             ],
         ]);
     }
@@ -552,7 +591,7 @@ class SiteController extends Controller
 
     public function robots(): Response
     {
-        $content = "User-agent: *\nAllow: /\n\nSitemap: " . url('/sitemap.xml') . "\n";
+        $content = "User-agent: *\nAllow: /\n\nSitemap: https://www.webtoolsstation.com/sitemap.xml\n";
 
         return response($content, 200)->header('Content-Type', 'text/plain');
     }
@@ -599,6 +638,20 @@ class SiteController extends Controller
         $guide['checklist'] = $guideDepth['checklist'] ?? [];
         $guide['mistakes'] = $guideDepth['mistakes'] ?? [];
         $guide['limits'] = $guideDepth['limits'] ?? null;
+        $guide['faq'] = [
+            [
+                'question' => 'Who should read this guide?',
+                'answer' => 'This guide is for visitors who want a practical browser-based workflow for ' . $guide['title'] . ' and want to understand what to check before relying on the result.',
+            ],
+            [
+                'question' => 'Does this replace a full professional workflow?',
+                'answer' => 'No. WebToolsStation guides explain quick browser checks, but important legal, security, financial, business, or production work should still be reviewed with the right professional tools and judgment.',
+            ],
+            [
+                'question' => 'Why does this guide include limitations?',
+                'answer' => 'Limitations help visitors understand where a lightweight online tool is useful and where a deeper review, backend verification, OCR, testing, or specialist workflow may be needed.',
+            ],
+        ];
 
         return $guide;
     }
@@ -632,6 +685,20 @@ class SiteController extends Controller
         $tool['common_mistakes'] = $depth['common_mistakes'] ?? [];
         $tool['better_alternative'] = $depth['better_alternative'] ?? [];
         $tool['output_notes'] = $depth['output_notes'] ?? [];
+        $tool['faq'] = [
+            [
+                'question' => 'Is this ' . $tool['title'] . ' free to use?',
+                'answer' => 'Yes. This WebToolsStation tool is free to use in your browser and does not require an account.',
+            ],
+            [
+                'question' => 'Does this tool send my input to a server?',
+                'answer' => 'The tool is designed as a browser-first utility, so the core action runs on your device instead of requiring a server-side upload for normal use.',
+            ],
+            [
+                'question' => 'When should I double-check the output?',
+                'answer' => 'Double-check the output before using it in production systems, sensitive documents, legal work, security decisions, or any workflow where an incorrect result could cause problems.',
+            ],
+        ];
 
         $tool['related'] = collect($this->tools())
             ->reject(fn (array $item): bool => $item['slug'] === $tool['slug'])

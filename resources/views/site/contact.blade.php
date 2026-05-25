@@ -11,6 +11,9 @@
                         Use this form to report a bug, suggest a new tool, ask a business question, or share feedback about the platform.
                         Messages go directly to TJVerce for review.
                     </p>
+                    <p style="margin-top:16px;">
+                        WebToolsStation is operated by TJVerce. Based in {{ $contact['location'] }}. Contact: {{ $contact['email'] }}.
+                    </p>
                 </div>
 
                 @if (session('status'))
