@@ -134,6 +134,46 @@
                             validation behavior, and tool explanations from a sanitized report just as effectively as from a private production sample.
                         </p>
                     </article>
+                    <article class="page-section-card">
+                        <h3>How contact feedback improves the platform</h3>
+                        <p>
+                            Feedback from visitors helps identify where a page may still feel thin, confusing, incomplete, or unclear. If several people ask the same question
+                            about a tool, that usually means the page needs a better explanation, a stronger example, or a clearer limitation note. If someone reports that a
+                            guide does not answer the practical question they had, the guide can be expanded with a new checklist, code sample, or workflow note.
+                        </p>
+                        <p>
+                            This matters for both visitors and quality review. WebToolsStation is not trying to be a collection of empty utility pages. The site should grow
+                            into a maintained reference where tools and supporting content improve together. Contact messages give TJVerce a way to see which parts of the
+                            platform need more context, which tools deserve better examples, and which pages should be reviewed before the next publishing update.
+                        </p>
+                    </article>
+                    <article class="page-section-card">
+                        <h3>How to write a useful report</h3>
+                        <p>
+                            A useful report usually includes the page URL, the browser or device you used, the kind of input involved, the button or action you clicked, the
+                            result you expected, and the result you actually saw. If the issue is about a guide, mention the section that felt unclear and the question you still
+                            had after reading it. If the issue is about a tool, mention whether the problem happened before input, after processing, while copying output, or
+                            while downloading a generated file.
+                        </p>
+                        <p>
+                            Screenshots can be helpful when they do not reveal private information, but a clear written example is often enough. The best reports make the issue
+                            reproducible without exposing sensitive data. That lets TJVerce review the problem, improve the page, and keep WebToolsStation safer for other
+                            visitors who may arrive with the same task.
+                        </p>
+                    </article>
+                    <article class="page-section-card">
+                        <h3>How contact fits into quality review</h3>
+                        <p>
+                            Contact access is one of the signals that a public tool platform is maintained. If a page has an error, a confusing explanation, a missing example,
+                            or a broken expectation, visitors need a simple way to report it. That feedback loop helps prevent old pages from staying thin or unclear after the
+                            platform grows.
+                        </p>
+                        <p>
+                            We also use contact requests to decide which pages need more depth before future AdSense or search reviews. A page that attracts repeated questions
+                            probably needs stronger examples, clearer headings, better FAQs, or a more honest limitation section. This page gives those improvements a practical
+                            path back into the product instead of leaving visitors with no way to reach the operator.
+                        </p>
+                    </article>
                 </div>
             </div>
 
