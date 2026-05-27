@@ -327,62 +327,56 @@
             color: rgba(255, 255, 255, 0.88);
         }
 
-        .footer-row {
-            align-items: stretch;
-            gap: 0;
-            width: 100%;
+        .footer-inner {
+            display: grid;
+            grid-template-columns: minmax(260px, 1.2fr) minmax(300px, 1fr);
+            gap: 28px;
+            align-items: start;
+            padding: 28px 0;
         }
 
-        .footer-main {
-            flex: 1.2;
-            padding: 30px;
+        .footer-summary h2 {
+            margin-top: 12px;
+            font-size: 1.45rem;
         }
 
-        .footer-side {
-            flex: 0.8;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.06);
-            border-left: 1px solid rgba(255, 255, 255, 0.14);
+        .footer-summary p {
+            max-width: 680px;
+            margin: 12px 0 0;
         }
 
-        .footer-feature-grid {
+        .footer-link-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 14px;
-            margin-top: 24px;
+            gap: 18px;
         }
 
-        .footer-feature {
-            padding: 16px;
-            background: rgba(255, 255, 255, 0.10);
-            border-color: rgba(255, 255, 255, 0.10);
-            box-shadow: none;
-        }
-
-        .footer-feature strong {
-            display: block;
-            font-family: "Trebuchet MS", "Segoe UI", sans-serif;
-            margin-bottom: 8px;
-        }
-
-        .footer-side h3 {
-            margin-bottom: 14px;
-        }
-
-        .footer-links {
+        .footer-link-group {
             display: grid;
-            gap: 10px;
+            gap: 8px;
+            padding: 16px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            font-family: "Trebuchet MS", "Segoe UI", sans-serif;
         }
 
-        .footer-links a {
-            display: inline-flex;
+        .footer-link-group strong {
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .footer-link-group a {
             width: fit-content;
         }
 
-        .footer-meta {
-            margin-top: 24px;
-            padding-top: 18px;
-            border-top: 1px solid rgba(255, 255, 255, 0.12);
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            padding: 18px 0 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.14);
             font-family: "Trebuchet MS", "Segoe UI", sans-serif;
             font-size: 0.94rem;
         }
@@ -515,8 +509,8 @@
         }
 
         @media (max-width: 980px) {
-            .hero-grid, .tool-layout, .page-layout, .section-head, .footer-row, .tool-hero { flex-direction: column; }
-            .tool-grid, .hero-stats, .detail-grid, .page-grid, .footer-feature-grid { grid-template-columns: 1fr; }
+            .hero-grid, .tool-layout, .page-layout, .section-head, .tool-hero { flex-direction: column; }
+            .tool-grid, .hero-stats, .detail-grid, .page-grid, .footer-inner, .footer-link-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 680px) {
@@ -555,17 +549,36 @@
     @yield('content')
 
     <footer class="footer-box">
-        <div class="shell" style="padding:24px 0;">
-            <nav class="footer-links" aria-label="Footer navigation">
-                <a href="{{ url('/') }}">Home</a>
-                <a href="{{ url('/guides') }}">Guides</a>
-                <a href="{{ url('/authors/tj-verse') }}">Author</a>
-                <a href="{{ url('/about') }}">About</a>
-                <a href="{{ url('/contact') }}">Contact</a>
-                <a href="{{ url('/privacy-policy') }}">Privacy</a>
-                <a href="{{ url('/terms-of-use') }}">Terms</a>
-            </nav>
-            <p style="margin:16px 0 0;">&copy; 2026 WebToolsStation by TJVerce. Contact: <a href="mailto:webtoolsstation@gmail.com">webtoolsstation@gmail.com</a></p>
+        <div class="shell">
+            <div class="footer-inner">
+                <div class="footer-summary">
+                    <div class="section-kicker">WebToolsStation by TJVerce</div>
+                    <h2>Professional browser tools with practical guides, visible ownership, and clear workflow limits.</h2>
+                    <p>
+                        WebToolsStation publishes free developer, text, image, security, and PDF utilities for everyday browser-based work. Each tool is supported by review notes,
+                        examples, FAQs, and related guides so visitors can understand the result before using it in a real workflow.
+                    </p>
+                </div>
+                <nav class="footer-link-grid" aria-label="Footer navigation">
+                    <div class="footer-link-group">
+                        <strong>Platform</strong>
+                        <a href="{{ url('/') }}">Tools</a>
+                        <a href="{{ url('/guides') }}">Guides</a>
+                        <a href="{{ url('/authors/tj-verse') }}">Author</a>
+                    </div>
+                    <div class="footer-link-group">
+                        <strong>Trust</strong>
+                        <a href="{{ url('/about') }}">About</a>
+                        <a href="{{ url('/contact') }}">Contact</a>
+                        <a href="{{ url('/privacy-policy') }}">Privacy</a>
+                        <a href="{{ url('/terms-of-use') }}">Terms</a>
+                    </div>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 WebToolsStation by TJVerce</span>
+                <span>Contact: <a href="mailto:webtoolsstation@gmail.com">webtoolsstation@gmail.com</a></span>
+            </div>
         </div>
     </footer>
 
