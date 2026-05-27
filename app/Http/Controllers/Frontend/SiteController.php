@@ -582,6 +582,13 @@ class SiteController extends Controller
                         'If you have questions about these Terms of Use, you can contact TJVerce at webtoolsstation@gmail.com. Continued use of the website after updates to these terms may be treated as acceptance of the revised version.',
                     ],
                 ],
+                [
+                    'heading' => 'Browser tool expectations',
+                    'paragraphs' => [
+                        'Many pages on WebToolsStation are lightweight utilities intended for fast formatting, conversion, inspection, and generation tasks. They are useful for everyday checks, but they are not designed to replace full professional software, production testing, legal review, security verification, or document forensics. Users should treat the output as one step in a workflow, not as an automatic final decision.',
+                        'If a task involves sensitive information, regulated data, private documents, account credentials, or business-critical results, use additional review processes appropriate to that context. WebToolsStation tries to explain limitations on tool and guide pages so visitors can understand when a browser check is enough and when a deeper workflow is more responsible.',
+                    ],
+                ],
             ],
             'cards' => [
                 ['title' => 'Owner', 'value' => 'TJVerce'],

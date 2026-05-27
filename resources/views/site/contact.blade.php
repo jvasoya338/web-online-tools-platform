@@ -82,6 +82,58 @@
                             WebToolsStation is still growing, so we focus first on messages that improve usability, trust, and practical value for visitors.
                         </p>
                     </article>
+                    <article class="page-section-card">
+                        <h3>What we can review from a contact request</h3>
+                        <p>
+                            Contact messages are most useful when they point to a specific page, tool, input type, browser, or workflow. For example, a message about the
+                            JSON Formatter should mention whether the problem happened while formatting, minifying, copying output, or reading an error message. A message
+                            about a PDF tool should mention the kind of PDF being checked, whether the file is password protected, and what result seemed unclear.
+                        </p>
+                        <p>
+                            We cannot safely diagnose private production systems, confidential documents, legal disputes, financial decisions, or account security incidents
+                            from a public contact form. In those cases, the best use of this form is to report a site issue or ask a general platform question while keeping
+                            sensitive details out of the message. That helps us improve WebToolsStation without asking visitors to share information that belongs in a more
+                            secure support or professional review process.
+                        </p>
+                    </article>
+                    <article class="page-section-card">
+                        <h3>Why this page exists</h3>
+                        <p>
+                            A real contact page is part of the trust structure for a public tools website. Visitors should be able to see who operates the platform, where the
+                            project is based, what kinds of messages are appropriate, and how feedback is handled. This is especially important for browser tools because users
+                            may be working with text, files, URLs, tokens, colors, or document signals that affect real work.
+                        </p>
+                        <p>
+                            WebToolsStation uses this page for support questions, correction requests, tool suggestions, and business inquiries. The goal is not to create an
+                            anonymous utility directory with no way to reach the operator. The goal is to keep the site accountable, improve pages when visitors find gaps, and
+                            make it clear that TJVerce reviews the platform as an ongoing publishing and product project.
+                        </p>
+                    </article>
+                    <article class="page-section-card">
+                        <h3>What happens after feedback is reviewed</h3>
+                        <p>
+                            When feedback points to a real usability problem, we compare it with the affected page and decide whether the fix belongs in the tool interface,
+                            the guide content, the metadata, or the surrounding trust information. Some changes are small, such as improving a label or adding a clearer warning.
+                            Other changes require deeper review, especially when they affect browser-side file handling, generated output, structured data, or public policy text.
+                        </p>
+                        <p>
+                            Tool suggestions are reviewed in the same practical way. A new idea should solve a clear task, fit the browser-based nature of the platform, and be
+                            understandable without a complicated account workflow. If a suggestion is too broad, too sensitive for a lightweight utility, or better handled by
+                            professional software, it may still influence a guide or limitation note even if it does not become a standalone tool immediately.
+                        </p>
+                    </article>
+                    <article class="page-section-card">
+                        <h3>Before sending sensitive information</h3>
+                        <p>
+                            Please avoid sending passwords, private API tokens, customer records, confidential PDF files, legal documents, medical information, payment details,
+                            or internal business data through this form. If you need to describe a problem, use a reduced example that shows the issue without exposing real
+                            sensitive content. For example, replace real names, IDs, domains, and account values with sample placeholders before sharing the message.
+                        </p>
+                        <p>
+                            This keeps the conversation safer for both sides and helps us focus on the platform issue. WebToolsStation can improve labels, examples, guide notes,
+                            validation behavior, and tool explanations from a sanitized report just as effectively as from a private production sample.
+                        </p>
+                    </article>
                 </div>
             </div>
 

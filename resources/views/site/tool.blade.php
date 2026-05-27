@@ -405,6 +405,50 @@
                 </div>
             </div>
 
+            <div class="tool-layout" style="margin-top:24px;">
+                <div class="tool-panel">
+                    <h2>Detailed workflow notes for {{ $tool['title'] }}</h2>
+                    <p>
+                        A useful {{ $tool['title'] }} page should do more than place a button beside an input box. The value comes from making the task clear before
+                        you run it, keeping the output easy to review, and helping you understand what the result can and cannot prove. This {{ strtolower($tool['category']) }}
+                        page is built for quick browser work, so it is best used when you need a focused answer without opening a larger application or creating an account.
+                    </p>
+                    <p>
+                        Start by checking that your source input is complete and that it belongs in this specific workflow. For {{ $tool['title'] }}, that means reading
+                        the short description, using the example input style when available, and running the tool once with a small sample before relying on a larger value.
+                        If the result looks unexpected, compare it with the original source instead of copying it immediately. Many tool mistakes come from incomplete
+                        pasted data, the wrong format, or an assumption about what the output is supposed to mean.
+                    </p>
+                    <p>
+                        This page is also designed to support repeat use. The surrounding notes explain where the tool helps, common checks to make, related tools to try,
+                        and guides that give additional context. That gives Google and human visitors a clearer reason for the page to exist: it is not only a thin utility
+                        shell, but a practical reference for completing the task carefully.
+                    </p>
+                    <p>
+                        If you return to this tool often, keep a consistent habit around naming, copying, storing, and reviewing the output. Small utilities are most valuable
+                        when they reduce friction without hiding judgment. Use the page for the quick operation, then keep any final decision tied to your project rules,
+                        team standards, file requirements, or application behavior.
+                    </p>
+                </div>
+                <aside class="tool-panel">
+                    <h2>Review checklist for {{ $tool['title'] }}</h2>
+                    <p>
+                        Before you use the result in another system, check the output against the reason you opened the tool in the first place. A fast browser utility is
+                        excellent for formatting, converting, inspecting, or generating a value, but important work still deserves a final human review.
+                    </p>
+                    <ul class="detail-list">
+                        <li>Confirm the input was pasted or uploaded completely before running the tool.</li>
+                        <li>Read the output for obvious formatting, encoding, naming, or file-type problems.</li>
+                        <li>Use the related guide if you are unsure what a warning, field, or converted value means.</li>
+                        <li>Avoid using sensitive data unless you understand the privacy note and your own security requirements.</li>
+                        <li>Move to a fuller workflow when you need batch processing, legal review, security verification, or production validation.</li>
+                    </ul>
+                    <p style="margin-top:16px;">
+                        The safest habit is simple: use WebToolsStation for the quick browser step, then confirm the result in the context where it will actually be used.
+                    </p>
+                </aside>
+            </div>
+
             @if (!empty($tool['related']))
                 <div class="tool-panel" style="margin-top:24px;">
                     <h2>Related tools</h2>
