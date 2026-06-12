@@ -93,7 +93,7 @@
                         <div class="tool-icon">AR</div>
                         <h3 style="margin-top:14px;">{{ $guide['title'] }}</h3>
                         <p>{{ $guide['seo_description'] }}</p>
-                        <p class="meta-copy" style="margin-top:12px;">By <a href="{{ url('/authors/' . $guide['author']['slug']) }}">{{ $guide['author']['name'] }}</a> · {{ $guide['reading_time'] }}</p>
+                        <p class="meta-copy" style="margin-top:12px;">By <a href="{{ $guide['author']['url'] }}">{{ $guide['author']['name'] }}</a> · {{ $guide['reading_time'] }}</p>
                         <a class="card-link" href="{{ url('/guides/' . $guide['slug']) }}">Open article <span aria-hidden="true">→</span></a>
                     </article>
                 @endforeach

@@ -15,7 +15,7 @@
                     <div class="section-kicker">Guide</div>
                     <h1 style="margin-top:16px;">{{ $article['title'] }}</h1>
                     <p class="meta-copy" style="margin-top:14px;">
-                        By <a href="{{ url('/authors/' . $article['author']['slug']) }}">{{ $article['author']['name'] }}</a> · Published {{ \Illuminate\Support\Carbon::parse($article['published_at'])->format('F j, Y') }}
+                        By <a href="{{ $article['author']['url'] }}">{{ $article['author']['name'] }}</a> · Published {{ \Illuminate\Support\Carbon::parse($article['published_at'])->format('F j, Y') }}
                         · Updated {{ \Illuminate\Support\Carbon::parse($article['updated_at'])->format('F j, Y') }} · {{ $article['reading_time'] }}
                     </p>
                     <p style="margin-top:16px;">{{ $article['intro'] }}</p>
@@ -100,7 +100,7 @@
                 <div class="page-section-card" style="margin-top:24px;">
                     <h2>About the author</h2>
                     <p>{{ $article['author']['name'] }} is the founder and product editor of WebToolsStation. This guide was reviewed for practical browser-tool usage, common mistakes, and clear limits before publication.</p>
-                    <p><a class="card-link" href="{{ url('/authors/' . $article['author']['slug']) }}">View author profile <span aria-hidden="true">→</span></a></p>
+                    <p><a class="card-link" href="{{ $article['author']['url'] }}">View author profile <span aria-hidden="true">→</span></a></p>
                 </div>
 
                 <div class="page-section-card" style="margin-top:24px;">
@@ -164,7 +164,7 @@
                     <div class="card">
                         <div class="tool-icon">AU</div>
                         <h3 style="margin-top:12px;">About the author</h3>
-                        <p><a href="{{ url('/authors/' . $article['author']['slug']) }}">{{ $article['author']['name'] }}</a></p>
+                        <p><a href="{{ $article['author']['url'] }}">{{ $article['author']['name'] }}</a></p>
                         <p>{{ $article['author']['role'] }}</p>
                         <p>{{ $article['author']['bio'] }}</p>
                     </div>

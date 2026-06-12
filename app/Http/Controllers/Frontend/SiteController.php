@@ -269,7 +269,7 @@ class SiteController extends Controller
                 'title' => $author['name'] . ' - WebToolsStation Author',
                 'description' => $author['bio'],
                 'keywords' => 'webtoolsstation author, tj verse, tjverce editor, tool guides author',
-                'canonical' => url('/authors/' . $author['slug']),
+                'canonical' => $author['url'],
                 'type' => 'profile',
                 'image' => url('/images/logo/webtoolsstation-logo.png'),
             ],
@@ -278,7 +278,7 @@ class SiteController extends Controller
                 '@type' => 'Person',
                 'name' => $author['name'],
                 'jobTitle' => $author['role'],
-                'url' => url('/authors/' . $author['slug']),
+                'url' => $author['url'],
                 'email' => $author['email'],
                 'worksFor' => [
                     '@type' => 'Organization',
@@ -387,7 +387,7 @@ class SiteController extends Controller
                         'author' => [
                             '@type' => 'Person',
                             'name' => $guide['author']['name'],
-                            'url' => url('/authors/' . $guide['author']['slug']),
+                            'url' => $guide['author']['url'],
                         ],
                         'publisher' => [
                             '@type' => 'Organization',
@@ -623,7 +623,7 @@ class SiteController extends Controller
         $urls = [
             url('/'),
             url('/about'),
-            url('/authors/tj-verse'),
+            url('/author.html'),
             url('/contact'),
             url('/privacy-policy'),
             url('/terms-of-use'),

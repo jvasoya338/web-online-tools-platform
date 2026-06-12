@@ -536,7 +536,7 @@
             <div class="nav-links">
                 <a href="{{ url('/') }}">Tools</a>
                 <a href="{{ url('/guides') }}">Guides</a>
-                <a href="{{ url('/authors/tj-verse') }}">Author</a>
+                <a href="{{ url('/author.html') }}">Author</a>
                 <a href="{{ url('/about') }}">About</a>
                 <a href="{{ url('/contact') }}">Contact</a>
                 <a href="{{ url('/privacy-policy') }}">Privacy</a>
@@ -564,7 +564,7 @@
                         <strong>Platform</strong>
                         <a href="{{ url('/') }}">Tools</a>
                         <a href="{{ url('/guides') }}">Guides</a>
-                        <a href="{{ url('/authors/tj-verse') }}">Author</a>
+                        <a href="{{ url('/author.html') }}">Author</a>
                     </div>
                     <div class="footer-link-group">
                         <strong>Trust</strong>

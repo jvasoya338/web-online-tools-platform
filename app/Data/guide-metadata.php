@@ -4,7 +4,7 @@ return [
     'default_author' => [
         'name' => 'TJ Verse',
         'role' => 'Founder and product editor at WebToolsStation',
-        'url' => 'https://www.webtoolsstation.com/authors/tj-verse',
+        'url' => 'https://www.webtoolsstation.com/author.html',
     ],
     'default_reviewer' => [
         'name' => 'TJVerce Product Review',
