@@ -5,6 +5,9 @@
 
     RewriteEngine On
 
+    # Permanent author profile URL for old crawled links
+    RewriteRule ^authors/tj-verse$ /author.html [L,R=301]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
