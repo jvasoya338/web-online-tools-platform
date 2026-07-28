@@ -8,6 +8,9 @@
     # Permanent author profile URL for old crawled links
     RewriteRule ^authors/tj-verse$ /author.html [L,R=301]
 
+    # Serve ads.txt through AdstxtManager
+    RewriteRule ^ads\.txt$ https://srv.adstxtmanager.com/19390/webtoolsstation.com [L,R=302]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
