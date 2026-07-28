@@ -1,3 +1,5 @@
+Redirect 301 /ads.txt https://srv.adstxtmanager.com/19390/webtoolsstation.com
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
@@ -7,9 +9,6 @@
 
     # Permanent author profile URL for old crawled links
     RewriteRule ^authors/tj-verse$ /author.html [L,R=301]
-
-    # Serve ads.txt through AdstxtManager
-    RewriteRule ^ads\.txt$ https://srv.adstxtmanager.com/19390/webtoolsstation.com [L,R=302]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
