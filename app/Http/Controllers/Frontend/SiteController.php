@@ -23,24 +23,44 @@ class SiteController extends Controller
             'toolCount' => count($tools),
             'pdfCount' => count(array_filter($tools, fn (array $tool): bool => $tool['category'] === 'PDF Tools')),
             'seo' => [
-                'title' => 'WebToolsStation - Free Developer and PDF Tools Online',
-                'description' => 'Use WebToolsStation by TJVerce for fast online developer tools and PDF utilities. Format JSON, decode JWT, test regex, convert text, inspect PDFs, and more.',
-                'keywords' => 'developer tools online, pdf tools online, json formatter, jwt decoder, regex tester, uuid generator, pdf page counter, pdf metadata viewer, webtoolsstation',
+                'title' => 'Free Online Browser Tools for Developers, PDFs and Text | WebToolsStation',
+                'description' => 'Use free online browser tools for JSON, JWT, Base64, regex, timestamps, UUIDs, text cleanup, colors, images and PDF checks. Built for users in the US, UK, Europe and worldwide.',
+                'keywords' => 'free online tools, browser tools, developer tools online, pdf tools online, json formatter, jwt decoder, regex tester, uuid generator, pdf page counter, webtoolsstation',
                 'canonical' => url('/'),
                 'type' => 'website',
                 'image' => url('/images/logo/webtoolsstation-logo.png'),
             ],
             'schema' => [
                 '@context' => 'https://schema.org',
-                '@type' => 'WebSite',
-                'name' => 'WebToolsStation',
-                'url' => url('/'),
-                'description' => 'A tool platform by TJVerce with developer utilities and PDF tools.',
-                'image' => url('/images/logo/webtoolsstation-logo.png'),
-                'publisher' => [
-                    '@type' => 'Organization',
-                    'name' => 'TJVerce',
-                    'email' => 'webtoolsstation@gmail.com',
+                '@graph' => [
+                    $this->organizationSchema(),
+                    [
+                        '@type' => 'WebSite',
+                        '@id' => url('/#website'),
+                        'name' => 'WebToolsStation',
+                        'url' => url('/'),
+                        'description' => 'Free online browser tools for developer, PDF, text, image, color, and data cleanup workflows.',
+                        'inLanguage' => 'en',
+                        'isAccessibleForFree' => true,
+                        'publisher' => [
+                            '@id' => url('/#organization'),
+                        ],
+                        'audience' => [
+                            '@type' => 'Audience',
+                            'audienceType' => 'Developers, students, creators, editors, and business users in the US, UK, Europe, and worldwide',
+                        ],
+                    ],
+                    [
+                        '@type' => 'ItemList',
+                        '@id' => url('/#tools'),
+                        'name' => 'Free online tools on WebToolsStation',
+                        'itemListElement' => array_map(fn (array $tool, int $index): array => [
+                            '@type' => 'ListItem',
+                            'position' => $index + 1,
+                            'name' => $tool['title'],
+                            'url' => url('/tools/' . $tool['slug']),
+                        ], $tools, array_keys($tools)),
+                    ],
                 ],
             ],
         ]);
@@ -58,8 +78,8 @@ class SiteController extends Controller
             'tool' => $tool,
             'tools' => array_map(fn (array $item): array => $this->prepareTool($item), $this->tools()),
             'seo' => [
-                'title' => $tool['title'] . ' Online - Free Browser Tool | WebToolsStation',
-                'description' => $tool['seo_description'],
+                'title' => $this->toolSeoTitle($tool),
+                'description' => $this->toolSeoDescription($tool),
                 'keywords' => implode(', ', $tool['keywords']),
                 'canonical' => url('/tools/' . $tool['slug']),
                 'type' => 'website',
@@ -68,23 +88,40 @@ class SiteController extends Controller
             'schema' => [
                 '@context' => 'https://schema.org',
                 '@graph' => [
+                    $this->organizationSchema(),
+                    [
+                        '@type' => 'WebPage',
+                        '@id' => url('/tools/' . $tool['slug'] . '#webpage'),
+                        'name' => $this->toolSeoTitle($tool),
+                        'url' => url('/tools/' . $tool['slug']),
+                        'description' => $this->toolSeoDescription($tool),
+                        'inLanguage' => 'en',
+                        'dateModified' => $tool['updated_at'],
+                        'isPartOf' => [
+                            '@id' => url('/#website'),
+                        ],
+                    ],
                     [
                         '@type' => 'SoftwareApplication',
+                        '@id' => url('/tools/' . $tool['slug'] . '#software'),
                         'name' => $tool['title'],
                         'applicationCategory' => $tool['category'],
                         'operatingSystem' => 'Any',
-                        'description' => $tool['seo_description'],
+                        'description' => $this->toolSeoDescription($tool),
                         'url' => url('/tools/' . $tool['slug']),
                         'image' => url('/images/logo/webtoolsstation-logo.png'),
+                        'softwareVersion' => 'Browser-based web tool',
+                        'inLanguage' => 'en',
+                        'isAccessibleForFree' => true,
+                        'dateModified' => $tool['updated_at'],
+                        'featureList' => array_values(array_merge($tool['details'], $tool['use_steps'])),
                         'offers' => [
                             '@type' => 'Offer',
                             'price' => '0',
                             'priceCurrency' => 'USD',
                         ],
                         'publisher' => [
-                            '@type' => 'Organization',
-                            'name' => 'WebToolsStation',
-                            'url' => url('/'),
+                            '@id' => url('/#organization'),
                         ],
                     ],
                     [
@@ -211,8 +248,8 @@ class SiteController extends Controller
                 ],
             ],
         ], [
-            'title' => 'About WebToolsStation - TJVerce',
-            'description' => 'Learn about WebToolsStation by TJVerce, including our mission, design approach, platform direction, and how we build useful online tools.',
+            'title' => 'About WebToolsStation - Free Online Tools by TJVerce',
+            'description' => 'Learn how WebToolsStation by TJVerce builds free browser tools, practical guides, privacy-aware workflows, and trusted utility pages for global users.',
             'keywords' => 'about webtoolsstation, about tjverce, online tools platform, developer and pdf tools',
             'canonical' => url('/about'),
             'type' => 'article',
@@ -228,9 +265,9 @@ class SiteController extends Controller
             'featuredGuides' => array_slice($guides, -8),
             'guideCount' => count($guides),
             'seo' => [
-                'title' => 'Guides and Articles - WebToolsStation',
-                'description' => 'Browse WebToolsStation guides covering JSON, JWT, Base64, passwords, timestamps, PDF checks, color conversion, slugs, and other practical web workflows.',
-                'keywords' => 'webtoolsstation guides, developer tool guides, pdf tool guides, json jwt base64 articles',
+                'title' => 'Practical Web Tool Guides with Examples | WebToolsStation',
+                'description' => 'Browse practical guides for JSON, JWT, Base64, regex, passwords, timestamps, PDFs, color conversion, slugs, and browser-based web workflows.',
+                'keywords' => 'web tool guides, developer tool guides, pdf tool guides, json jwt base64 articles, browser workflow guides',
                 'canonical' => url('/guides'),
                 'type' => 'website',
                 'image' => url('/images/logo/webtoolsstation-logo.png'),
@@ -266,7 +303,7 @@ class SiteController extends Controller
             'author' => $author,
             'guides' => $guides,
             'seo' => [
-                'title' => $author['name'] . ' - WebToolsStation Author',
+                'title' => $author['name'] . ' - Founder and Editor of WebToolsStation',
                 'description' => $author['bio'],
                 'keywords' => 'webtoolsstation author, tj verse, tjverce editor, tool guides author',
                 'canonical' => $author['url'],
@@ -295,8 +332,8 @@ class SiteController extends Controller
     {
         return view('site.contact', [
             'seo' => [
-                'title' => 'Contact WebToolsStation - TJVerce',
-                'description' => 'Contact WebToolsStation by TJVerce at webtoolsstation@gmail.com for support, partnerships, suggestions, and platform feedback.',
+                'title' => 'Contact WebToolsStation Support and Editorial Team',
+                'description' => 'Contact WebToolsStation for support, tool suggestions, content corrections, partnerships, advertising questions, and platform feedback.',
                 'keywords' => 'contact webtoolsstation, contact tjverce, webtoolsstation support email',
                 'canonical' => url('/contact'),
                 'type' => 'article',
@@ -368,8 +405,8 @@ class SiteController extends Controller
             'guides' => $this->guides(),
             'relatedTools' => $this->relatedToolsForGuide($guide['slug']),
             'seo' => [
-                'title' => $guide['seo_title'],
-                'description' => $guide['seo_description'],
+                'title' => $this->guideSeoTitle($guide),
+                'description' => $this->guideSeoDescription($guide),
                 'keywords' => implode(', ', $guide['keywords']),
                 'canonical' => url('/guides/' . $guide['slug']),
                 'type' => 'article',
@@ -379,11 +416,14 @@ class SiteController extends Controller
             'schema' => [
                 '@context' => 'https://schema.org',
                 '@graph' => [
+                    $this->organizationSchema(),
                     [
                         '@type' => 'Article',
+                        '@id' => url('/guides/' . $guide['slug'] . '#article'),
                         'headline' => $guide['title'],
-                        'description' => $guide['seo_description'],
+                        'description' => $this->guideSeoDescription($guide),
                         'image' => [$guide['image']],
+                        'inLanguage' => 'en',
                         'author' => [
                             '@type' => 'Person',
                             'name' => $guide['author']['name'],
@@ -401,6 +441,8 @@ class SiteController extends Controller
                         'mainEntityOfPage' => url('/guides/' . $guide['slug']),
                         'datePublished' => $guide['published_at'],
                         'dateModified' => $guide['updated_at'],
+                        'articleSection' => 'Web tools and browser workflow guides',
+                        'keywords' => $guide['keywords'],
                     ],
                     [
                         '@type' => 'FAQPage',
@@ -621,14 +663,25 @@ class SiteController extends Controller
     public function sitemap(): Response
     {
         $urls = [
-            url('/'),
-            url('/about'),
-            url('/author.html'),
-            url('/contact'),
-            url('/privacy-policy'),
-            url('/terms-of-use'),
-            ...array_map(fn (array $guide): string => url('/guides/' . $guide['slug']), $this->guides()),
-            ...array_map(fn (array $tool): string => url('/tools/' . $tool['slug']), $this->tools()),
+            ['loc' => url('/'), 'lastmod' => '2026-08-07', 'changefreq' => 'weekly', 'priority' => '1.0'],
+            ['loc' => url('/guides'), 'lastmod' => '2026-08-07', 'changefreq' => 'weekly', 'priority' => '0.9'],
+            ['loc' => url('/author.html'), 'lastmod' => '2026-08-07', 'changefreq' => 'monthly', 'priority' => '0.7'],
+            ['loc' => url('/about'), 'lastmod' => '2026-08-07', 'changefreq' => 'monthly', 'priority' => '0.7'],
+            ['loc' => url('/contact'), 'lastmod' => '2026-08-07', 'changefreq' => 'monthly', 'priority' => '0.7'],
+            ['loc' => url('/privacy-policy'), 'lastmod' => '2026-08-07', 'changefreq' => 'monthly', 'priority' => '0.6'],
+            ['loc' => url('/terms-of-use'), 'lastmod' => '2026-08-07', 'changefreq' => 'monthly', 'priority' => '0.6'],
+            ...array_map(fn (array $guide): array => [
+                'loc' => url('/guides/' . $guide['slug']),
+                'lastmod' => $guide['updated_at'],
+                'changefreq' => 'monthly',
+                'priority' => '0.8',
+            ], $this->guides()),
+            ...array_map(fn (array $tool): array => [
+                'loc' => url('/tools/' . $tool['slug']),
+                'lastmod' => '2026-08-07',
+                'changefreq' => 'monthly',
+                'priority' => '0.8',
+            ], $this->tools()),
         ];
 
         $xml = view('site.sitemap', ['urls' => $urls])->render();
@@ -734,6 +787,8 @@ class SiteController extends Controller
         $tool['better_alternative'] = $depth['better_alternative'] ?? [];
         $tool['output_notes'] = $depth['output_notes'] ?? [];
         $tool['updated_at'] = '2026-05-25';
+        $tool['seo_title'] = $this->toolSeoTitle($tool);
+        $tool['seo_description_full'] = $this->toolSeoDescription($tool);
         $tool['faq'] = [
             [
                 'question' => 'Is this ' . $tool['title'] . ' free to use?',
@@ -763,6 +818,61 @@ class SiteController extends Controller
 
         return $tool;
     }
+
+    private function toolSeoTitle(array $tool): string
+    {
+        return $tool['title'] . ' Online - Free, Fast Browser Tool | WebToolsStation';
+    }
+
+    private function toolSeoDescription(array $tool): string
+    {
+        return $tool['seo_description'] . ' Free browser tool with no sign-up, clear examples, and practical workflow notes.';
+    }
+
+    private function guideSeoTitle(array $guide): string
+    {
+        return $guide['title'] . ' - Practical Examples | WebToolsStation';
+    }
+
+    private function guideSeoDescription(array $guide): string
+    {
+        return $guide['seo_description'] . ' Includes examples, common mistakes, limitations, and practical browser workflow tips.';
+    }
+
+    private function organizationSchema(): array
+    {
+        return [
+            '@type' => 'Organization',
+            '@id' => url('/#organization'),
+            'name' => 'WebToolsStation',
+            'alternateName' => 'TJVerce WebToolsStation',
+            'url' => url('/'),
+            'email' => 'webtoolsstation@gmail.com',
+            'logo' => [
+                '@type' => 'ImageObject',
+                'url' => url('/images/logo/webtoolsstation-logo.png'),
+            ],
+            'sameAs' => [
+                'https://tjverse.group/',
+            ],
+            'areaServed' => [
+                ['@type' => 'Country', 'name' => 'United States'],
+                ['@type' => 'Country', 'name' => 'United Kingdom'],
+                ['@type' => 'Place', 'name' => 'Europe'],
+                ['@type' => 'Place', 'name' => 'Worldwide'],
+            ],
+            'knowsAbout' => [
+                'Developer tools',
+                'PDF tools',
+                'JSON formatting',
+                'JWT decoding',
+                'Regular expressions',
+                'Text conversion',
+                'Browser-based utilities',
+            ],
+        ];
+    }
+
     private function toolGuideMap(): array
     {
         return app(WebToolsStationCatalog::class)->toolGuideMap();

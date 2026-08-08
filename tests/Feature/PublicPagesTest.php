@@ -29,7 +29,9 @@ class PublicPagesTest extends TestCase
         $this->get('/tools/json-formatter')
             ->assertOk()
             ->assertSee('JSON Formatter')
-            ->assertSee('Format JSON');
+            ->assertSee('Format JSON')
+            ->assertSee('hreflang="en-US"', false)
+            ->assertSee('SoftwareApplication');
 
         $this->get('/tools/pdf-page-counter')
             ->assertOk()
@@ -44,7 +46,18 @@ class PublicPagesTest extends TestCase
             ->assertSee('How to Format JSON Without Errors')
             ->assertSee('Guide')
             ->assertSee('TJ Verse')
-            ->assertSee('Before you rely on the result');
+            ->assertSee('Before you rely on the result')
+            ->assertSee('Practical Examples')
+            ->assertSee('FAQPage');
+    }
+
+    public function test_sitemap_includes_search_metadata(): void
+    {
+        $this->get('/sitemap.xml')
+            ->assertOk()
+            ->assertSee('<lastmod>', false)
+            ->assertSee('<changefreq>', false)
+            ->assertSee('<priority>', false);
     }
 
     public function test_unknown_tool_and_guide_pages_return_not_found(): void

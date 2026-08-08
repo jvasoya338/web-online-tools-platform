@@ -4,11 +4,12 @@
     <section class="hero">
         <div class="shell hero-grid">
             <div class="hero-card">
-                <span class="eyebrow">Developer tools and PDF utilities</span>
-                <h1>Useful online tools presented in a cleaner and more comfortable way.</h1>
+                <span class="eyebrow">Free online browser tools for global workflows</span>
+                <h1>Free online tools for developers, PDF checks, text cleanup, and everyday web work.</h1>
                 <p class="lede">
-                    WebToolsStation by TJVerce is designed for people who want quick results without a messy interface.
-                    The platform keeps the focus on practical tools, readable pages, and a calmer browsing experience.
+                    WebToolsStation by TJVerce is designed for people in the US, UK, Europe, and worldwide who want quick results
+                    without a messy interface. Format data, inspect PDFs, convert text, test patterns, and use practical browser
+                    utilities without a sign-up step.
                 </p>
                 <div class="hero-actions">
                     <a class="button button-primary" href="#tool-grid">Explore Tools</a>

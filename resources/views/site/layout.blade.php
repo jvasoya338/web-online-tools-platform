@@ -14,10 +14,17 @@
     <title>{{ $seo['title'] }}</title>
     <meta name="description" content="{{ $seo['description'] }}">
     <meta name="keywords" content="{{ $seo['keywords'] }}">
+    <meta name="language" content="English">
+    <meta name="content-language" content="en">
+    <meta name="distribution" content="global">
+    <meta name="rating" content="general">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="publisher" content="WebToolsStation">
     @if (!empty($seo['author']))
         <meta name="author" content="{{ $seo['author'] }}">
     @endif
     <meta name="robots" content="index, follow">
+    <meta property="og:locale" content="en_US">
     <meta property="og:title" content="{{ $seo['title'] }}">
     <meta property="og:description" content="{{ $seo['description'] }}">
     <meta property="og:type" content="{{ $seo['type'] }}">
@@ -30,6 +37,10 @@
     <meta name="twitter:description" content="{{ $seo['description'] }}">
     <meta name="twitter:image" content="{{ $seo['image'] ?? url('/images/logo/webtoolsstation-logo.png') }}">
     <link rel="canonical" href="{{ $seo['canonical'] }}">
+    <link rel="alternate" hreflang="en" href="{{ $seo['canonical'] }}">
+    <link rel="alternate" hreflang="en-US" href="{{ $seo['canonical'] }}">
+    <link rel="alternate" hreflang="en-GB" href="{{ $seo['canonical'] }}">
+    <link rel="alternate" hreflang="x-default" href="{{ $seo['canonical'] }}">
     <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-icon-72x72.png">
