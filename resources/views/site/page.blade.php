@@ -23,33 +23,12 @@
                 </div>
 
                 <div class="page-section-card" style="margin-top:24px;">
-                    <h2>How this page supports site quality</h2>
+                    <h2>Transparency & User Inquiries</h2>
                     <p>
-                        WebToolsStation treats public trust pages as part of the product, not as filler. A tools website asks visitors to interact with text, files, colors,
-                        URLs, tokens, or document signals, so the surrounding pages need to explain who operates the site, how contact works, what limits apply, and how users
-                        should think about privacy and responsibility. That context helps visitors decide whether the platform is appropriate for their workflow.
+                        WebToolsStation maintains clear operating terms, data privacy disclosures, and contact channels to ensure transparent relationships with all visitors. When using browser-based utilities to inspect code, tokens, or documents, knowing how your data is handled is essential.
                     </p>
                     <p>
-                        This page also supports search and AdSense quality because it gives reviewers and users a clearer view of the site beyond the individual tools. A
-                        low-value site often has thin policy pages, anonymous ownership, and repeated boilerplate. WebToolsStation is being structured differently: ownership,
-                        author information, contact details, policy explanations, sitemap access, crawl rules, and practical limitations are kept visible so the platform feels
-                        maintained rather than automatically generated.
-                    </p>
-                    <p>
-                        The same standard applies across the platform. Tool pages should explain what the utility does and how to review the output. Guide pages should provide
-                        examples, mistakes, limitations, and useful next steps. Trust pages should make the site easier to understand before a visitor uses a browser-based
-                        workflow. This page exists inside that larger quality system.
-                    </p>
-                    <p>
-                        Visitors should also be able to understand the boundaries of the service without guessing. WebToolsStation is a browser-based utility and publishing
-                        project, not a replacement for every professional workflow. The public pages explain this clearly because honest limits are part of trust. When a site is
-                        transparent about ownership, contact, data handling, acceptable use, and review standards, the tools become easier to evaluate and the overall platform
-                        becomes more useful.
-                    </p>
-                    <p>
-                        This quality approach also helps keep the site consistent as it grows. New tools, guides, and policy updates should fit the same pattern: clear language,
-                        practical examples where they help, visible review notes, and plain explanations of what the platform does not do. That makes the website easier for
-                        visitors to trust and easier for search reviewers to understand as a maintained public resource rather than a group of disconnected pages.
+                        If you have questions regarding these terms, our privacy practices, or wish to report an issue with any tool on the platform, please visit our <a href="{{ url('/contact') }}" style="color:var(--brand); text-decoration:underline;">Contact Page</a>.
                     </p>
                 </div>
             </div>

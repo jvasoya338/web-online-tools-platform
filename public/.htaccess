@@ -1,5 +1,3 @@
-Redirect 301 /ads.txt https://srv.adstxtmanager.com/19390/webtoolsstation.com
-
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
@@ -7,8 +5,8 @@ Redirect 301 /ads.txt https://srv.adstxtmanager.com/19390/webtoolsstation.com
 
     RewriteEngine On
 
-    # Permanent author profile URL for old crawled links
-    RewriteRule ^authors/tj-verse$ /author.html [L,R=301]
+    # Redirect old author.html requests to clean Laravel author route
+    RewriteRule ^author\.html$ /authors/tj-verse [L,R=301]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .

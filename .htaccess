@@ -1,5 +1,3 @@
-Redirect 301 /ads.txt https://srv.adstxtmanager.com/19390/webtoolsstation.com
-
 <IfModule mod_rewrite.c>
     Options -Indexes
     RewriteEngine On

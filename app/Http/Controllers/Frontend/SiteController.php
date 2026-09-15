@@ -15,9 +15,11 @@ class SiteController extends Controller
     {
         $tools = array_map(fn (array $tool): array => $this->prepareTool($tool), $this->tools());
         $guides = $this->guides();
+        $categories = $this->categories();
 
         return view('site.home', [
             'tools' => $tools,
+            'categories' => $categories,
             'featuredTools' => array_slice($tools, 0, 6),
             'latestGuides' => array_slice($guides, -6),
             'toolCount' => count($tools),
@@ -147,8 +149,191 @@ class SiteController extends Controller
                             [
                                 '@type' => 'ListItem',
                                 'position' => 2,
+                                'name' => $tool['category'],
+                                'item' => url('/categories/' . $tool['category_slug']),
+                            ],
+                            [
+                                '@type' => 'ListItem',
+                                'position' => 3,
                                 'name' => $tool['title'],
                                 'item' => url('/tools/' . $tool['slug']),
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+    }
+
+
+    public function category(string $slug): View
+    {
+        $categories = $this->categories();
+        $category = $categories[$slug] ?? null;
+
+        abort_if(!$category, 404);
+
+        $tools = collect($this->tools())
+            ->filter(fn (array $tool): bool => $tool['category'] === $category['category_key'])
+            ->map(fn (array $tool): array => $this->prepareTool($tool))
+            ->values()
+            ->all();
+
+        $toolSlugs = array_column($tools, 'slug');
+        $guideMap = $this->toolGuideMap();
+        $relatedGuideSlugs = [];
+        foreach ($toolSlugs as $tSlug) {
+            if (!empty($guideMap[$tSlug])) {
+                $relatedGuideSlugs = array_merge($relatedGuideSlugs, $guideMap[$tSlug]);
+            }
+        }
+        $relatedGuideSlugs = array_unique($relatedGuideSlugs);
+
+        $relatedGuides = collect($this->guides())
+            ->whereIn('slug', $relatedGuideSlugs)
+            ->take(6)
+            ->values()
+            ->all();
+
+        return view('site.category', [
+            'category' => $category,
+            'tools' => $tools,
+            'relatedGuides' => $relatedGuides,
+            'toolCount' => count($tools),
+            'seo' => [
+                'title' => $category['name'] . ' - Free Online Browser Utilities | WebToolsStation',
+                'description' => $category['description'],
+                'keywords' => strtolower($category['name']) . ', free online tools, browser tools, webtoolsstation',
+                'canonical' => url('/categories/' . $category['slug']),
+                'type' => 'website',
+                'image' => url('/images/logo/webtoolsstation-logo.png'),
+            ],
+            'schema' => [
+                '@context' => 'https://schema.org',
+                '@graph' => [
+                    $this->organizationSchema(),
+                    [
+                        '@type' => 'CollectionPage',
+                        '@id' => url('/categories/' . $category['slug'] . '#collection'),
+                        'name' => $category['name'],
+                        'url' => url('/categories/' . $category['slug']),
+                        'description' => $category['description'],
+                        'inLanguage' => 'en',
+                        'isPartOf' => [
+                            '@id' => url('/#website'),
+                        ],
+                    ],
+                    [
+                        '@type' => 'ItemList',
+                        '@id' => url('/categories/' . $category['slug'] . '#tools'),
+                        'name' => $category['name'] . ' on WebToolsStation',
+                        'itemListElement' => array_map(fn (array $t, int $i): array => [
+                            '@type' => 'ListItem',
+                            'position' => $i + 1,
+                            'name' => $t['title'],
+                            'url' => url('/tools/' . $t['slug']),
+                        ], $tools, array_keys($tools)),
+                    ],
+                    [
+                        '@type' => 'BreadcrumbList',
+                        'itemListElement' => [
+                            [
+                                '@type' => 'ListItem',
+                                'position' => 1,
+                                'name' => 'Home',
+                                'item' => url('/'),
+                            ],
+                            [
+                                '@type' => 'ListItem',
+                                'position' => 2,
+                                'name' => $category['name'],
+                                'item' => url('/categories/' . $category['slug']),
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+    }
+
+    public function collection(string $slug): View
+    {
+        $collections = $this->collections();
+        $collection = $collections[$slug] ?? null;
+
+        abort_if(!$collection, 404);
+
+        $curatedSlugs = $collection['curated_tools'] ?? [];
+        $tools = collect($this->tools())
+            ->filter(fn (array $tool): bool => in_array($tool['slug'], $curatedSlugs))
+            ->map(fn (array $tool): array => $this->prepareTool($tool))
+            ->values()
+            ->all();
+
+        return view('site.collection', [
+            'collection' => $collection,
+            'tools' => $tools,
+            'seo' => [
+                'title' => $collection['title'] . ' | WebToolsStation',
+                'description' => $collection['seo_description'],
+                'keywords' => strtolower($collection['short_title']) . ', developer tools online, browser utilities, webtoolsstation',
+                'canonical' => url('/collections/' . $collection['slug']),
+                'type' => 'website',
+                'image' => url('/images/logo/webtoolsstation-logo.png'),
+            ],
+            'schema' => [
+                '@context' => 'https://schema.org',
+                '@graph' => [
+                    $this->organizationSchema(),
+                    [
+                        '@type' => 'CollectionPage',
+                        '@id' => url('/collections/' . $collection['slug'] . '#collection'),
+                        'name' => $collection['title'],
+                        'url' => url('/collections/' . $collection['slug']),
+                        'description' => $collection['seo_description'],
+                        'inLanguage' => 'en',
+                        'isAccessibleForFree' => true,
+                        'mainEntity' => [
+                            '@type' => 'ItemList',
+                            'itemListElement' => array_map(fn (array $tool, int $index): array => [
+                                '@type' => 'ListItem',
+                                'position' => $index + 1,
+                                'url' => url('/tools/' . $tool['slug']),
+                                'name' => $tool['title'],
+                            ], $tools, array_keys($tools)),
+                        ],
+                    ],
+                    [
+                        '@type' => 'FAQPage',
+                        'mainEntity' => array_map(fn (array $item): array => [
+                            '@type' => 'Question',
+                            'name' => $item['question'],
+                            'acceptedAnswer' => [
+                                '@type' => 'Answer',
+                                'text' => $item['answer'],
+                            ],
+                        ], $collection['faq']),
+                    ],
+                    [
+                        '@type' => 'BreadcrumbList',
+                        'itemListElement' => [
+                            [
+                                '@type' => 'ListItem',
+                                'position' => 1,
+                                'name' => 'Home',
+                                'item' => url('/'),
+                            ],
+                            [
+                                '@type' => 'ListItem',
+                                'position' => 2,
+                                'name' => 'Collections',
+                                'item' => url('/collections/' . $collection['slug']),
+                            ],
+                            [
+                                '@type' => 'ListItem',
+                                'position' => 3,
+                                'name' => $collection['short_title'],
+                                'item' => url('/collections/' . $collection['slug']),
                             ],
                         ],
                     ],
@@ -209,7 +394,7 @@ class SiteController extends Controller
                 [
                     'heading' => 'Our long-term direction',
                     'paragraphs' => [
-                        'The long-term vision for WebToolsStation is a carefully built platform with strong utility pages, strong content, and a professional public presence. We want the site to feel good enough for regular visitors, clear enough for search engines to understand, and trustworthy enough for advertising and partner review standards. That means continuing to improve page quality, clarity, accuracy, and visual consistency.',
+                        'The long-term vision for WebToolsStation is a carefully built platform with strong utility pages, strong content, and a professional public presence. We want the site to feel good enough for regular visitors, clear enough for search engines to understand, and dependable enough for everyday use by developers, creators, and business users worldwide. That means continuing to improve page quality, clarity, accuracy, and visual consistency.',
                         'As the platform grows, we will keep refining the tool set, page structure, and content quality. We want visitors to feel that the website has direction and care behind it. WebToolsStation is not meant to be a random collection of scripts. It is meant to become a stable and attractive online destination for practical work. That is the standard TJVerce wants to build toward.',
                     ],
                 ],
@@ -660,16 +845,181 @@ class SiteController extends Controller
         ]);
     }
 
+
+    public function disclaimer(): View
+    {
+        return $this->pageView([
+            'label' => 'Legal Disclaimer',
+            'title' => 'Disclaimer of Warranties, Tool Use, and Output Verification',
+            'intro' => 'This Disclaimer outlines the operational scope, technical boundaries, and usage expectations for WebToolsStation by TJVerce. By accessing or using the browser-based tools, calculators, converters, and guides provided on this platform, you acknowledge and agree to the terms described below.',
+            'sections' => [
+                [
+                    'heading' => 'For Informational and Utility Purposes Only',
+                    'paragraphs' => [
+                        'WebToolsStation provides online tools, utilities, formatting functions, data converters, and educational guides for general informational, educational, and workflow convenience purposes only. Nothing on this website constitutes legal advice, financial advice, cybersecurity certification, cryptographic compliance, or professional engineering consultation.',
+                        'While we strive to ensure that formatting algorithms, converters, and calculations operate accurately according to standard specifications (such as RFC 8259 for JSON, RFC 7519 for JWT, or RFC 4648 for Base64), software anomalies, browser-specific execution variations, and input idiosyncrasies can occur. Users must independently evaluate and verify all outputs before deploying them in production systems, legal contracts, or critical business operations.',
+                    ],
+                ],
+                [
+                    'heading' => 'No Guarantee of Accuracy or Fitness for a Particular Purpose',
+                    'paragraphs' => [
+                        'All tools and content on WebToolsStation are provided on an "as is" and "as available" basis without warranties of any kind, whether express, implied, statutory, or otherwise. TJVerce expressly disclaims all implied warranties of merchantability, fitness for a particular purpose, non-infringement, and title.',
+                        'We do not warrant that tool functions will be uninterrupted, error-free, compatible with all devices and file versions, or that defects will be immediately corrected. You assume total responsibility and risk for your use of the website and any actions taken based on tool results.',
+                    ],
+                ],
+                [
+                    'heading' => 'Client-Side Browser Execution and Data Privacy',
+                    'paragraphs' => [
+                        'Many utilities on WebToolsStation (including text formatting, color conversion, hash computation, and PDF inspection) are engineered to process data client-side within your browser runtime using standard Web APIs (such as the Web Cryptography API, Canvas API, and WebAssembly). This design reduces latency and avoids sending your data to external servers for standard operations.',
+                        'However, users are solely responsible for ensuring that they do not input confidential corporate trade secrets, unprotected personally identifiable information (PII), or regulated data into any browser environment on an untrusted or insecure device. We strongly recommend testing workflows with sanitized sample data before processing sensitive production values.',
+                    ],
+                ],
+                [
+                    'heading' => 'Token Decoding and Cryptographic Verification Boundaries',
+                    'paragraphs' => [
+                        'Tools such as the JWT Decoder are designed exclusively for inspecting readable header and payload claims during local development and debugging. Decoding a token does not verify its cryptographic signature, validate that the signing key is authentic, or confirm that the issuing authority has not revoked the credential. Cryptographic verification must always be enforced within your secure application backend using trusted public keys or secrets.',
+                        'Similarly, cryptographic hash generators (such as SHA-256) generate deterministic message digests based on provided text. They cannot decrypt, reverse, or validate the authenticity or safety of underlying data without authorized external verification mechanisms.',
+                    ],
+                ],
+                [
+                    'heading' => 'Third-Party Links and External Services',
+                    'paragraphs' => [
+                        'WebToolsStation may contain links to external websites, documentation repositories, RFC specifications, or third-party resources for convenience and reference. TJVerce exercises no control over, and assumes no responsibility for, the content, privacy policies, practices, or availability of any third-party websites or services. Inclusion of a link does not imply endorsement.',
+                    ],
+                ],
+                [
+                    'heading' => 'Limitation of Liability',
+                    'paragraphs' => [
+                        'To the maximum extent permitted by applicable law, in no event shall TJVerce, WebToolsStation, its operators, contributors, or affiliates be liable for any direct, indirect, incidental, consequential, special, punitive, or exemplary damages—including but not limited to loss of profits, lost data, business interruption, production downtime, system errors, or security breaches—arising out of or in connection with your access to, use of, or inability to use the platform or its tools.',
+                        'If you have questions regarding this Disclaimer or wish to report an unexpected calculation or tool behavior, please contact us at webtoolsstation@gmail.com.',
+                    ],
+                ],
+            ],
+            'cards' => [
+                ['title' => 'Platform', 'value' => 'WebToolsStation'],
+                ['title' => 'Operator', 'value' => 'TJVerce'],
+                ['title' => 'Warranty Status', 'value' => 'Provided "As-Is" Without Warranties'],
+                ['title' => 'Inquiries', 'value' => 'webtoolsstation@gmail.com'],
+            ],
+            'schema' => [
+                '@context' => 'https://schema.org',
+                '@type' => 'WebPage',
+                'name' => 'Legal Disclaimer - WebToolsStation',
+                'url' => url('/disclaimer'),
+                'description' => 'Legal disclaimer for WebToolsStation covering tool accuracy, browser execution, liability limits, and output verification.',
+                'image' => url('/images/logo/webtoolsstation-logo.png'),
+                'publisher' => [
+                    '@type' => 'Organization',
+                    'name' => 'TJVerce',
+                    'url' => url('/'),
+                ],
+            ],
+        ], [
+            'title' => 'Disclaimer - WebToolsStation',
+            'description' => 'Read the Legal Disclaimer for WebToolsStation covering browser tool accuracy, client-side processing, limitation of liability, and output verification.',
+            'keywords' => 'disclaimer webtoolsstation, tools disclaimer, liability limits, output verification',
+            'canonical' => url('/disclaimer'),
+            'type' => 'article',
+        ]);
+    }
+
+    public function cookiePolicy(): View
+    {
+        return $this->pageView([
+            'label' => 'Cookie Policy',
+            'title' => 'How WebToolsStation Uses Cookies, Local Storage, and Analytics',
+            'intro' => 'This Cookie Policy explains how WebToolsStation by TJVerce uses cookies, local browser storage, and related web technologies when you browse our tools, read our guides, and interact with the platform. We believe in clear, transparent disclosure so visitors understand exactly what data is stored on their devices and how to control it.',
+            'sections' => [
+                [
+                    'heading' => 'What Are Cookies and Local Storage?',
+                    'paragraphs' => [
+                        'Cookies are small text files that websites place on your computer or mobile device through your web browser. They allow websites to recognize your device, remember preferences, maintain sessions, and understand how pages are navigated.',
+                        'Local Storage (HTML5 Web Storage) is a related browser technology that allows web applications to store key-value data directly on your device with no expiration date unless cleared. WebToolsStation utilizes local storage for user interface preferences, such as remembering your consent choice on the cookie notification banner (cookie_ok).',
+                    ],
+                ],
+                [
+                    'heading' => 'Categories of Cookies and Storage We Use',
+                    'paragraphs' => [
+                        'Strictly Essential Storage: These items are necessary for the website to function properly. For example, local storage key "cookie_ok" stores your acknowledgment of our cookie disclosure so you are not repeatedly prompted with the banner on every page visit.',
+                        'Measurement and Analytics: We use Google Analytics (measurement ID G-R5ZD94KR5T) to gather aggregated, non-personally identifiable statistics about website traffic, popular tools, referring domains, browser types, and general geographical regions. These measurement cookies (such as _ga and _ga_*) help us understand platform reliability and identify which tools need performance improvements.',
+                        'Advertising Technologies: When advertising services such as Google AdSense are active on the website, Google and third-party advertising partners may use cookies (such as the DoubleClick cookie) to serve ads based on prior visits to this or other websites. These technologies help deliver relevant advertising to support the free operation of the platform.',
+                    ],
+                ],
+                [
+                    'heading' => 'Browser-Based Tools Do Not Transmit Input to Cookies',
+                    'paragraphs' => [
+                        'It is important to understand that the text, files, tokens, or codes you enter into our interactive browser utilities (such as the JSON Formatter, Base64 Converter, or PDF Viewer) are never stored in cookies or transmitted to analytics cookies. Interactive tool state is processed in volatile browser memory during your active tab session and discarded when you close or refresh the page.',
+                    ],
+                ],
+                [
+                    'heading' => 'How to Control and Manage Cookies',
+                    'paragraphs' => [
+                        'You have the right to accept, reject, or delete cookies at any time. Most modern browsers allow you to control cookies through their settings preferences. You can configure your browser to block third-party cookies, clear cookies when closing the browser, or alert you before a cookie is set.',
+                        'You can also opt out of Google Analytics tracking across all websites by installing the official Google Analytics Opt-out Browser Add-on provided by Google. To learn more about how Google uses data in advertising, you can visit Google Advertising Privacy and Terms page.',
+                    ],
+                ],
+                [
+                    'heading' => 'Updates to This Cookie Policy',
+                    'paragraphs' => [
+                        'We may update this Cookie Policy from time to time to reflect changes in our technical practices, new tool features, or evolving regulatory guidelines. When updates occur, the revision date at the top of this page will be updated accordingly.',
+                        'If you have questions about our use of cookies or browser storage technologies, you can contact TJVerce at webtoolsstation@gmail.com.',
+                    ],
+                ],
+            ],
+            'cards' => [
+                ['title' => 'Platform', 'value' => 'WebToolsStation'],
+                ['title' => 'Operator', 'value' => 'TJVerce'],
+                ['title' => 'Analytics Partner', 'value' => 'Google Analytics (G-R5ZD94KR5T)'],
+                ['title' => 'Questions', 'value' => 'webtoolsstation@gmail.com'],
+            ],
+            'schema' => [
+                '@context' => 'https://schema.org',
+                '@type' => 'WebPage',
+                'name' => 'Cookie Policy - WebToolsStation',
+                'url' => url('/cookie-policy'),
+                'description' => 'Cookie Policy for WebToolsStation covering cookies, local storage, analytics, and user preference controls.',
+                'image' => url('/images/logo/webtoolsstation-logo.png'),
+                'publisher' => [
+                    '@type' => 'Organization',
+                    'name' => 'TJVerce',
+                    'url' => url('/'),
+                ],
+            ],
+        ], [
+            'title' => 'Cookie Policy - WebToolsStation',
+            'description' => 'Read the Cookie Policy for WebToolsStation explaining how cookies, local storage, Google Analytics, and advertising technologies are used.',
+            'keywords' => 'cookie policy webtoolsstation, website cookies, local storage, analytics policy',
+            'canonical' => url('/cookie-policy'),
+            'type' => 'article',
+        ]);
+    }
+
     public function sitemap(): Response
     {
+        $today = now()->toDateString();
+
         $urls = [
-            ['loc' => url('/'), 'lastmod' => '2026-08-07', 'changefreq' => 'weekly', 'priority' => '1.0'],
-            ['loc' => url('/guides'), 'lastmod' => '2026-08-07', 'changefreq' => 'weekly', 'priority' => '0.9'],
-            ['loc' => url('/author.html'), 'lastmod' => '2026-08-07', 'changefreq' => 'monthly', 'priority' => '0.7'],
+            ['loc' => url('/'), 'lastmod' => $today, 'changefreq' => 'daily', 'priority' => '1.0'],
+            ['loc' => url('/guides'), 'lastmod' => $today, 'changefreq' => 'weekly', 'priority' => '0.9'],
+            ['loc' => url('/authors/tj-verse'), 'lastmod' => '2026-08-07', 'changefreq' => 'monthly', 'priority' => '0.8'],
             ['loc' => url('/about'), 'lastmod' => '2026-08-07', 'changefreq' => 'monthly', 'priority' => '0.7'],
             ['loc' => url('/contact'), 'lastmod' => '2026-08-07', 'changefreq' => 'monthly', 'priority' => '0.7'],
             ['loc' => url('/privacy-policy'), 'lastmod' => '2026-08-07', 'changefreq' => 'monthly', 'priority' => '0.6'],
             ['loc' => url('/terms-of-use'), 'lastmod' => '2026-08-07', 'changefreq' => 'monthly', 'priority' => '0.6'],
+            ['loc' => url('/disclaimer'), 'lastmod' => $today, 'changefreq' => 'monthly', 'priority' => '0.6'],
+            ['loc' => url('/cookie-policy'), 'lastmod' => $today, 'changefreq' => 'monthly', 'priority' => '0.6'],
+            ...array_map(fn (array $category): array => [
+                'loc' => url('/categories/' . $category['slug']),
+                'lastmod' => $today,
+                'changefreq' => 'weekly',
+                'priority' => '0.9',
+            ], $this->categories()),
+            ...array_map(fn (array $collection): array => [
+                'loc' => url('/collections/' . $collection['slug']),
+                'lastmod' => $today,
+                'changefreq' => 'weekly',
+                'priority' => '0.85',
+            ], $this->collections()),
             ...array_map(fn (array $guide): array => [
                 'loc' => url('/guides/' . $guide['slug']),
                 'lastmod' => $guide['updated_at'],
@@ -691,7 +1041,7 @@ class SiteController extends Controller
 
     public function robots(): Response
     {
-        $content = "User-agent: *\nAllow: /\n\nSitemap: https://www.webtoolsstation.com/sitemap.xml\n";
+        $content = "User-agent: *\nAllow: /\n\nUser-agent: Mediapartners-Google\nAllow: /\n\nUser-agent: Googlebot\nAllow: /\n\nSitemap: https://www.webtoolsstation.com/sitemap.xml\n";
 
         return response($content, 200)->header('Content-Type', 'text/plain');
     }
@@ -762,6 +1112,15 @@ class SiteController extends Controller
         $editorial = $this->toolEditorial()[$tool['slug']] ?? [];
         $depth = $this->toolDepth()[$tool['slug']] ?? [];
 
+        $categoryMap = [
+            'Developer Tools' => 'developer-tools',
+            'Text Tools' => 'text-tools',
+            'Image Tools' => 'image-tools',
+            'Security Tools' => 'security-tools',
+            'PDF Tools' => 'pdf-tools',
+        ];
+        $tool['category_slug'] = $categoryMap[$tool['category']] ?? 'developer-tools';
+
         $tool['use_steps'] = $editorial['use_steps'] ?? [
             'Review the description so you know what the tool is meant to do before entering data.',
             'Paste, type, or upload the required input and run the tool once the source looks complete.',
@@ -780,16 +1139,18 @@ class SiteController extends Controller
             'If the input contains sensitive information, handle the result carefully even when the tool runs locally.',
         ];
 
-        $tool['example_title'] = $editorial['example_title'] ?? 'Practical example';
+        $tool['example_title'] = $editorial['example_title'] ?? 'Practical Workflow Example';
         $tool['example_body'] = $editorial['example_body'] ?? 'This tool is most useful when you need a focused answer quickly and want to keep the workflow simple.';
         $tool['privacy_note'] = $editorial['privacy_note'] ?? 'This tool is designed to keep the workflow lightweight and browser-first.';
+        $tool['technical_notes'] = $editorial['technical_notes'] ?? null;
+        $tool['worked_example'] = $editorial['worked_example'] ?? null;
         $tool['common_mistakes'] = $depth['common_mistakes'] ?? [];
         $tool['better_alternative'] = $depth['better_alternative'] ?? [];
         $tool['output_notes'] = $depth['output_notes'] ?? [];
-        $tool['updated_at'] = '2026-05-25';
+        $tool['updated_at'] = '2026-08-07';
         $tool['seo_title'] = $this->toolSeoTitle($tool);
         $tool['seo_description_full'] = $this->toolSeoDescription($tool);
-        $tool['faq'] = [
+        $tool['faq'] = $editorial['faq'] ?? [
             [
                 'question' => 'Is this ' . $tool['title'] . ' free to use?',
                 'answer' => 'Yes. This WebToolsStation tool is free to use in your browser and does not require an account.',
@@ -1034,5 +1395,14 @@ class SiteController extends Controller
                 ],
             ],
         };
+    }
+    private function categories(): array
+    {
+        return app(WebToolsStationCatalog::class)->categories();
+    }
+
+    private function collections(): array
+    {
+        return app(WebToolsStationCatalog::class)->collections();
     }
 }

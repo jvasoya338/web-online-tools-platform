@@ -43,4 +43,14 @@ class WebToolsStationCatalog
     {
         return require app_path('Data/tool-depth.php');
     }
+
+    public function categories(): array
+    {
+        return require app_path('Data/categories.php');
+    }
+
+    public function collections(): array
+    {
+        return require app_path('Data/collections.php');
+    }
 }
