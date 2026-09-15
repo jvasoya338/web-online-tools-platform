@@ -26,7 +26,7 @@
                     </div>
                     <div class="stat">
                         <strong>TJ</strong>
-                        <p>Maintained by the TJVerce editorial and product team</p>
+                        <p>Maintained by the TJ Verse editorial and product team</p>
                     </div>
                 </div>
             </div>

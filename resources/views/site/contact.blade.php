@@ -9,10 +9,10 @@
                     <h1 style="margin-top:16px;">Send a message to WebToolsStation</h1>
                     <p style="margin-top:16px;">
                         Use this form to report a bug, suggest a new tool, ask a business question, or share feedback about the platform.
-                        Messages go directly to TJVerce for review.
+                        Messages go directly to TJ Verse for review.
                     </p>
                     <p style="margin-top:16px;">
-                        WebToolsStation is operated by TJVerce. Based in {{ $contact['location'] }}. Contact: {{ $contact['email'] }}.
+                        WebToolsStation is operated by TJ Verse. Based in {{ $contact['location'] }}. Contact: {{ $contact['email'] }}.
                     </p>
                 </div>
 
@@ -106,7 +106,7 @@
                         <p>
                             WebToolsStation uses this page for support questions, correction requests, tool suggestions, and business inquiries. The goal is not to create an
                             anonymous utility directory with no way to reach the operator. The goal is to keep the site accountable, improve pages when visitors find gaps, and
-                            make it clear that TJVerce reviews the platform as an ongoing publishing and product project.
+                            make it clear that TJ Verse reviews the platform as an ongoing publishing and product project.
                         </p>
                     </article>
                     <article class="page-section-card">
@@ -143,7 +143,7 @@
                         </p>
                         <p>
                             This matters for both visitors and quality review. WebToolsStation is not trying to be a collection of empty utility pages. The site should grow
-                            into a maintained reference where tools and supporting content improve together. Contact messages give TJVerce a way to see which parts of the
+                            into a maintained reference where tools and supporting content improve together. Contact messages give TJ Verse a way to see which parts of the
                             platform need more context, which tools deserve better examples, and which pages should be reviewed before the next publishing update.
                         </p>
                     </article>
@@ -157,7 +157,7 @@
                         </p>
                         <p>
                             Screenshots can be helpful when they do not reveal private information, but a clear written example is often enough. The best reports make the issue
-                            reproducible without exposing sensitive data. That lets TJVerce review the problem, improve the page, and keep WebToolsStation safer for other
+                            reproducible without exposing sensitive data. That lets TJ Verse review the problem, improve the page, and keep WebToolsStation safer for other
                             visitors who may arrive with the same task.
                         </p>
                     </article>

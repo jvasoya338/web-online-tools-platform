@@ -4,13 +4,13 @@ return [
     'default_author' => [
         'name' => 'TJ Verse',
         'role' => 'Founder and product editor at WebToolsStation',
-        'url' => 'https://www.webtoolsstation.com/authors/tj-verse',
+        'url' => 'https://webtoolsstation.com/authors/tj-verse',
     ],
     'default_reviewer' => [
-        'name' => 'TJVerce Editorial Team',
+        'name' => 'TJ Verse Editorial Team',
         'role' => 'Tool workflow accuracy and documentation review',
     ],
-    'image' => 'https://www.webtoolsstation.com/images/logo/webtoolsstation-logo.png',
+    'image' => 'https://webtoolsstation.com/images/logo/webtoolsstation-logo.png',
     'guides' => [
         'how-to-format-json-without-errors' => [
             'published_at' => '2026-02-05',

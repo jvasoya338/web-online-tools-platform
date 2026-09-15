@@ -1571,7 +1571,7 @@
                         <strong style="font-size:1.05rem; color:var(--text);">WebToolsStation</strong>
                     </div>
                     <p>
-                        A fast, privacy-focused online utility platform built by TJVerce.
+                        A fast, privacy-focused online utility platform built by TJ Verse.
                         All transformations run client-side in your browser runtime—your sensitive data, tokens, and documents are never uploaded to remote servers.
                     </p>
                 </div>
@@ -1608,7 +1608,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <span>&copy; {{ date('Y') }} WebToolsStation by TJVerce. All rights reserved.</span>
+                <span>&copy; {{ date('Y') }} WebToolsStation by TJ Verse. All rights reserved.</span>
                 <span>Client-Side Local Processing Guaranteed</span>
             </div>
         </div>

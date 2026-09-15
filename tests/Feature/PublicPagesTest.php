@@ -90,7 +90,7 @@ class PublicPagesTest extends TestCase
             ->assertSee('User-agent: *', false)
             ->assertSee('User-agent: Mediapartners-Google', false)
             ->assertSee('User-agent: Googlebot', false)
-            ->assertSee('Sitemap: https://www.webtoolsstation.com/sitemap.xml', false);
+            ->assertSee('Sitemap: https://webtoolsstation.com/sitemap.xml', false);
 
         $this->get('/disclaimer')
             ->assertOk()

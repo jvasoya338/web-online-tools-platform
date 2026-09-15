@@ -7,7 +7,7 @@
                 <span class="eyebrow">Free Online Browser Utilities</span>
                 <h1>{{ $toolCount }} Free Online Tools for Developers, Text, PDF, Security & Media</h1>
                 <p class="lede">
-                    WebToolsStation by TJVerce provides fast, privacy-focused browser utilities that execute locally on your machine.
+                    WebToolsStation by TJ Verse provides fast, privacy-focused browser utilities that execute locally on your machine.
                     Format payloads, inspect PDFs, convert text, decode tokens, and test patterns without registration, subscriptions, or remote server storage.
                 </p>
                 <div class="hero-actions">
@@ -215,8 +215,8 @@
                     <div class="page-grid">
                         <div class="card">
                             <div class="tool-icon">TJ</div>
-                            <h3 style="margin-top:12px;">Founded by TJVerce</h3>
-                            <p>Owned and maintained by TJVerce, providing dependable web utilities and technical guides.</p>
+                            <h3 style="margin-top:12px;">Founded by TJ Verse</h3>
+                            <p>Owned and maintained by TJ Verse, providing dependable web utilities and technical guides.</p>
                             <a class="card-link" href="{{ url('/authors/tj-verse') }}">Author Profile →</a>
                         </div>
                         <div class="card">

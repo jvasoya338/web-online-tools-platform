@@ -84,7 +84,7 @@
                 <div class="card click-card">
                     <div class="tool-icon">CT</div>
                     <h3 style="margin-top:12px;">Contact Support</h3>
-                    <p>Reach out to TJVerce directly to suggest a new tool or report an issue.</p>
+                    <p>Reach out to TJ Verse directly to suggest a new tool or report an issue.</p>
                     <a class="card-link" href="{{ url('/contact') }}">Contact Us <span aria-hidden="true">→</span></a>
                 </div>
             </div>

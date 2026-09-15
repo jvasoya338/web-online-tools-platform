@@ -347,7 +347,7 @@ class SiteController extends Controller
         return $this->pageView([
             'label' => 'About Us',
             'title' => 'A calm, useful platform built for everyday digital work.',
-            'intro' => 'WebToolsStation is a product from TJVerce. We created it with a very simple idea in mind: useful online tools should feel trustworthy, fast, and easy to understand from the first click. Too many utility websites feel crowded, confusing, or overloaded with unnecessary noise. We wanted to build something cleaner. Our goal is to give people practical tools they can use in seconds while also giving the platform enough depth, structure, and clarity to grow into a reliable destination over time.',
+            'intro' => 'WebToolsStation is a product from TJ Verse. We created it with a very simple idea in mind: useful online tools should feel trustworthy, fast, and easy to understand from the first click. Too many utility websites feel crowded, confusing, or overloaded with unnecessary noise. We wanted to build something cleaner. Our goal is to give people practical tools they can use in seconds while also giving the platform enough depth, structure, and clarity to grow into a reliable destination over time.',
             'sections' => [
                 [
                     'heading' => 'Why WebToolsStation exists',
@@ -373,14 +373,14 @@ class SiteController extends Controller
                 [
                     'heading' => 'Who runs this website',
                     'paragraphs' => [
-                        'WebToolsStation is operated by TJVerce. The site is maintained as a focused tools and publishing project rather than an anonymous script directory. That means we review how pages read, how tools behave in the browser, and whether the surrounding explanations are clear enough for normal users to trust what they are seeing.',
+                        'WebToolsStation is operated by TJ Verse. The site is maintained as a focused tools and publishing project rather than an anonymous script directory. That means we review how pages read, how tools behave in the browser, and whether the surrounding explanations are clear enough for normal users to trust what they are seeing.',
                         'The goal is not to publish as many pages as possible. The goal is to publish tools and supporting guides that solve practical problems in a way that feels understandable, maintained, and honest about limitations. When a page needs more explanation, examples, or review notes, we would rather improve it than pretend a thin page is finished.',
                     ],
                 ],
                 [
                     'heading' => 'How we think about quality',
                     'paragraphs' => [
-                        'At TJVerce, we care about the difference between having a page and having a useful page. A useful page answers questions, solves tasks, and reduces friction. We review our tools with that mindset. If a tool feels vague, visually messy, or hard to trust, it needs more work. If content feels thin, it needs more substance. If a page creates confusion, it needs simplification.',
+                        'At TJ Verse, we care about the difference between having a page and having a useful page. A useful page answers questions, solves tasks, and reduces friction. We review our tools with that mindset. If a tool feels vague, visually messy, or hard to trust, it needs more work. If content feels thin, it needs more substance. If a page creates confusion, it needs simplification.',
                         'That same approach shapes how we want the platform to grow. We are not trying to become loud for the sake of being noticed. We want to become dependable. We want people to bookmark the site because it works. We want visitors to return because the experience stays clean and consistent. We want search traffic to grow because the pages are genuinely useful, not because they are overloaded with empty promises.',
                     ],
                 ],
@@ -395,7 +395,7 @@ class SiteController extends Controller
                     'heading' => 'Our long-term direction',
                     'paragraphs' => [
                         'The long-term vision for WebToolsStation is a carefully built platform with strong utility pages, strong content, and a professional public presence. We want the site to feel good enough for regular visitors, clear enough for search engines to understand, and dependable enough for everyday use by developers, creators, and business users worldwide. That means continuing to improve page quality, clarity, accuracy, and visual consistency.',
-                        'As the platform grows, we will keep refining the tool set, page structure, and content quality. We want visitors to feel that the website has direction and care behind it. WebToolsStation is not meant to be a random collection of scripts. It is meant to become a stable and attractive online destination for practical work. That is the standard TJVerce wants to build toward.',
+                        'As the platform grows, we will keep refining the tool set, page structure, and content quality. We want visitors to feel that the website has direction and care behind it. WebToolsStation is not meant to be a random collection of scripts. It is meant to become a stable and attractive online destination for practical work. That is the standard TJ Verse wants to build toward.',
                     ],
                 ],
                 [
@@ -407,9 +407,9 @@ class SiteController extends Controller
                 ],
             ],
             'cards' => [
-                ['title' => 'Company', 'value' => 'TJVerce'],
+                ['title' => 'Company', 'value' => 'TJ Verse'],
                 ['title' => 'Platform', 'value' => 'WebToolsStation'],
-                ['title' => 'Operator', 'value' => 'TJVerce editorial and product team'],
+                ['title' => 'Operator', 'value' => 'TJ Verse editorial and product team'],
                 ['title' => 'Focus', 'value' => 'Useful online tools with clear design and practical guidance'],
                 ['title' => 'Contact', 'value' => 'webtoolsstation@gmail.com'],
             ],
@@ -418,23 +418,23 @@ class SiteController extends Controller
                 '@type' => 'AboutPage',
                 'name' => 'About WebToolsStation',
                 'url' => url('/about'),
-                'description' => 'Learn about WebToolsStation, what it publishes, and how TJVerce approaches tool quality and trust.',
+                'description' => 'Learn about WebToolsStation, what it publishes, and how TJ Verse approaches tool quality and trust.',
                 'image' => url('/images/logo/webtoolsstation-logo.png'),
                 'publisher' => [
                     '@type' => 'Organization',
-                    'name' => 'TJVerce',
+                    'name' => 'TJ Verse',
                     'url' => url('/'),
                 ],
                 'mainEntity' => [
                     '@type' => 'Organization',
-                    'name' => 'TJVerce',
+                    'name' => 'TJ Verse',
                     'url' => url('/'),
                     'email' => 'webtoolsstation@gmail.com',
                 ],
             ],
         ], [
-            'title' => 'About WebToolsStation - Free Online Tools by TJVerce',
-            'description' => 'Learn how WebToolsStation by TJVerce builds free browser tools, practical guides, privacy-aware workflows, and trusted utility pages for global users.',
+            'title' => 'About WebToolsStation - Free Online Tools by TJ Verse',
+            'description' => 'Learn how WebToolsStation by TJ Verse builds free browser tools, practical guides, privacy-aware workflows, and trusted utility pages for global users.',
             'keywords' => 'about webtoolsstation, about tjverce, online tools platform, developer and pdf tools',
             'canonical' => url('/about'),
             'type' => 'article',
@@ -466,7 +466,7 @@ class SiteController extends Controller
                 'image' => url('/images/logo/webtoolsstation-logo.png'),
                 'publisher' => [
                     '@type' => 'Organization',
-                    'name' => 'TJVerce',
+                    'name' => 'TJ Verse',
                     'url' => url('/'),
                 ],
             ],
@@ -504,7 +504,7 @@ class SiteController extends Controller
                 'email' => $author['email'],
                 'worksFor' => [
                     '@type' => 'Organization',
-                    'name' => 'TJVerce',
+                    'name' => 'TJ Verse',
                     'url' => url('/'),
                 ],
                 'sameAs' => $author['same_as'],
@@ -532,7 +532,7 @@ class SiteController extends Controller
                 'image' => url('/images/logo/webtoolsstation-logo.png'),
             ],
             'contact' => [
-                'company' => 'TJVerce',
+                'company' => 'TJ Verse',
                 'platform' => 'WebToolsStation',
                 'email' => 'webtoolsstation@gmail.com',
                 'location' => 'India',
@@ -673,12 +673,12 @@ class SiteController extends Controller
         return $this->pageView([
             'label' => 'Privacy Policy',
             'title' => 'How WebToolsStation handles information, browser activity, and communication.',
-            'intro' => 'This Privacy Policy explains how TJVerce operates WebToolsStation and describes the types of information that may be handled when you use the website. We believe a privacy page should be clear enough for normal users to understand, while still being complete enough to explain the essential responsibilities of the platform. The purpose of this policy is to show how the website works, what kinds of data may be collected, and how communication and technical activity may be managed.',
+            'intro' => 'This Privacy Policy explains how TJ Verse operates WebToolsStation and describes the types of information that may be handled when you use the website. We believe a privacy page should be clear enough for normal users to understand, while still being complete enough to explain the essential responsibilities of the platform. The purpose of this policy is to show how the website works, what kinds of data may be collected, and how communication and technical activity may be managed.',
             'sections' => [
                 [
                     'heading' => 'Who operates this platform',
                     'paragraphs' => [
-                        'WebToolsStation is operated by TJVerce. Throughout this policy, references to “we,” “our,” or “us” refer to TJVerce and the WebToolsStation platform. References to “you” refer to visitors, users, and anyone who accesses the website or contacts us through the available public channels.',
+                        'WebToolsStation is operated by TJ Verse. Throughout this policy, references to “we,” “our,” or “us” refer to TJ Verse and the WebToolsStation platform. References to “you” refer to visitors, users, and anyone who accesses the website or contacts us through the available public channels.',
                         'We maintain this website to provide practical online tools and supporting public information. Because the platform includes public pages, browser-based tools, and communication options, some technical and contact-related information may be handled in the normal course of operating the website.',
                     ],
                 ],
@@ -721,12 +721,12 @@ class SiteController extends Controller
                     'heading' => 'Retention, updates, and contact',
                     'paragraphs' => [
                         'We may keep records for as long as reasonably necessary to operate the website, respond to inquiries, maintain internal history, meet legal obligations, or address security concerns. The length of time may vary depending on the type of information involved and the reason it was collected.',
-                        'Because websites change, this Privacy Policy may also change. When the platform grows or our practices become more detailed, we may revise the text to better explain those changes. If you have questions about this policy, you can contact TJVerce at webtoolsstation@gmail.com.',
+                        'Because websites change, this Privacy Policy may also change. When the platform grows or our practices become more detailed, we may revise the text to better explain those changes. If you have questions about this policy, you can contact TJ Verse at webtoolsstation@gmail.com.',
                     ],
                 ],
             ],
             'cards' => [
-                ['title' => 'Operator', 'value' => 'TJVerce'],
+                ['title' => 'Operator', 'value' => 'TJ Verse'],
                 ['title' => 'Website', 'value' => 'WebToolsStation'],
                 ['title' => 'Primary Contact', 'value' => 'webtoolsstation@gmail.com'],
                 ['title' => 'Policy Scope', 'value' => 'Website usage, browser tools, and communication'],
@@ -740,13 +740,13 @@ class SiteController extends Controller
                 'image' => url('/images/logo/webtoolsstation-logo.png'),
                 'publisher' => [
                     '@type' => 'Organization',
-                    'name' => 'TJVerce',
+                    'name' => 'TJ Verse',
                     'url' => url('/'),
                 ],
             ],
         ], [
             'title' => 'Privacy Policy - WebToolsStation',
-            'description' => 'Read the Privacy Policy for WebToolsStation by TJVerce, including how browser-based tools, cookies, technical information, and contact messages are handled.',
+            'description' => 'Read the Privacy Policy for WebToolsStation by TJ Verse, including how browser-based tools, cookies, technical information, and contact messages are handled.',
             'keywords' => 'privacy policy webtoolsstation, tjverce privacy, website data handling policy',
             'canonical' => url('/privacy-policy'),
             'type' => 'article',
@@ -763,7 +763,7 @@ class SiteController extends Controller
                 [
                     'heading' => 'Ownership and acceptance',
                     'paragraphs' => [
-                        'WebToolsStation is owned and operated by TJVerce. By accessing the platform, viewing its pages, or using its tools, you agree to follow these Terms of Use. If you do not agree with these terms, you should stop using the website.',
+                        'WebToolsStation is owned and operated by TJ Verse. By accessing the platform, viewing its pages, or using its tools, you agree to follow these Terms of Use. If you do not agree with these terms, you should stop using the website.',
                         'These terms may be updated as the platform changes. When new features, new tools, or new content types are introduced, the language on this page may be revised so that it stays relevant to the actual operation of the website.',
                     ],
                 ],
@@ -798,15 +798,15 @@ class SiteController extends Controller
                 [
                     'heading' => 'Intellectual property and platform rights',
                     'paragraphs' => [
-                        'The WebToolsStation brand, design, written content, page structure, and platform presentation are part of the TJVerce website offering unless otherwise stated. You should not copy, republish, or misuse original platform content in a way that infringes our rights or misrepresents the source.',
+                        'The WebToolsStation brand, design, written content, page structure, and platform presentation are part of the TJ Verse website offering unless otherwise stated. You should not copy, republish, or misuse original platform content in a way that infringes our rights or misrepresents the source.',
                         'Normal use of the public website is permitted, but that does not grant ownership of the platform, its identity, or its original materials. If you want to discuss collaboration, licensing, or business use beyond normal browsing, please contact us directly.',
                     ],
                 ],
                 [
                     'heading' => 'Limitation and contact',
                     'paragraphs' => [
-                        'To the extent permitted by applicable law, WebToolsStation and TJVerce provide the website on an as available and as is basis. We do not make broad warranties that the platform will always meet every expectation or every use case. We aim for quality and usefulness, but users should still evaluate results in context.',
-                        'If you have questions about these Terms of Use, you can contact TJVerce at webtoolsstation@gmail.com. Continued use of the website after updates to these terms may be treated as acceptance of the revised version.',
+                        'To the extent permitted by applicable law, WebToolsStation and TJ Verse provide the website on an as available and as is basis. We do not make broad warranties that the platform will always meet every expectation or every use case. We aim for quality and usefulness, but users should still evaluate results in context.',
+                        'If you have questions about these Terms of Use, you can contact TJ Verse at webtoolsstation@gmail.com. Continued use of the website after updates to these terms may be treated as acceptance of the revised version.',
                     ],
                 ],
                 [
@@ -818,7 +818,7 @@ class SiteController extends Controller
                 ],
             ],
             'cards' => [
-                ['title' => 'Owner', 'value' => 'TJVerce'],
+                ['title' => 'Owner', 'value' => 'TJ Verse'],
                 ['title' => 'Applies To', 'value' => 'All visitors and users of WebToolsStation'],
                 ['title' => 'Use Standard', 'value' => 'Lawful, respectful, non-abusive use only'],
                 ['title' => 'Questions', 'value' => 'webtoolsstation@gmail.com'],
@@ -832,13 +832,13 @@ class SiteController extends Controller
                 'image' => url('/images/logo/webtoolsstation-logo.png'),
                 'publisher' => [
                     '@type' => 'Organization',
-                    'name' => 'TJVerce',
+                    'name' => 'TJ Verse',
                     'url' => url('/'),
                 ],
             ],
         ], [
             'title' => 'Terms of Use - WebToolsStation',
-            'description' => 'Read the Terms of Use for WebToolsStation by TJVerce, including acceptable use, platform limits, output responsibility, and website rules.',
+            'description' => 'Read the Terms of Use for WebToolsStation by TJ Verse, including acceptable use, platform limits, output responsibility, and website rules.',
             'keywords' => 'terms of use webtoolsstation, tjverce terms of use, website use policy',
             'canonical' => url('/terms-of-use'),
             'type' => 'article',
@@ -851,7 +851,7 @@ class SiteController extends Controller
         return $this->pageView([
             'label' => 'Legal Disclaimer',
             'title' => 'Disclaimer of Warranties, Tool Use, and Output Verification',
-            'intro' => 'This Disclaimer outlines the operational scope, technical boundaries, and usage expectations for WebToolsStation by TJVerce. By accessing or using the browser-based tools, calculators, converters, and guides provided on this platform, you acknowledge and agree to the terms described below.',
+            'intro' => 'This Disclaimer outlines the operational scope, technical boundaries, and usage expectations for WebToolsStation by TJ Verse. By accessing or using the browser-based tools, calculators, converters, and guides provided on this platform, you acknowledge and agree to the terms described below.',
             'sections' => [
                 [
                     'heading' => 'For Informational and Utility Purposes Only',
@@ -863,7 +863,7 @@ class SiteController extends Controller
                 [
                     'heading' => 'No Guarantee of Accuracy or Fitness for a Particular Purpose',
                     'paragraphs' => [
-                        'All tools and content on WebToolsStation are provided on an "as is" and "as available" basis without warranties of any kind, whether express, implied, statutory, or otherwise. TJVerce expressly disclaims all implied warranties of merchantability, fitness for a particular purpose, non-infringement, and title.',
+                        'All tools and content on WebToolsStation are provided on an "as is" and "as available" basis without warranties of any kind, whether express, implied, statutory, or otherwise. TJ Verse expressly disclaims all implied warranties of merchantability, fitness for a particular purpose, non-infringement, and title.',
                         'We do not warrant that tool functions will be uninterrupted, error-free, compatible with all devices and file versions, or that defects will be immediately corrected. You assume total responsibility and risk for your use of the website and any actions taken based on tool results.',
                     ],
                 ],
@@ -884,20 +884,20 @@ class SiteController extends Controller
                 [
                     'heading' => 'Third-Party Links and External Services',
                     'paragraphs' => [
-                        'WebToolsStation may contain links to external websites, documentation repositories, RFC specifications, or third-party resources for convenience and reference. TJVerce exercises no control over, and assumes no responsibility for, the content, privacy policies, practices, or availability of any third-party websites or services. Inclusion of a link does not imply endorsement.',
+                        'WebToolsStation may contain links to external websites, documentation repositories, RFC specifications, or third-party resources for convenience and reference. TJ Verse exercises no control over, and assumes no responsibility for, the content, privacy policies, practices, or availability of any third-party websites or services. Inclusion of a link does not imply endorsement.',
                     ],
                 ],
                 [
                     'heading' => 'Limitation of Liability',
                     'paragraphs' => [
-                        'To the maximum extent permitted by applicable law, in no event shall TJVerce, WebToolsStation, its operators, contributors, or affiliates be liable for any direct, indirect, incidental, consequential, special, punitive, or exemplary damages—including but not limited to loss of profits, lost data, business interruption, production downtime, system errors, or security breaches—arising out of or in connection with your access to, use of, or inability to use the platform or its tools.',
+                        'To the maximum extent permitted by applicable law, in no event shall TJ Verse, WebToolsStation, its operators, contributors, or affiliates be liable for any direct, indirect, incidental, consequential, special, punitive, or exemplary damages—including but not limited to loss of profits, lost data, business interruption, production downtime, system errors, or security breaches—arising out of or in connection with your access to, use of, or inability to use the platform or its tools.',
                         'If you have questions regarding this Disclaimer or wish to report an unexpected calculation or tool behavior, please contact us at webtoolsstation@gmail.com.',
                     ],
                 ],
             ],
             'cards' => [
                 ['title' => 'Platform', 'value' => 'WebToolsStation'],
-                ['title' => 'Operator', 'value' => 'TJVerce'],
+                ['title' => 'Operator', 'value' => 'TJ Verse'],
                 ['title' => 'Warranty Status', 'value' => 'Provided "As-Is" Without Warranties'],
                 ['title' => 'Inquiries', 'value' => 'webtoolsstation@gmail.com'],
             ],
@@ -910,7 +910,7 @@ class SiteController extends Controller
                 'image' => url('/images/logo/webtoolsstation-logo.png'),
                 'publisher' => [
                     '@type' => 'Organization',
-                    'name' => 'TJVerce',
+                    'name' => 'TJ Verse',
                     'url' => url('/'),
                 ],
             ],
@@ -928,7 +928,7 @@ class SiteController extends Controller
         return $this->pageView([
             'label' => 'Cookie Policy',
             'title' => 'How WebToolsStation Uses Cookies, Local Storage, and Analytics',
-            'intro' => 'This Cookie Policy explains how WebToolsStation by TJVerce uses cookies, local browser storage, and related web technologies when you browse our tools, read our guides, and interact with the platform. We believe in clear, transparent disclosure so visitors understand exactly what data is stored on their devices and how to control it.',
+            'intro' => 'This Cookie Policy explains how WebToolsStation by TJ Verse uses cookies, local browser storage, and related web technologies when you browse our tools, read our guides, and interact with the platform. We believe in clear, transparent disclosure so visitors understand exactly what data is stored on their devices and how to control it.',
             'sections' => [
                 [
                     'heading' => 'What Are Cookies and Local Storage?',
@@ -962,13 +962,13 @@ class SiteController extends Controller
                     'heading' => 'Updates to This Cookie Policy',
                     'paragraphs' => [
                         'We may update this Cookie Policy from time to time to reflect changes in our technical practices, new tool features, or evolving regulatory guidelines. When updates occur, the revision date at the top of this page will be updated accordingly.',
-                        'If you have questions about our use of cookies or browser storage technologies, you can contact TJVerce at webtoolsstation@gmail.com.',
+                        'If you have questions about our use of cookies or browser storage technologies, you can contact TJ Verse at webtoolsstation@gmail.com.',
                     ],
                 ],
             ],
             'cards' => [
                 ['title' => 'Platform', 'value' => 'WebToolsStation'],
-                ['title' => 'Operator', 'value' => 'TJVerce'],
+                ['title' => 'Operator', 'value' => 'TJ Verse'],
                 ['title' => 'Analytics Partner', 'value' => 'Google Analytics (G-R5ZD94KR5T)'],
                 ['title' => 'Questions', 'value' => 'webtoolsstation@gmail.com'],
             ],
@@ -981,7 +981,7 @@ class SiteController extends Controller
                 'image' => url('/images/logo/webtoolsstation-logo.png'),
                 'publisher' => [
                     '@type' => 'Organization',
-                    'name' => 'TJVerce',
+                    'name' => 'TJ Verse',
                     'url' => url('/'),
                 ],
             ],
@@ -1041,7 +1041,7 @@ class SiteController extends Controller
 
     public function robots(): Response
     {
-        $content = "User-agent: *\nAllow: /\n\nUser-agent: Mediapartners-Google\nAllow: /\n\nUser-agent: Googlebot\nAllow: /\n\nSitemap: https://www.webtoolsstation.com/sitemap.xml\n";
+        $content = "User-agent: *\nAllow: /\n\nUser-agent: Mediapartners-Google\nAllow: /\n\nUser-agent: Googlebot\nAllow: /\n\nSitemap: https://webtoolsstation.com/sitemap.xml\n";
 
         return response($content, 200)->header('Content-Type', 'text/plain');
     }
@@ -1062,7 +1062,7 @@ class SiteController extends Controller
                 'image' => url('/images/logo/webtoolsstation-logo.png'),
                 'publisher' => [
                     '@type' => 'Organization',
-                    'name' => 'TJVerce',
+                    'name' => 'TJ Verse',
                     'url' => url('/'),
                     'email' => 'webtoolsstation@gmail.com',
                 ],
@@ -1206,7 +1206,7 @@ class SiteController extends Controller
             '@type' => 'Organization',
             '@id' => url('/#organization'),
             'name' => 'WebToolsStation',
-            'alternateName' => 'TJVerce WebToolsStation',
+            'alternateName' => 'TJ Verse WebToolsStation',
             'url' => url('/'),
             'email' => 'webtoolsstation@gmail.com',
             'logo' => [
