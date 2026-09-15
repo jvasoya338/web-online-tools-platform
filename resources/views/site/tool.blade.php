@@ -61,10 +61,22 @@
                 'sha1-hash-generator', 'sha512-hash-generator', 'md5-hash-generator',
                 'curl-command-generator', 'http-header-analyzer', 'mime-type-lookup',
             ];
+            $textToolsBatch2 = [
+                'remove-duplicate-lines', 'remove-empty-lines', 'find-and-replace',
+                'reverse-text', 'markdown-to-html',
+            ];
+            $devBatch2bTools = [
+                'html-to-markdown', 'unicode-inspector', 'text-escape-unescape',
+                'csv-viewer', 'tsv-to-csv-converter',
+            ];
         @endphp
 
         <section class="tool-workspace-hero" id="tool-workspace" aria-label="{{ $tool['title'] }} Workspace">
-            @if (in_array($tool['slug'], $devBatch1Tools))
+            @if (in_array($tool['slug'], $devBatch2bTools))
+                @include('site.tools.workspace-dev-batch2b')
+            @elseif (in_array($tool['slug'], $textToolsBatch2))
+                @include('site.tools.workspace-text-tools')
+            @elseif (in_array($tool['slug'], $devBatch1Tools))
                 @include('site.tools.workspace-dev-batch1')
             @elseif (in_array($tool['slug'], $minifierTools))
                 @include('site.tools.workspace-minifier')
@@ -286,14 +298,21 @@
 @endsection
 
 @section('scripts')
-    <script type="module">
-        window.pdfjsLibPromise = import("https://cdn.jsdelivr.net/npm/pdfjs-dist@4/build/pdf.min.mjs")
-            .then((pdfjsLib) => {
-                pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4/build/pdf.worker.min.mjs";
-                return pdfjsLib;
-            });
-    </script>
-    <script src="/js/developer-tools.js"></script>
+    @if ($tool['category'] === 'PDF Tools' || in_array($tool['slug'], $pdfTools))
+        <script type="module">
+            window.pdfjsLibPromise = import("https://cdn.jsdelivr.net/npm/pdfjs-dist@4/build/pdf.min.mjs")
+                .then((pdfjsLib) => {
+                    pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4/build/pdf.worker.min.mjs";
+                    return pdfjsLib;
+                });
+        </script>
+    @endif
+    @if ($tool['category'] === 'Text Tools' || in_array($tool['slug'], array_merge($textToolsBatch2, $devBatch2bTools)))
+        <script src="/js/text-tools.js"></script>
+    @endif
+    @if ($tool['category'] === 'Developer Tools' || $tool['category'] === 'Security Tools' || $tool['category'] === 'Color Tools' || in_array($tool['slug'], array_merge($devBatch1Tools, $devBatch2bTools, $minifierTools, $formatterTools, $validatorTools, $converterTools, $devHelperTools, $textCodeTools, $generatorTools, $colorTools, $imageTools, $metricsTools)))
+        <script src="/js/developer-tools.js"></script>
+    @endif
     <script>
         const currentToolSlug = "{{ $tool['slug'] }}";
 
@@ -522,7 +541,19 @@
                 'sha512-hash-generator': computeDedicatedHash,
                 'md5-hash-generator': computeDedicatedHash,
                 'curl-command-generator': buildCurlCommand,
-                'http-header-analyzer': analyzeHttpHeaders
+                'http-header-analyzer': analyzeHttpHeaders,
+                // Batch 2A Text Tools
+                'remove-duplicate-lines': runDeduplicateLines,
+                'remove-empty-lines': runRemoveEmptyLines,
+                'find-and-replace': runFindAndReplace,
+                'reverse-text': runReverseText,
+                'markdown-to-html': runMarkdownToHtml,
+                // Batch 2B Tools
+                'html-to-markdown': runHtmlToMarkdown,
+                'unicode-inspector': runUnicodeInspector,
+                'text-escape-unescape': runTextEscape,
+                'csv-viewer': runCsvViewer,
+                'tsv-to-csv-converter': runTsvToCsv
             };
             if (actionMap[currentToolSlug]) {
                 actionMap[currentToolSlug]();
@@ -1254,6 +1285,18 @@
             if (currentToolSlug === 'mime-type-lookup') initMimeDatabase();
             if (currentToolSlug === 'curl-command-generator') loadCurlSample();
             if (currentToolSlug === 'http-header-analyzer') loadHttpHeadersSample();
+            // Batch 2A auto-inits
+            if (currentToolSlug === 'remove-duplicate-lines') loadDeduplicateLinesSample();
+            if (currentToolSlug === 'remove-empty-lines') loadRemoveEmptyLinesSample();
+            if (currentToolSlug === 'find-and-replace') loadFindAndReplaceSample();
+            if (currentToolSlug === 'reverse-text') loadReverseTextSample();
+            if (currentToolSlug === 'markdown-to-html') loadMarkdownSample();
+            // Batch 2B auto-inits
+            if (currentToolSlug === 'html-to-markdown') loadHtmlToMarkdownSample();
+            if (currentToolSlug === 'unicode-inspector') loadUnicodeInspectorSample();
+            if (currentToolSlug === 'text-escape-unescape') loadTextEscapeSample();
+            if (currentToolSlug === 'csv-viewer') loadCsvViewerSample();
+            if (currentToolSlug === 'tsv-to-csv-converter') loadTsvToCsvSample();
         });
     </script>
 @endsection

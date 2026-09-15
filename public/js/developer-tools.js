@@ -2044,7 +2044,12 @@ async function pasteYamlValidatorClipboard() {
 // JWT GENERATOR
 // ==========================================
 function base64UrlEncode(str) {
-    return btoa(str).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+    const bytes = new TextEncoder().encode(str);
+    let binary = '';
+    for (let i = 0; i < bytes.length; i++) {
+        binary += String.fromCharCode(bytes[i]);
+    }
+    return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
 }
 
 function setJwtExpiry(seconds) {
@@ -2189,24 +2194,20 @@ function updateNanoIdEntropyNote() {
 }
 
 function generateNanoId(length, alphabet) {
-    const bytes = new Uint8Array(length * 2);
-    window.crypto.getRandomValues(bytes);
+    const mask = (2 << (31 - Math.clz32((alphabet.length - 1) | 1))) - 1;
+    const step = Math.ceil((1.6 * mask * length) / alphabet.length);
     let id = '';
-    const mask = alphabet.length <= 16 ? 15 : alphabet.length <= 32 ? 31 : alphabet.length <= 64 ? 63 : 255;
-    for (let i = 0; i < bytes.length && id.length < length; i++) {
-        const byte = bytes[i] & mask;
-        if (byte < alphabet.length) id += alphabet[byte];
-    }
-    // Fallback if not enough
-    while (id.length < length) {
-        const extra = new Uint8Array(8);
-        window.crypto.getRandomValues(extra);
-        for (let j = 0; j < extra.length && id.length < length; j++) {
-            const b = extra[j] & mask;
-            if (b < alphabet.length) id += alphabet[b];
+    while (true) {
+        const bytes = new Uint8Array(step);
+        window.crypto.getRandomValues(bytes);
+        for (let i = 0; i < step; i++) {
+            const byte = bytes[i] & mask;
+            if (byte < alphabet.length) {
+                id += alphabet[byte];
+                if (id.length === length) return id;
+            }
         }
     }
-    return id.substring(0, length);
 }
 
 function generateNanoIds() {

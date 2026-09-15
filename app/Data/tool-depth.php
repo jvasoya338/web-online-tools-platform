@@ -1345,4 +1345,176 @@ return array (
       2 => 'Quick-copy buttons copy the exact MIME type or complete Content-Type header string.',
     ),
   ),
+  'remove-duplicate-lines' => 
+  array (
+    'common_mistakes' => 
+    array (
+      0 => 'Forgetting that leading or trailing whitespace causes identical words to be treated as unique unless trimming is active.',
+      1 => 'Assuming case-insensitive matching preserves all letter case variants rather than retaining only the first encountered line.',
+      2 => 'Accidentally deduplicating structured CSV files where identical values in non-key columns are valid.',
+    ),
+    'better_alternative' => 
+    array (
+      0 => 'For sorting lines alphabetically or numerically while deduplicating, use the Line Sorter tool.',
+      1 => 'For finding differences between two distinct text files rather than deduplicating a single list, use the Text Diff Checker.',
+    ),
+    'output_notes' => 
+    array (
+      0 => 'The output displays the exact unique line sequence and reports the total count of duplicate rows eliminated.',
+    ),
+  ),
+  'remove-empty-lines' => 
+  array (
+    'common_mistakes' => 
+    array (
+      0 => 'Stripping all blank lines from Markdown or prose documents where double line breaks are needed for paragraph separation.',
+      1 => 'Not enabling the "Include whitespace-only lines" toggle when processing files containing space or tab padding on blank lines.',
+    ),
+    'better_alternative' => 
+    array (
+      0 => 'If you want to reduce multiple blank lines down to a single blank line divider instead of removing all gaps, use the "Collapse Empty Lines" mode.',
+      1 => 'For word count and paragraph structural analysis, use the Word Counter tool.',
+    ),
+    'output_notes' => 
+    array (
+      0 => 'Reports the number of removed blank lines and the clean final row count.',
+    ),
+  ),
+  'find-and-replace' => 
+  array (
+    'common_mistakes' => 
+    array (
+      0 => 'Using regular expression mode without escaping special regex characters like dots (.), parentheses, or square brackets.',
+      1 => 'Performing unconstrained global replacements without previewing or verifying whole-word boundaries first.',
+      2 => 'Leaving case sensitivity off when replacing abbreviations or case-critical variable names.',
+    ),
+    'better_alternative' => 
+    array (
+      0 => 'For complex pattern validation and regex debugging with match group inspection, use the dedicated Regex Tester tool.',
+      1 => 'For simple letter case modifications across an entire document, use the Text Case Converter tool.',
+    ),
+    'output_notes' => 
+    array (
+      0 => 'Displays the modified text and indicates the exact count of replacements performed across the document.',
+    ),
+  ),
+  'reverse-text' => 
+  array (
+    'common_mistakes' => 
+    array (
+      0 => 'Using character reversal when the goal was to reverse paragraph or chronological line order.',
+      1 => 'Assuming word reversal preserves punctuation attachment at the end of sentences.',
+    ),
+    'better_alternative' => 
+    array (
+      0 => 'For sorting lines in descending (Z-to-A) alphabetical order rather than strict geometric reversal, use the Line Sorter tool.',
+      1 => 'For converting text into binary or ASCII codes, use the Text to Binary Converter.',
+    ),
+    'output_notes' => 
+    array (
+      0 => 'Output maintains the exact character or line count of the source text with inverted positional order.',
+    ),
+  ),
+  'markdown-to-html' => 
+  array (
+    'common_mistakes' => 
+    array (
+      0 => 'Omitting the mandatory header row separator (|---|---|) when creating GFM tables in Markdown.',
+      1 => 'Forgetting to leave an empty line before starting a bulleted or numbered list in Markdown.',
+    ),
+    'better_alternative' => 
+    array (
+      0 => 'For minifying or beautifying already generated HTML code, use the HTML Formatter or HTML Minifier tools.',
+      1 => 'For encoding HTML entity characters (like &lt;, &gt;, &amp;), use the HTML Entity Encoder/Decoder.',
+    ),
+    'output_notes' => 
+    array (
+      0 => 'Outputs clean, standards-compliant HTML5 tags and provides an interactive visual rendering preview.',
+    ),
+  ),
+  'html-to-markdown' => 
+  array (
+    'common_mistakes' => 
+    array (
+      0 => 'Expecting complex layout grids, interactive JavaScript widgets, or iframe embeds to convert directly into Markdown.',
+      1 => 'Assuming inline CSS styling (like text colors or margins) will be preserved in Markdown.',
+    ),
+    'better_alternative' => 
+    array (
+      0 => 'For converting Markdown back into HTML code or live visual preview, use the Markdown to HTML tool.',
+      1 => 'For cleaning or indenting raw HTML markup, use the HTML Formatter.',
+    ),
+    'output_notes' => 
+    array (
+      0 => 'Outputs clean GitHub Flavored Markdown (GFM) suitable for README files, static site generators, and CMS editors.',
+    ),
+  ),
+  'unicode-inspector' => 
+  array (
+    'common_mistakes' => 
+    array (
+      0 => 'Confusing a grapheme cluster (user-perceived character) with an atomic Unicode code point.',
+      1 => 'Assuming all Unicode characters occupy a single byte in UTF-8 encoding.',
+    ),
+    'better_alternative' => 
+    array (
+      0 => 'For converting text strings into raw 8-bit binary numbers, use the Text to Binary Converter.',
+      1 => 'For encoding text into Base64 or URL percent-encoding, use the Base64 Encode/Decode or URL Encode/Decode tools.',
+    ),
+    'output_notes' => 
+    array (
+      0 => 'Displays a structured table with code points, decimal equivalents, UTF-8 byte streams, and Unicode categories.',
+    ),
+  ),
+  'text-escape-unescape' => 
+  array (
+    'common_mistakes' => 
+    array (
+      0 => 'Accidentally escaping a string twice, creating double-escaped backslashes (`\\\\`).',
+      1 => 'Using HTML entity escaping when the target context is a JSON or JavaScript string literal.',
+    ),
+    'better_alternative' => 
+    array (
+      0 => 'For comprehensive URL percent-encoding and decoding, use the dedicated URL Encode/Decode tool.',
+      1 => 'For encoding text into HTML entities with full entity lookup, use the HTML Entity Encode/Decode tool.',
+    ),
+    'output_notes' => 
+    array (
+      0 => 'Outputs transformed strings with backslash escapes, HTML entities, or CSV quotes according to the selected mode.',
+    ),
+  ),
+  'csv-viewer' => 
+  array (
+    'common_mistakes' => 
+    array (
+      0 => 'Using a naive comma split on CSV data that contains commas within quoted strings.',
+      1 => 'Selecting the wrong delimiter when viewing European CSV files that use semicolons.',
+    ),
+    'better_alternative' => 
+    array (
+      0 => 'For converting CSV datasets into JSON arrays or objects, use the CSV to JSON Converter tool.',
+      1 => 'For converting TSV files into RFC 4180 standard CSV, use the TSV to CSV Converter.',
+    ),
+    'output_notes' => 
+    array (
+      0 => 'Renders an interactive, searchable data table and displays total row and column counts.',
+    ),
+  ),
+  'tsv-to-csv-converter' => 
+  array (
+    'common_mistakes' => 
+    array (
+      0 => 'Simply replacing tabs with commas without quoting cell values that contain commas or quotation marks.',
+      1 => 'Using space-padded columns instead of genuine tab characters (`\\t`).',
+    ),
+    'better_alternative' => 
+    array (
+      0 => 'For viewing and searching CSV or TSV data in a formatted table grid, use the CSV Viewer.',
+      1 => 'For converting JSON arrays into CSV format, use the JSON to CSV Converter.',
+    ),
+    'output_notes' => 
+    array (
+      0 => 'Outputs standard RFC 4180 compliant CSV text with appropriate quotation wrapping and quote doubling.',
+    ),
+  ),
 );

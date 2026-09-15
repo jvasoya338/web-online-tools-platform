@@ -386,7 +386,7 @@
                 <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
                     <div>
                         <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--brand); margin-bottom:4px;">Security Scorecard</div>
-                        <h3 style="margin:0; font-size:1.1rem; color:var(--text);">OWASP Secure Headers Project Audit</h3>
+                        <h3 style="margin:0; font-size:1.1rem; color:var(--text);">Security Headers Quick Check (5 Core Headers)</h3>
                     </div>
                     <div id="http-score-badge" style="font-size:2.5rem; font-weight:900; color:var(--brand);">—</div>
                 </div>
@@ -432,7 +432,7 @@
         <div class="pane-card" style="padding:16px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
                 <span id="mime-results-count" style="font-size:0.88rem; font-weight:600; color:var(--text-muted);">Loading MIME database...</span>
-                <span style="font-size:0.78rem; color:var(--text-muted);">400+ indexed MIME types</span>
+                <span style="font-size:0.78rem; color:var(--text-muted);">80+ indexed MIME types</span>
             </div>
             <div style="overflow-x:auto; max-height:400px; overflow-y:auto;">
                 <table style="width:100%; border-collapse:collapse; font-size:0.84rem;">

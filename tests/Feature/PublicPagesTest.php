@@ -118,10 +118,10 @@ class PublicPagesTest extends TestCase
             ->assertSee('find the page', false);
     }
 
-    public function test_all_sixty_four_tools_render_hero_and_editorial_sections(): void
+    public function test_all_seventy_four_tools_render_hero_and_editorial_sections(): void
     {
         $tools = require base_path('app/Data/tools.php');
-        $this->assertCount(64, $tools);
+        $this->assertCount(74, $tools);
 
         foreach ($tools as $tool) {
             $slug = $tool['slug'];

@@ -289,4 +289,54 @@ return array (
     0 => 'when-to-use-url-encoding-in-api-and-form-work',
     1 => 'how-to-clean-text-for-urls-and-slugs',
   ),
+  'remove-duplicate-lines' => 
+  array (
+    0 => 'how-line-sorting-helps-clean-messy-lists-fast',
+    1 => 'how-to-clean-text-for-urls-and-slugs',
+  ),
+  'remove-empty-lines' => 
+  array (
+    0 => 'how-line-sorting-helps-clean-messy-lists-fast',
+    1 => 'how-to-format-json-without-errors',
+  ),
+  'find-and-replace' => 
+  array (
+    0 => 'common-regex-mistakes-beginners-make',
+    1 => 'how-to-clean-text-for-urls-and-slugs',
+  ),
+  'reverse-text' => 
+  array (
+    0 => 'how-line-sorting-helps-clean-messy-lists-fast',
+    1 => 'how-to-compare-text-differences-quickly',
+  ),
+  'markdown-to-html' => 
+  array (
+    0 => 'how-to-format-json-without-errors',
+    1 => 'how-to-compare-text-differences-quickly',
+  ),
+  'html-to-markdown' => 
+  array (
+    0 => 'how-to-format-json-without-errors',
+    1 => 'how-to-compare-text-differences-quickly',
+  ),
+  'unicode-inspector' => 
+  array (
+    0 => 'how-to-clean-text-for-urls-and-slugs',
+    1 => 'common-regex-mistakes-beginners-make',
+  ),
+  'text-escape-unescape' => 
+  array (
+    0 => 'how-to-format-json-without-errors',
+    1 => 'when-to-use-url-encoding-in-api-and-form-work',
+  ),
+  'csv-viewer' => 
+  array (
+    0 => 'best-way-to-clean-csv-before-converting-to-json',
+    1 => 'how-to-format-json-without-errors',
+  ),
+  'tsv-to-csv-converter' => 
+  array (
+    0 => 'best-way-to-clean-csv-before-converting-to-json',
+    1 => 'how-line-sorting-helps-clean-messy-lists-fast',
+  ),
 );

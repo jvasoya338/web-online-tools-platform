@@ -3197,7 +3197,7 @@ Next Run: Today at :15, :30, :45, :00',
     'example_title' => 'Ansible Task Syntax Validation',
     'example_body' => 'A single misplaced space in an Ansible task can cause an entire deployment run to abort. Validating the block structure beforehand catches syntax problems before touching infrastructure.',
     'privacy_note' => 'Validation is executed entirely client-side in your web browser. Confidential server manifests and infrastructure files never leave your computer.',
-    'technical_notes' => 'The validation engine checks for compliance with the YAML 1.2 specification. It tokenizes the input to ensure all indentations use spaces, block scalars are properly terminated, and all mapping keys have valid value delimiters.',
+    'technical_notes' => 'The validation engine checks common YAML 1.2 syntax structures, indentation consistency, and tab prohibition. It tokenizes mappings, sequences, and scalars while noting that advanced constructs like complex anchors, aliases, and custom schema tags require full server-side linters.',
     'worked_example' => 
     array (
       'input_label' => 'Sample YAML to Validate',
@@ -3671,6 +3671,584 @@ Description: Modern compressed web image format developed by Google.',
       array (
         'question' => 'What happens if a server sends the wrong Content-Type header?',
         'answer' => 'Browsers may either refuse to execute the file (such as scripts and stylesheets when nosniff is enabled), misinterpret binary data as plain text, or force the user to download the file instead of displaying it.',
+      ),
+    ),
+  ),
+  'remove-duplicate-lines' => 
+  array (
+    'use_steps' => 
+    array (
+      0 => 'Paste your text list, log export, or email dataset into the input area.',
+      1 => 'Choose matching criteria such as case sensitivity, whitespace trimming, or preserving initial ordering.',
+      2 => 'Click "Remove Duplicates" and review the live metrics summarizing unique lines and removed duplicates.',
+      3 => 'Copy the cleaned list or download it as a plain text document.',
+    ),
+    'use_cases' => 
+    array (
+      0 => 'Cleaning email subscriber lists or marketing recipient databases before campaign imports.',
+      1 => 'Deduplicating keyword lists during search engine optimization and PPC keyword research.',
+      2 => 'Normalizing log entry identifiers, IP address dumps, or database export records.',
+    ),
+    'watch_out_for' => 
+    array (
+      0 => 'Trailing or leading spaces will cause identical words to be treated as distinct lines unless "Trim Whitespace" is enabled.',
+      1 => 'Case-insensitive deduplication will discard uppercase variants in favor of the first matching line encountered.',
+      2 => 'Very large lists with hundreds of thousands of lines process entirely in memory; avoid closing the tab during processing.',
+    ),
+    'example_title' => 'Deduplicating an Email and Keyword List',
+    'example_body' => 'When compiling lists from multiple spreadsheets, identical lines frequently appear multiple times. This tool filters redundant entries in a single pass while preserving the original sequence.',
+    'privacy_note' => 'List deduplication runs entirely inside your browser JavaScript runtime. Sensitive email lists, customer records, and internal identifiers are never sent to our servers.',
+    'technical_notes' => 'Line deduplication utilizes a high-performance JavaScript Set data structure with O(n) average time complexity. When line trimming is active, string normalization occurs prior to Set membership checks while retaining the trimmed line in the output sequence.',
+    'worked_example' => 
+    array (
+      'input_label' => 'Source List With Duplicate Items',
+      'input' => 'apple
+banana
+apple
+cherry
+Banana
+apple',
+      'output_label' => 'Cleaned Unique List (Case-Insensitive)',
+      'output' => 'apple
+banana
+cherry',
+      'explanation' => 'Three instances of "apple" are collapsed to one, and "Banana" is identified as a duplicate of "banana" when case-insensitive comparison is selected.',
+    ),
+    'faq' => 
+    array (
+      0 => 
+      array (
+        'question' => 'Does this tool alter the original ordering of unique lines?',
+        'answer' => 'By default, the tool preserves the exact first-occurrence order of every unique line in your document. You can also pair it with our Line Sorter tool if alphabetical ordering is desired.',
+      ),
+      1 => 
+      array (
+        'question' => 'How does whitespace trimming affect duplicate detection?',
+        'answer' => 'When "Trim Whitespace" is enabled, leading and trailing spaces or tab characters are ignored during duplicate comparison, preventing " item" and "item" from appearing as separate unique rows.',
+      ),
+      2 => 
+      array (
+        'question' => 'Can I deduplicate confidential contact lists securely?',
+        'answer' => 'Yes. All data processing is executed entirely within your local browser sandbox via JavaScript. No data is transmitted across the network.',
+      ),
+    ),
+  ),
+  'remove-empty-lines' => 
+  array (
+    'use_steps' => 
+    array (
+      0 => 'Paste your text, code snippet, or exported file content into the input pane.',
+      1 => 'Select whether to strip all blank lines, remove whitespace-only rows, or collapse multiple blank lines into a single spacing break.',
+      2 => 'Click "Remove Empty Lines" to generate the cleaned output.',
+      3 => 'Review the reduction statistics and copy or download the consolidated text.',
+    ),
+    'use_cases' => 
+    array (
+      0 => 'Removing excessive paragraph gaps and empty rows from converted PDF or OCR text extractions.',
+      1 => 'Cleaning blank lines in source code, configuration files, or database seed dumps.',
+      2 => 'Preparing clean text blocks for character-limited forms, SMS templates, or documentation snippets.',
+    ),
+    'watch_out_for' => 
+    array (
+      0 => 'In Markdown documents, double line breaks denote paragraph separations; stripping all blank lines will convert paragraphs into a single continuous block.',
+      1 => 'Lines containing invisible Unicode characters (like non-breaking spaces) require the "Treat whitespace as empty" option to be caught.',
+      2 => 'Preserving single blank lines is recommended when cleaning prose or code files where visual spacing improves readability.',
+    ),
+    'example_title' => 'Cleaning OCR Text Extractions',
+    'example_body' => 'Scanned documents and OCR conversions often generate sporadic double or triple blank lines. This tool normalizes spacing into clean, consistent text.',
+    'privacy_note' => 'Empty line stripping executes 100% client-side in your local browser window. No document text or file contents are transferred over the internet.',
+    'technical_notes' => 'The tool evaluates each line break using standard regular expressions matching (?:\\r?\\n){2,} and ^\\s*$ patterns. Whitespace normalization processes Unicode space characters (\\s) including non-breaking spaces (\\u00A0) and zero-width spaces.',
+    'worked_example' => 
+    array (
+      'input_label' => 'Text With Excess Spacing & Blank Lines',
+      'input' => 'Chapter 1: Overview
+
+
+
+This section introduces the foundational concepts.
+   
+
+Next steps follow below.',
+      'output_label' => 'Cleaned Text (Collapsed Blank Lines)',
+      'output' => 'Chapter 1: Overview
+
+This section introduces the foundational concepts.
+
+Next steps follow below.',
+      'explanation' => 'Multiple consecutive blank lines and whitespace-only rows are collapsed into standard single blank line dividers.',
+    ),
+    'faq' => 
+    array (
+      0 => 
+      array (
+        'question' => 'What is the difference between stripping all empty lines and collapsing them?',
+        'answer' => 'Stripping removes every blank line entirely, joining all text rows together. Collapsing preserves single blank line breaks between paragraphs while eliminating double or triple blank gaps.',
+      ),
+      1 => 
+      array (
+        'question' => 'Does this tool treat lines with only spaces or tabs as empty?',
+        'answer' => 'Yes, when the "Include whitespace-only lines" option is checked, rows consisting only of spaces, tabs, or invisible whitespace are treated as empty lines and removed.',
+      ),
+      2 => 
+      array (
+        'question' => 'Does this tool support Windows (CRLF) and Unix (LF) line endings?',
+        'answer' => 'Yes. The parser seamlessly normalizes both Windows (\\r\\n) and Unix/Linux/macOS (\\n) line termination sequences.',
+      ),
+    ),
+  ),
+  'find-and-replace' => 
+  array (
+    'use_steps' => 
+    array (
+      0 => 'Paste your text document or code into the main editor.',
+      1 => 'Enter the string or pattern to find in the "Find" field, and the replacement text in the "Replace with" field.',
+      2 => 'Toggle options such as Case Sensitive, Whole Word Matching, or Regular Expression mode as needed.',
+      3 => 'Click "Replace All" and view the updated document alongside the replacement count statistic.',
+    ),
+    'use_cases' => 
+    array (
+      0 => 'Refactoring variable names, domain URLs, or API endpoints across bulk configuration templates.',
+      1 => 'Fixing recurring typos or updating terminology across lengthy editorial manuscripts.',
+      2 => 'Using regular expressions to reformat date strings, phone numbers, or structured data rows.',
+    ),
+    'watch_out_for' => 
+    array (
+      0 => 'In Regular Expression mode, unescaped special characters (e.g. ., *, +, ?, [, ]) have special syntactic meanings; toggle regex mode off for literal string replacement.',
+      1 => 'Whole Word mode relies on word boundaries (\\b); punctuation adjacent to terms may alter boundary detection in certain languages.',
+      2 => 'Leaving the "Replace with" field empty functions as a global removal tool for the specified search term.',
+    ),
+    'example_title' => 'Batch Replacing API Domain Endpoints',
+    'example_body' => 'When migrating staging environments to production, developers must replace all instances of http://staging.api.local with https://api.production.com. Find and Replace executes this instantly across multiline payloads.',
+    'privacy_note' => 'Find and replace operations occur entirely inside your browser memory. Your documents, search queries, and replacement strings are never transmitted to external servers.',
+    'technical_notes' => 'Literal replacements construct dynamic regular expressions with RegExp.escape semantics to prevent unexpected metacharacter evaluation. In regex mode, the user pattern is compiled with safety guards against catastrophic backtracking patterns.',
+    'worked_example' => 
+    array (
+      'input_label' => 'Source Configuration Snippet',
+      'input' => 'DATABASE_HOST=staging-db.internal
+CACHE_HOST=staging-cache.internal
+LOG_PREFIX=staging_app',
+      'output_label' => 'Replaced Configuration (Find "staging", Replace "production")',
+      'output' => 'DATABASE_HOST=production-db.internal
+CACHE_HOST=production-cache.internal
+LOG_PREFIX=production_app',
+      'explanation' => 'All 3 occurrences of "staging" were located and substituted with "production" in a single pass with real-time match reporting.',
+    ),
+    'faq' => 
+    array (
+      0 => 
+      array (
+        'question' => 'Can I use capture groups in regular expression replacements?',
+        'answer' => 'Yes. In Regular Expression mode, you can use $1, $2, etc., in the replacement field to reference matched capture groups from your find pattern.',
+      ),
+      1 => 
+      array (
+        'question' => 'How does Whole Word matching work?',
+        'answer' => 'Whole Word matching ensures that finding "cat" will replace "the cat sat" but will ignore words like "category" or "scattered".',
+      ),
+      2 => 
+      array (
+        'question' => 'Can I replace text with nothing to delete specific phrases?',
+        'answer' => 'Yes. Leaving the "Replace with" field blank will delete all instances of the matched find pattern across your entire document.',
+      ),
+    ),
+  ),
+  'reverse-text' => 
+  array (
+    'use_steps' => 
+    array (
+      0 => 'Paste or type the text you want to reverse into the input editor.',
+      1 => 'Select your desired reversal mode: Reverse Characters (complete string reversal), Reverse Words (word sequence inversion), Reverse Lines, or Reverse Characters per Line.',
+      2 => 'Click "Reverse Text" to see the transformed output instantly.',
+      3 => 'Copy the reversed string to your clipboard or download it as a text file.',
+    ),
+    'use_cases' => 
+    array (
+      0 => 'Reversing lists of dates, log chronologies, or ordered data sets to display newest-first or oldest-first.',
+      1 => 'Creating palindromic checks and debugging character indexing logic in software development.',
+      2 => 'Text styling, cryptographic puzzle construction, and mirror text generation.',
+    ),
+    'watch_out_for' => 
+    array (
+      0 => 'Reversing strings containing Unicode surrogate pairs or combined emojis (e.g. flags or skin tones) requires grapheme-aware reversal to avoid corrupted glyphs.',
+      1 => 'Reverse Words mode splits on space delimiters; punctuation attached to words will remain attached to those words in their new positions.',
+      2 => 'Reverse Lines mode reverses the top-to-bottom row sequence while preserving the left-to-right character order within each row.',
+    ),
+    'example_title' => 'Reversing Chronological Log Sequences',
+    'example_body' => 'When viewing log files ordered from oldest to newest, using Reverse Lines instantly inverts the file so the most recent log events appear at the top.',
+    'privacy_note' => 'All text reversal transforms run locally within your browser engine. Your text content is never uploaded, logged, or sent to any server.',
+    'technical_notes' => 'Character reversal utilizes the standard Intl.Segmenter API with grapheme granularity (and Array.from code-point fallback), ensuring that multi-codepoint emojis, skin tone modifiers, and complex script clusters remain visually intact. Word reversal tokenizes on whitespace boundaries, while line reversal inverts line sequences.',
+    'worked_example' => 
+    array (
+      'input_label' => 'Input Text',
+      'input' => 'Step 1: Download
+Step 2: Install
+Step 3: Run',
+      'output_label' => 'Reversed Lines Output',
+      'output' => 'Step 3: Run
+Step 2: Install
+Step 1: Download',
+      'explanation' => 'In "Reverse Lines" mode, the sequence of lines is inverted from bottom-to-top while preserving internal sentence grammar.',
+    ),
+    'faq' => 
+    array (
+      0 => 
+      array (
+        'question' => 'Does this tool support emoji and international Unicode characters?',
+        'answer' => 'Yes. The reversal engine utilizes the modern Intl.Segmenter API to maintain user-perceived grapheme clusters, so combined emojis, flags, and diacritic marks stay attached to their base characters during reversal.',
+      ),
+      1 => 
+      array (
+        'question' => 'What is the difference between Reverse Characters and Reverse Words?',
+        'answer' => 'Reverse Characters turns "Hello World" into "dlroW olleH". Reverse Words turns "Hello World" into "World Hello".',
+      ),
+      2 => 
+      array (
+        'question' => 'Can I reverse each line individually?',
+        'answer' => 'Yes. Selecting "Reverse Per Line" keeps the vertical line order intact while flipping the character sequence of each individual line.',
+      ),
+    ),
+  ),
+  'markdown-to-html' => 
+  array (
+    'use_steps' => 
+    array (
+      0 => 'Paste your Markdown content, README file, or documentation into the left editor pane.',
+      1 => 'Select formatting options such as GitHub Flavored Markdown (GFM) tables, task lists, or smart line breaks.',
+      2 => 'View the converted HTML markup in the output pane, or toggle the "Rendered Preview" tab to inspect formatted visual output.',
+      3 => 'Copy the generated HTML code or download it as an `.html` file.',
+    ),
+    'use_cases' => 
+    array (
+      0 => 'Converting technical README documentation and release notes into HTML for website publication or blog posts.',
+      1 => 'Drafting content in lightweight Markdown syntax and exporting standard HTML for CMS platforms like WordPress or Webflow.',
+      2 => 'Generating HTML email templates and formatted newsletter snippets from plain Markdown drafts.',
+    ),
+    'watch_out_for' => 
+    array (
+      0 => 'Raw HTML embedded inside Markdown is preserved by default; avoid pasting untrusted script tags if rendering in production.',
+      1 => 'Tables in GitHub Flavored Markdown require a header row and separator line (|---|---|) to render properly.',
+      2 => 'Ensure code blocks use triple backticks (```) with language identifiers for clean `<pre><code>` HTML output.',
+    ),
+    'example_title' => 'Converting a Feature Specification to HTML',
+    'example_body' => 'Markdown headings, bullet lists, bold text, and hyperlinks are converted to semantic HTML tags (<h2>, <ul>, <li>, <strong>, <a>) ready for direct integration into web templates.',
+    'privacy_note' => 'Markdown parsing and HTML generation execute entirely in your local browser JavaScript environment. Your documents, notes, and technical drafts are never transmitted over the network.',
+    'technical_notes' => 'The conversion engine parses commonly used CommonMark and GitHub Flavored Markdown (GFM) constructs. It transforms headings, lists, code blocks, blockquotes, tables, and inline formatting into clean, semantic HTML5 markup.',
+    'worked_example' => 
+    array (
+      'input_label' => 'Source Markdown Input',
+      'input' => '## Features
+
+- **Fast**: 100% browser-based
+- **Secure**: Zero uploads
+
+Visit [WebToolsStation](https://webtoolsstation.com)',
+      'output_label' => 'Converted HTML Output',
+      'output' => '<h2>Features</h2>
+<ul>
+  <li><strong>Fast</strong>: 100% browser-based</li>
+  <li><strong>Secure</strong>: Zero uploads</li>
+</ul>
+<p>Visit <a href="https://webtoolsstation.com">WebToolsStation</a></p>',
+      'explanation' => 'Markdown syntax elements are converted to standard, semantic HTML5 tags with proper nesting and attribute formatting.',
+    ),
+    'faq' => 
+    array (
+      0 => 
+      array (
+        'question' => 'Does this converter support GitHub Flavored Markdown (GFM)?',
+        'answer' => 'Yes. The converter supports GFM extensions including tables, task lists ([x]), strikethrough (~~text~~), code block language syntax, and automatic URL linkification.',
+      ),
+      1 => 
+      array (
+        'question' => 'Can I preview the rendered HTML visually before copying?',
+        'answer' => 'Yes. You can switch between "HTML Source Code" and "Visual Preview" tabs to see exactly how your Markdown will look when rendered by a web browser.',
+      ),
+      2 => 
+      array (
+        'question' => 'Does the generated HTML include full document wrappers (<html>, <body>)?',
+        'answer' => 'By default, the tool outputs clean HTML fragments suitable for embedding directly into CMS editors or template layouts. You can also download a complete standalone HTML document with one click.',
+      ),
+    ),
+  ),
+  'html-to-markdown' => 
+  array (
+    'use_steps' => 
+    array (
+      0 => 'Paste your raw HTML markup, web page source snippet, or rich text export into the input editor.',
+      1 => 'Click "Convert to Markdown" to generate clean GitHub Flavored Markdown (GFM).',
+      2 => 'Review the generated Markdown structure in the output pane.',
+      3 => 'Copy the Markdown text to your clipboard or download it as a `.md` document.',
+    ),
+    'use_cases' => 
+    array (
+      0 => 'Migrating legacy HTML blog posts, articles, and documentation into static site generators (Hugo, Jekyll, Astro, Next.js).',
+      1 => 'Converting rich text copied from web pages into clean Markdown for GitHub issues, pull requests, or README files.',
+      2 => 'Archiving and normalizing web content into human-readable plain text notes.',
+    ),
+    'watch_out_for' => 
+    array (
+      0 => 'Complex layout structures like nested multi-level tables, complex CSS grids, or nested iframes have no direct Markdown representation and are simplified.',
+      1 => 'Inline CSS styles (such as color, font-size, margin) are discarded to produce clean semantic Markdown.',
+      2 => 'Malformed HTML tags (e.g. unclosed tags) are normalized by the browser DOM parser before conversion.',
+    ),
+    'example_title' => 'Converting an HTML Blog Post to Markdown',
+    'example_body' => 'Web articles containing headings (<h1>..<h6>), paragraphs, bold and italic text, hyperlinks, and bulleted lists are transformed into clean, readable Markdown syntax without HTML boilerplate.',
+    'privacy_note' => 'HTML-to-Markdown conversion executes entirely within your local browser DOM environment. No HTML payloads, document contents, or URLs are uploaded to external servers.',
+    'technical_notes' => 'The conversion engine parses the input using standard DOMParser and recursively traverses the DOM tree. It maps HTML5 semantic nodes (e.g. H1-H6, P, STRONG, EM, UL, OL, LI, BLOCKQUOTE, CODE, PRE, TABLE, TR, TD, TH, A, IMG) to their GFM equivalents.',
+    'worked_example' => 
+    array (
+      'input_label' => 'Source HTML Code',
+      'input' => '<h2>Release Notes</h2>
+<p>Version <strong>2.0</strong> is now live!</p>
+<ul>
+  <li>Added new tools</li>
+  <li><a href="https://webtoolsstation.com">Visit Website</a></li>
+</ul>',
+      'output_label' => 'Converted Markdown Output',
+      'output' => '## Release Notes
+
+Version **2.0** is now live!
+
+- Added new tools
+- [Visit Website](https://webtoolsstation.com)',
+      'explanation' => 'Headings, paragraphs, bold tags, unordered lists, and hyperlinks are converted to standard GitHub Flavored Markdown formatting.',
+    ),
+    'faq' => 
+    array (
+      0 => 
+      array (
+        'question' => 'Does this tool support HTML tables?',
+        'answer' => 'Yes. Standard HTML <table> structures with <thead>, <tbody>, <tr>, <th>, and <td> elements are converted into GitHub Flavored Markdown table syntax.',
+      ),
+      1 => 
+      array (
+        'question' => 'How does the converter handle code blocks and syntax highlighting?',
+        'answer' => 'HTML `<pre><code>` structures are converted into fenced Markdown code blocks (```) and preserve language classes when present.',
+      ),
+      2 => 
+      array (
+        'question' => 'Is raw HTML content sent to any server during conversion?',
+        'answer' => 'No. All parsing and conversion are executed locally in your browser sandbox using the browser native DOM API.',
+      ),
+    ),
+  ),
+  'unicode-inspector' => 
+  array (
+    'use_steps' => 
+    array (
+      0 => 'Type or paste any text string, emoji, international character, or symbol into the input field.',
+      1 => 'Inspect the generated character-by-character table displaying the character, Unicode code point (U+XXXX), decimal value, UTF-8 byte encoding, and character category.',
+      2 => 'Review grapheme cluster groupings to understand how combined emojis and diacritics are formed.',
+      3 => 'Click "Copy Code Point" or "Copy Character" to copy specific values to your clipboard.',
+    ),
+    'use_cases' => 
+    array (
+      0 => 'Debugging encoding issues, mojibake (garbled characters), and invisible zero-width characters in web applications.',
+      1 => 'Inspecting multi-byte emoji sequences, skin tone modifiers, and zero-width joiners (ZWJ).',
+      2 => 'Finding the exact Unicode hexadecimal code point and HTML entity for typography and symbols.',
+    ),
+    'watch_out_for' => 
+    array (
+      0 => 'Some complex emojis (like family emojis or flags) are composite grapheme clusters composed of multiple individual Unicode code points joined by ZWJ (U+200D).',
+      1 => 'Invisible characters like zero-width space (U+200B) or byte order mark (U+FEFF) will appear in the inspector table even though they render invisibly in text editors.',
+      2 => 'UTF-8 byte counts differ from character counts: ASCII characters use 1 byte, while emojis and non-Latin scripts use 2 to 4 bytes per code point.',
+    ),
+    'example_title' => 'Inspecting a Multi-Byte Emoji and Accented Character',
+    'example_body' => 'When pasting "Café 🚀", the inspector breaks down each component: C (U+0043, 1 byte), a (U+0061, 1 byte), f (U+0066, 1 byte), é (combining acute U+0301 or precomposed U+00E9), space (U+0020, 1 byte), and rocket 🚀 (U+1F680, 4 bytes).',
+    'privacy_note' => 'Unicode inspection executes 100% locally in your browser memory. No text input is recorded, logged, or transmitted across the network.',
+    'technical_notes' => 'The inspector iterates over code points using codePointAt() and segmenter APIs. UTF-8 byte sequences are computed via native TextEncoder, providing exact hexadecimal byte representations (e.g. 0xF0 0x9F 0x9A 0x80 for U+1F680).',
+    'worked_example' => 
+    array (
+      'input_label' => 'Input String',
+      'input' => 'A 😀',
+      'output_label' => 'Inspected Breakdown',
+      'output' => 'Char: \'A\' | Code Point: U+0041 | Dec: 65 | UTF-8: 0x41 | Category: Letter, Uppercase
+Char: \' \' | Code Point: U+0020 | Dec: 32 | UTF-8: 0x20 | Category: Separator, Space
+Char: \'😀\' | Code Point: U+1F600 | Dec: 128512 | UTF-8: 0xF0 0x9F 0x98 0x80 | Category: Symbol, Other',
+      'explanation' => 'Each character is analyzed with its exact hexadecimal code point, decimal code, UTF-8 byte stream, and general Unicode category.',
+    ),
+    'faq' => 
+    array (
+      0 => 
+      array (
+        'question' => 'What is the difference between a code point and a grapheme cluster?',
+        'answer' => 'A code point is a single atomic numerical value in the Unicode standard (e.g. U+0041 for "A"). A grapheme cluster is what a user perceives as a single visual character, which may consist of multiple code points (e.g. a base emoji plus a skin tone modifier).',
+      ),
+      1 => 
+      array (
+        'question' => 'How many UTF-8 bytes does an emoji require?',
+        'answer' => 'Most modern emojis in the Supplementary Multilingual Plane (SMP, above U+FFFF) require 4 bytes in UTF-8 encoding.',
+      ),
+      2 => 
+      array (
+        'question' => 'Can this tool reveal invisible zero-width spaces in copied text?',
+        'answer' => 'Yes. Invisible characters such as U+200B (Zero-Width Space) and U+FEFF (Zero-Width No-Break Space) are highlighted explicitly in the table with their code points.',
+      ),
+    ),
+  ),
+  'text-escape-unescape' => 
+  array (
+    'use_steps' => 
+    array (
+      0 => 'Paste your text, code string, or payload into the input editor.',
+      1 => 'Select your target format: JSON String, JavaScript/C-style String, HTML Entities, or CSV Field.',
+      2 => 'Choose the operation mode: "Escape" (convert special characters to escape sequences) or "Unescape" (restore original characters).',
+      3 => 'Copy the transformed output or download it for use in your project.',
+    ),
+    'use_cases' => 
+    array (
+      0 => 'Escaping multiline strings, double quotes, and backslashes for embedding inside JSON API payloads.',
+      1 => 'Formatting text for inclusion inside JavaScript string literals (`\\n`, `\\t`, `\\"`, `\'`).',
+      2 => 'Sanitizing raw text containing `<, >, &, "` into HTML entities (`&lt;, &gt;, &amp;, &quot;`).',
+    ),
+    'watch_out_for' => 
+    array (
+      0 => 'Double escaping: escaping an already escaped string will convert `\\"` into `\\\\"`; ensure you choose the correct direction.',
+      1 => 'JSON strings require double quotes around escaped keys and values according to RFC 8259.',
+      2 => 'In CSV mode, fields containing commas, quotes, or newlines are enclosed in double quotes with internal quotes doubled (`""`).',
+    ),
+    'example_title' => 'Escaping a Multiline Text Block for JSON',
+    'example_body' => 'When embedding text with quotes and newlines into a JSON payload, raw newlines cause parsing errors. Escaping converts newlines to `\\n` and double quotes to `\\"`.',
+    'privacy_note' => 'All text escaping and unescaping operations execute locally on your device within the browser engine. Your text data is never sent to our servers.',
+    'technical_notes' => 'JSON escaping utilizes native JSON.stringify and JSON.parse implementations. HTML entity escaping maps characters to their standard XML/HTML entities (`&`, `<`, `>`, `"`, `\'`). CSV escaping follows RFC 4180 standard quotation rules.',
+    'worked_example' => 
+    array (
+      'input_label' => 'Raw Multiline Text With Quotes',
+      'input' => 'Hello "World"
+Line 2 with 	 tab.',
+      'output_label' => 'JSON Escaped Output',
+      'output' => '"Hello \\"World\\"\\nLine 2 with \\t tab."',
+      'explanation' => 'Double quotes are escaped with backslashes, line breaks are replaced with \\n, and tabs are replaced with \\t.',
+    ),
+    'faq' => 
+    array (
+      0 => 
+      array (
+        'question' => 'What characters are escaped in JSON mode?',
+        'answer' => 'JSON mode escapes quotation marks (\\"), backslashes (\\), line breaks (\\n), carriage returns (\\r), tabs (\\t), backspaces (\\b), form feeds (\\f), and Unicode control characters.',
+      ),
+      1 => 
+      array (
+        'question' => 'How does CSV field escaping work?',
+        'answer' => 'If a value contains a comma, newline, or quotation mark, the field is enclosed in double quotes and any existing quotes inside the field are doubled (e.g. "He said ""Hello""").',
+      ),
+      2 => 
+      array (
+        'question' => 'Can I unescape an already escaped JSON string back to normal text?',
+        'answer' => 'Yes. Selecting the "Unescape" mode will convert `\\n` back to actual line breaks and `\\"` back to literal quotes.',
+      ),
+    ),
+  ),
+  'csv-viewer' => 
+  array (
+    'use_steps' => 
+    array (
+      0 => 'Paste your CSV content or upload a `.csv` file into the viewer.',
+      1 => 'Select the delimiter (Comma, Semicolon, Tab, Pipe) or allow auto-detection.',
+      2 => 'Toggle "First row is header" to format column titles.',
+      3 => 'Use the search filter to query rows and inspect total row/column counts.',
+    ),
+    'use_cases' => 
+    array (
+      0 => 'Quickly inspecting exported customer lists, transaction logs, or spreadsheet data without opening Excel or Google Sheets.',
+      1 => 'Verifying that CSV exports correctly handle quoted commas, multiline values, and headers.',
+      2 => 'Filtering and searching through large tabular datasets directly inside your web browser.',
+    ),
+    'watch_out_for' => 
+    array (
+      0 => 'RFC 4180 requires fields containing commas or line breaks to be wrapped in double quotes; unquoted commas in data columns will cause column misalignment.',
+      1 => 'Ensure the correct delimiter is selected if your CSV uses semicolons (common in European Excel exports) or tabs.',
+      2 => 'Extremely large CSV files with hundreds of thousands of rows will utilize local browser memory; consider filtering before pasting.',
+    ),
+    'example_title' => 'Inspecting a User Directory CSV Export',
+    'example_body' => 'Pasting a raw CSV block renders an interactive table with bold headers, alternating row striping, and a live search filter box.',
+    'privacy_note' => 'All CSV parsing and rendering occur 100% inside your local browser memory. No spreadsheet data, financial figures, or confidential records are transmitted across the internet.',
+    'technical_notes' => 'The parser implements an RFC 4180 finite-state machine that accurately tracks quote states. It correctly parses commas and newlines inside quoted fields, handles doubled quotes (`""`), and reports row/column count diagnostics.',
+    'worked_example' => 
+    array (
+      'input_label' => 'Raw CSV Input',
+      'input' => 'Name,Email,Role,Location
+Alex Smith,alex@example.com,Developer,"New York, USA"
+Maria Garcia,maria@example.com,Designer,"Madrid, Spain"',
+      'output_label' => 'Rendered Table Structure',
+      'output' => '2 rows | 4 columns
+Headers: [Name, Email, Role, Location]
+Row 1: Alex Smith | alex@example.com | Developer | New York, USA
+Row 2: Maria Garcia | maria@example.com | Designer | Madrid, Spain',
+      'explanation' => 'The quoted commas inside "New York, USA" and "Madrid, Spain" are correctly parsed as single cell values rather than column separators.',
+    ),
+    'faq' => 
+    array (
+      0 => 
+      array (
+        'question' => 'Does this viewer support European CSV files with semicolon (;) delimiters?',
+        'answer' => 'Yes. You can select "Semicolon (;)" from the Delimiter dropdown or use Auto-Detect to parse European-format CSV files effortlessly.',
+      ),
+      1 => 
+      array (
+        'question' => 'How does the parser handle commas inside quoted text?',
+        'answer' => 'The parser conforms to RFC 4180 standards: commas enclosed within double quotes are treated as literal cell content rather than column breaks.',
+      ),
+      2 => 
+      array (
+        'question' => 'Can I search and filter rows in the table preview?',
+        'answer' => 'Yes. The built-in search box instantly filters rows matching your query in real time.',
+      ),
+    ),
+  ),
+  'tsv-to-csv-converter' => 
+  array (
+    'use_steps' => 
+    array (
+      0 => 'Paste your TSV (Tab-Separated Values) data or export into the input editor.',
+      1 => 'Click "Convert to CSV" to transform tab separators into standard comma separators.',
+      2 => 'Review the generated RFC 4180 compliant CSV code.',
+      3 => 'Copy the CSV output to your clipboard or download it as a `.csv` file.',
+    ),
+    'use_cases' => 
+    array (
+      0 => 'Converting database query results, SQL outputs, and spreadsheet clipboard copies into standard CSV format.',
+      1 => 'Preparing data exports for systems that strictly accept Comma-Separated Values rather than TSV.',
+      2 => 'Normalizing mixed tab-delimited datasets into standardized CSV files.',
+    ),
+    'watch_out_for' => 
+    array (
+      0 => 'Values containing commas, quotation marks, or newlines must be quoted in CSV; the converter automatically applies RFC 4180 double quotation.',
+      1 => 'Consecutive tabs represent empty columns and are preserved as empty values in the CSV output.',
+      2 => 'Ensure the source text uses actual tab characters (`\\t`) rather than multiple spaces.',
+    ),
+    'example_title' => 'Converting SQL Query Output to CSV',
+    'example_body' => 'Pasting tab-separated database rows automatically converts them into properly escaped, comma-separated rows ready for import into CRM or spreadsheet applications.',
+    'privacy_note' => 'TSV-to-CSV conversion runs entirely client-side inside your browser sandbox. Your database records, spreadsheets, and data payloads are never uploaded.',
+    'technical_notes' => 'The conversion engine splits lines on newline sequences and tokenizes columns on tab characters (`\\t`). Each cell value is evaluated: if it contains a comma, double quote, or newline, it is enclosed in double quotes and internal quotes are escaped as `""` per RFC 4180.',
+    'worked_example' => 
+    array (
+      'input_label' => 'Source TSV Input (Tab-Separated)',
+      'input' => 'ID	Product	Price
+101	Widget, Large	24.99
+102	Gadget	14.50',
+      'output_label' => 'Converted RFC 4180 CSV Output',
+      'output' => 'ID,Product,Price
+101,"Widget, Large",24.99
+102,Gadget,14.50',
+      'explanation' => 'The tab characters are replaced with commas, and the cell value "Widget, Large" containing a comma is automatically wrapped in double quotes.',
+    ),
+    'faq' => 
+    array (
+      0 => 
+      array (
+        'question' => 'How does this tool handle cell values containing commas?',
+        'answer' => 'Any cell containing a comma is automatically enclosed in double quotation marks (e.g. "Widget, Large") to prevent CSV readers from splitting it into two columns.',
+      ),
+      1 => 
+      array (
+        'question' => 'How are quotation marks inside cell values escaped?',
+        'answer' => 'In accordance with RFC 4180, existing double quotation marks inside a cell are doubled (e.g. "He said ""Hello""").',
+      ),
+      2 => 
+      array (
+        'question' => 'Can I download the output directly as a .csv file?',
+        'answer' => 'Yes. Click the "Download CSV" button to save the converted file directly to your device.',
       ),
     ),
   ),

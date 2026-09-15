@@ -1474,4 +1474,244 @@ return array (
       2 => 'One-click header & MIME string copy',
     ),
   ),
+  64 => 
+  array (
+    'slug' => 'remove-duplicate-lines',
+    'title' => 'Remove Duplicate Lines',
+    'icon' => 'RD',
+    'category' => 'Text Tools',
+    'summary' => 'Deduplicate text lists while preserving or sorting order.',
+    'description' => 'Remove duplicate lines from lists, CSVs, log exports, and text datasets. Features case sensitivity toggles, whitespace trimming, and original order preservation.',
+    'seo_description' => 'Remove duplicate lines from text online with WebToolsStation. Clean up lists, deduplicate keywords, and remove redundant lines with instant client-side processing.',
+    'keywords' => 
+    array (
+      0 => 'remove duplicate lines',
+      1 => 'deduplicate list',
+      2 => 'text deduplicator',
+      3 => 'delete duplicate lines online',
+      4 => 'unique lines extractor',
+    ),
+    'details' => 
+    array (
+      0 => 'Case-sensitive or insensitive matching',
+      1 => 'Preserve original line order',
+      2 => 'Live duplicate removal statistics',
+    ),
+  ),
+  65 => 
+  array (
+    'slug' => 'remove-empty-lines',
+    'title' => 'Remove Empty Lines',
+    'icon' => 'RE',
+    'category' => 'Text Tools',
+    'summary' => 'Strip blank lines, whitespace-only rows, and excess gaps.',
+    'description' => 'Clean up messy documents, code blocks, and datasets by stripping empty lines, whitespace-only rows, or collapsing multiple consecutive blank lines into one.',
+    'seo_description' => 'Remove empty lines from text online with WebToolsStation. Strip blank lines, remove whitespace-only rows, and clean document spacing in your browser with zero data uploads.',
+    'keywords' => 
+    array (
+      0 => 'remove empty lines',
+      1 => 'delete blank lines',
+      2 => 'strip empty lines online',
+      3 => 'remove white space lines',
+      4 => 'clean blank lines',
+    ),
+    'details' => 
+    array (
+      0 => 'Strip all blank lines',
+      1 => 'Remove whitespace-only rows',
+      2 => 'Collapse consecutive empty lines',
+    ),
+  ),
+  66 => 
+  array (
+    'slug' => 'find-and-replace',
+    'title' => 'Find and Replace',
+    'icon' => 'FR',
+    'category' => 'Text Tools',
+    'summary' => 'Search and substitute text patterns or regular expressions.',
+    'description' => 'Search and replace words, phrases, or regex patterns across multiline text. Supports case matching, whole-word matching, and live replacement count reporting.',
+    'seo_description' => 'Find and replace text online with WebToolsStation. Search and substitute words, phrases, or regular expression patterns with live replacement metrics.',
+    'keywords' => 
+    array (
+      0 => 'find and replace',
+      1 => 'find and replace text online',
+      2 => 'search and replace text',
+      3 => 'regex find and replace',
+      4 => 'text substitute tool',
+    ),
+    'details' => 
+    array (
+      0 => 'Case-sensitive and whole-word modes',
+      1 => 'Safe regular expression support',
+      2 => 'Live replacement count tracker',
+    ),
+  ),
+  67 => 
+  array (
+    'slug' => 'reverse-text',
+    'title' => 'Reverse Text',
+    'icon' => 'RT',
+    'category' => 'Text Tools',
+    'summary' => 'Reverse character order, word sequences, or line structures.',
+    'description' => 'Reverse text character-by-character, reverse word order, invert line sequences, or flip characters per line. Designed for data cleaning, debugging, and text manipulation.',
+    'seo_description' => 'Reverse text online with WebToolsStation. Flip character order, reverse word sequences, and invert line lists in your browser with pure client-side processing.',
+    'keywords' => 
+    array (
+      0 => 'reverse text',
+      1 => 'reverse words',
+      2 => 'backwards text generator',
+      3 => 'reverse string online',
+      4 => 'invert line order',
+    ),
+    'details' => 
+    array (
+      0 => 'Reverse characters, words, or lines',
+      1 => 'Flip characters per individual line',
+      2 => 'Preserve whitespace structure',
+    ),
+  ),
+  68 => 
+  array (
+    'slug' => 'markdown-to-html',
+    'title' => 'Markdown to HTML',
+    'icon' => 'MD',
+    'category' => 'Text Tools',
+    'summary' => 'Convert Markdown content into clean HTML and live previews.',
+    'description' => 'Convert GitHub Flavored Markdown (GFM) into clean, standard HTML code. Features dual-pane source and preview rendering, table support, task lists, and one-click export.',
+    'seo_description' => 'Convert Markdown to HTML online with WebToolsStation. Transform GFM headings, tables, code blocks, and formatting into clean HTML markup with instant live preview.',
+    'keywords' => 
+    array (
+      0 => 'markdown to html',
+      1 => 'convert markdown to html',
+      2 => 'markdown previewer online',
+      3 => 'gfm to html converter',
+      4 => 'markdown renderer',
+    ),
+    'details' => 
+    array (
+      0 => 'GitHub Flavored Markdown (GFM) syntax',
+      1 => 'Live side-by-side HTML preview',
+      2 => 'One-click HTML markup download',
+    ),
+  ),
+  69 => 
+  array (
+    'slug' => 'html-to-markdown',
+    'title' => 'HTML to Markdown',
+    'icon' => 'HM',
+    'category' => 'Text Tools',
+    'summary' => 'Convert HTML markup into clean GitHub Flavored Markdown.',
+    'description' => 'Convert HTML documents, blog articles, and rich snippets into clean Markdown syntax. Supports headings, paragraphs, lists, code blocks, blockquotes, links, images, and tables.',
+    'seo_description' => 'Convert HTML to Markdown online with WebToolsStation. Transform HTML tags, tables, code fences, and links into clean GitHub Flavored Markdown (GFM) with zero data uploads.',
+    'keywords' => 
+    array (
+      0 => 'html to markdown',
+      1 => 'convert html to markdown',
+      2 => 'html to md converter',
+      3 => 'html to gfm online',
+      4 => 'html markdown generator',
+    ),
+    'details' => 
+    array (
+      0 => 'Converts HTML elements to GFM',
+      1 => 'Preserves headings, lists, and code fences',
+      2 => '100% browser-based conversion',
+    ),
+  ),
+  70 => 
+  array (
+    'slug' => 'unicode-inspector',
+    'title' => 'Unicode Inspector',
+    'icon' => 'UI',
+    'category' => 'Developer Tools',
+    'summary' => 'Inspect characters, code points, UTF-8 bytes, and graphemes.',
+    'description' => 'Analyze text character-by-character to inspect Unicode code points (U+XXXX), decimal values, UTF-8 hex byte sequences, HTML entities, and grapheme cluster boundaries.',
+    'seo_description' => 'Inspect Unicode characters online with WebToolsStation. Analyze code points (U+XXXX), UTF-8 hex bytes, decimal representations, and emojis in your browser.',
+    'keywords' => 
+    array (
+      0 => 'unicode inspector',
+      1 => 'unicode character lookup',
+      2 => 'utf-8 byte inspector',
+      3 => 'unicode code point finder',
+      4 => 'inspect unicode string',
+    ),
+    'details' => 
+    array (
+      0 => 'U+XXXX code point notation',
+      1 => 'UTF-8 hex byte breakdown',
+      2 => 'Grapheme cluster and emoji analysis',
+    ),
+  ),
+  71 => 
+  array (
+    'slug' => 'text-escape-unescape',
+    'title' => 'Text Escape and Unescape',
+    'icon' => 'EU',
+    'category' => 'Developer Tools',
+    'summary' => 'Escape and unescape JSON, JavaScript, HTML, and string literals.',
+    'description' => 'Escape or unescape special characters for JSON strings, JavaScript literals, HTML entities, and CSV fields. Easily toggle between escaping and unescaping modes.',
+    'seo_description' => 'Escape and unescape text online with WebToolsStation. Convert quotes, backslashes, newlines, and special characters for JSON, JavaScript, HTML, and CSV safely in your browser.',
+    'keywords' => 
+    array (
+      0 => 'text escape unescape',
+      1 => 'json string escape',
+      2 => 'javascript string escape',
+      3 => 'escape text online',
+      4 => 'unescape string online',
+    ),
+    'details' => 
+    array (
+      0 => 'JSON, JS, HTML, and CSV escape modes',
+      1 => 'Bidirectional escape and unescape',
+      2 => 'Instant client-side transformation',
+    ),
+  ),
+  72 => 
+  array (
+    'slug' => 'csv-viewer',
+    'title' => 'CSV Viewer',
+    'icon' => 'CV',
+    'category' => 'Developer Tools',
+    'summary' => 'Inspect and search CSV files in an interactive data table.',
+    'description' => 'Parse and view CSV files in a structured, searchable data table. Supports RFC 4180 compliant parsing, auto-detected delimiters (comma, tab, semicolon, pipe), and row counts.',
+    'seo_description' => 'View and inspect CSV files online with WebToolsStation. Interactive tabular preview with search filtering, delimiter selection, and RFC 4180 parsing in your browser.',
+    'keywords' => 
+    array (
+      0 => 'csv viewer',
+      1 => 'view csv online',
+      2 => 'csv table viewer',
+      3 => 'csv file inspector',
+      4 => 'online csv reader',
+    ),
+    'details' => 
+    array (
+      0 => 'RFC 4180 compliant CSV parser',
+      1 => 'Custom delimiter detection',
+      2 => 'Interactive searchable table grid',
+    ),
+  ),
+  73 => 
+  array (
+    'slug' => 'tsv-to-csv-converter',
+    'title' => 'TSV to CSV Converter',
+    'icon' => 'TC',
+    'category' => 'Developer Tools',
+    'summary' => 'Convert Tab-Separated Values into RFC 4180 compliant CSV.',
+    'description' => 'Convert TSV spreadsheets and database exports into RFC 4180 standard CSV files. Automatically wraps values with commas, quotes, or newlines in standard double-quote escapes.',
+    'seo_description' => 'Convert TSV to CSV online with WebToolsStation. Transform tab-separated files into RFC 4180 compliant CSV format with proper quote escaping in your browser.',
+    'keywords' => 
+    array (
+      0 => 'tsv to csv',
+      1 => 'convert tsv to csv',
+      2 => 'tab separated to comma separated',
+      3 => 'tsv to csv converter online',
+      4 => 'export tsv as csv',
+    ),
+    'details' => 
+    array (
+      0 => 'RFC 4180 compliant output',
+      1 => 'Automatic quote escaping',
+      2 => 'One-click CSV file download',
+    ),
+  ),
 );
