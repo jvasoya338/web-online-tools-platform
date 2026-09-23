@@ -66,10 +66,105 @@
                 'html-to-markdown', 'unicode-inspector', 'text-escape-unescape',
                 'csv-viewer', 'tsv-to-csv-converter',
             ];
+            $dataToolsBatch1 = [
+                'json-tree-viewer', 'json-path-finder', 'json-flatten-unflatten', 'json-key-sorter',
+                'json-schema-generator', 'json-schema-validator', 'jsonlines-validator-formatter',
+                'csv-validator', 'csv-column-extractor', 'csv-to-sql-converter',
+                'toml-formatter-validator', 'toml-to-json-converter',
+            ];
+            $codeFormattersBatch1 = [
+                'python-formatter', 'php-formatter', 'java-formatter', 'csharp-formatter',
+                'cpp-formatter', 'go-formatter', 'sql-minifier', 'uuid-v7-generator',
+            ];
+            $devBatch2New = [
+                'uuid-validator', 'env-file-parser-formatter', 'curl-to-fetch-converter',
+                'curl-to-python-converter', 'user-agent-parser', 'semver-validator-calculator',
+                'dockerfile-formatter',
+            ];
+            $textBatch2New = [
+                'whitespace-cleaner', 'shuffle-lines', 'number-lines', 'prefix-suffix-lines',
+                'text-splitter', 'text-merger', 'extract-emails', 'extract-urls',
+                'extract-ip-addresses', 'extract-numbers', 'word-frequency-counter',
+                'text-repeater', 'tabs-to-spaces-converter',
+            ];
+            $encodeToolsBatch3 = [
+                'markdown-table-generator', 'base32-encode-decode', 'base58-encode-decode',
+                'base85-encode-decode', 'hex-string-encode-decode', 'ascii-to-decimal-converter',
+                'octal-to-text-converter', 'rot13-encoder-decoder', 'morse-code-translator',
+                'punycode-converter', 'data-uri-generator',
+            ];
+            $securityToolsBatch3 = [
+                'password-strength-analyzer', 'hash-comparator', 'api-key-generator',
+                'sri-hash-generator', 'csp-generator', 'csp-validator', 'file-hash-calculator',
+                'sensitive-data-redactor',
+            ];
+            $seoToolsBatch3 = [
+                'meta-tag-generator',
+            ];
+            $seoToolsBatch4 = [
+                'meta-tag-analyzer', 'serp-snippet-preview', 'open-graph-generator',
+                'twitter-card-generator', 'robots-txt-generator', 'robots-txt-validator',
+                'xml-sitemap-validator', 'schema-breadcrumb-generator', 'schema-faq-generator',
+                'keyword-density-analyzer',
+            ];
+            $webToolsBatch4 = [
+                'url-builder-utm', 'url-normalizer', 'url-validator',
+                'http-status-code-lookup', 'cookie-parser', 'http-request-builder',
+                'cors-header-generator', 'browser-info-detector',
+            ];
+            $colorToolsBatch4 = [
+                'hex-to-hsl-converter', 'color-palette-generator',
+            ];
+            $colorToolsBatch5 = [
+                'css-gradient-generator', 'wcag-contrast-checker',
+                'color-shades-tints-generator', 'css-variable-color-generator',
+            ];
+            $imageToolsBatch5 = [
+                'image-resizer', 'image-cropper', 'image-to-base64-converter',
+                'base64-to-image-converter', 'svg-placeholder-generator',
+            ];
+            $calcToolsBatch5 = [
+                'percentage-calculator', 'aspect-ratio-calculator',
+                'date-difference-calculator', 'data-storage-converter',
+                'download-time-calculator',
+            ];
+            $aiToolsBatch5 = [
+                'ai-token-counter', 'ai-prompt-diff-checker',
+                'fine-tuning-jsonl-validator', 'rag-chunk-size-calculator',
+                'ai-prompt-formatter', 'llms-txt-generator',
+            ];
         @endphp
 
         <section class="tool-workspace-hero" id="tool-workspace" aria-label="{{ $tool['title'] }} Workspace">
-            @if (in_array($tool['slug'], $devBatch2bTools))
+            @if (in_array($tool['slug'], $dataToolsBatch1))
+                @include('site.tools.workspace-data-tools')
+            @elseif (in_array($tool['slug'], $codeFormattersBatch1))
+                @include('site.tools.workspace-code-formatters')
+            @elseif (in_array($tool['slug'], $devBatch2New))
+                @include('site.tools.workspace-dev-batch2')
+            @elseif (in_array($tool['slug'], $textBatch2New))
+                @include('site.tools.workspace-text-batch2')
+            @elseif (in_array($tool['slug'], $encodeToolsBatch3))
+                @include('site.tools.workspace-encode-tools')
+            @elseif (in_array($tool['slug'], $securityToolsBatch3))
+                @include('site.tools.workspace-security-tools')
+            @elseif (in_array($tool['slug'], $seoToolsBatch3))
+                @include('site.tools.workspace-seo-batch3')
+            @elseif (in_array($tool['slug'], $seoToolsBatch4))
+                @include('site.tools.workspace-seo-batch4')
+            @elseif (in_array($tool['slug'], $webToolsBatch4))
+                @include('site.tools.workspace-web-batch4')
+            @elseif (in_array($tool['slug'], $colorToolsBatch4))
+                @include('site.tools.workspace-color-batch4')
+            @elseif (in_array($tool['slug'], $colorToolsBatch5))
+                @include('site.tools.workspace-color-batch5')
+            @elseif (in_array($tool['slug'], $imageToolsBatch5))
+                @include('site.tools.workspace-image-batch5')
+            @elseif (in_array($tool['slug'], $calcToolsBatch5))
+                @include('site.tools.workspace-calc-batch5')
+            @elseif (in_array($tool['slug'], $aiToolsBatch5))
+                @include('site.tools.workspace-ai-batch5')
+            @elseif (in_array($tool['slug'], $devBatch2bTools))
                 @include('site.tools.workspace-dev-batch2b')
             @elseif (in_array($tool['slug'], $textToolsBatch2))
                 @include('site.tools.workspace-text-tools')
@@ -278,9 +373,9 @@
                             <a href="{{ url('/guides/' . $guide['slug']) }}" class="card click-card" style="text-decoration:none; padding:16px;">
                                 <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
                                     <div class="tool-icon" style="width:32px; height:32px; font-size:0.75rem;">GD</div>
-                                    <h3 style="margin:0; font-size:0.95rem; font-weight:600; color:var(--text);">{{ $guide['title'] }}</h3>
+                                    <h3 style="margin:0; font-size:0.95rem; font-weight:600; color:var(--text);">{{ $guide['title'] ?? 'Editorial Guide' }}</h3>
                                 </div>
-                                <p style="font-size:0.83rem; color:var(--text-muted); line-height:1.45; margin:0 0 10px;">{{ $guide['seo_description'] }}</p>
+                                <p style="font-size:0.83rem; color:var(--text-muted); line-height:1.45; margin:0 0 10px;">{{ $guide['seo_description'] ?? ($guide['intro'] ?? '') }}</p>
                                 <span style="font-size:0.82rem; font-weight:600; color:var(--brand);">Read guide →</span>
                             </a>
                         @endforeach
@@ -310,6 +405,19 @@
     @if ($tool['category'] === 'Developer Tools' || $tool['category'] === 'Security Tools' || $tool['category'] === 'Color Tools' || in_array($tool['slug'], array_merge($devBatch1Tools, $devBatch2bTools, $minifierTools, $formatterTools, $validatorTools, $converterTools, $devHelperTools, $textCodeTools, $generatorTools, $colorTools, $imageTools, $metricsTools)))
         <script src="/js/developer-tools.js"></script>
     @endif
+    <script src="/js/data-engine.js"></script>
+    <script src="/js/developer-engine.js"></script>
+    <script src="/js/text-engine.js"></script>
+    <script src="/js/encode-engine.js"></script>
+    <script src="/js/security-engine.js"></script>
+    <script src="/js/seo-engine.js"></script>
+    <script src="/js/seo-batch4-engine.js"></script>
+    <script src="/js/web-batch4-engine.js"></script>
+    <script src="/js/color-batch4-engine.js"></script>
+    <script src="/js/color-batch5-engine.js"></script>
+    <script src="/js/image-batch5-engine.js"></script>
+    <script src="/js/calculator-batch5-engine.js"></script>
+    <script src="/js/ai-batch5-engine.js"></script>
     <script>
         const currentToolSlug = "{{ $tool['slug'] }}";
 
@@ -494,7 +602,43 @@
             'reverse-text', 'markdown-to-html', 'html-to-markdown', 'unicode-inspector',
             'text-escape-unescape', 'csv-viewer', 'tsv-to-csv-converter', 'query-string-parser',
             'csv-to-json-converter', 'json-to-xml-converter', 'xml-to-json-converter',
-            'json-to-csv-converter', 'yaml-to-json-converter', 'json-to-yaml-converter'
+            'json-to-csv-converter', 'yaml-to-json-converter', 'json-to-yaml-converter',
+            // New Batch 1 Data & Code Tools
+            'json-tree-viewer', 'json-path-finder', 'json-flatten-unflatten', 'json-key-sorter',
+            'json-schema-generator', 'json-schema-validator', 'jsonlines-validator-formatter',
+            'csv-validator', 'csv-column-extractor', 'csv-to-sql-converter',
+            'toml-formatter-validator', 'toml-to-json-converter',
+            'python-formatter', 'php-formatter', 'java-formatter', 'csharp-formatter',
+            'cpp-formatter', 'go-formatter', 'sql-minifier',
+            // New Batch 2 Tools
+            'uuid-validator', 'env-file-parser-formatter', 'curl-to-fetch-converter',
+            'curl-to-python-converter', 'user-agent-parser', 'semver-validator-calculator',
+            'dockerfile-formatter', 'whitespace-cleaner', 'number-lines',
+            'prefix-suffix-lines', 'text-splitter', 'text-merger', 'extract-emails',
+            'extract-urls', 'extract-ip-addresses', 'extract-numbers',
+            'word-frequency-counter', 'text-repeater', 'tabs-to-spaces-converter',
+            // New Batch 3 Tools
+            'markdown-table-generator', 'base32-encode-decode', 'base58-encode-decode',
+            'base85-encode-decode', 'hex-string-encode-decode', 'ascii-to-decimal-converter',
+            'octal-to-text-converter', 'rot13-encoder-decoder', 'morse-code-translator',
+            'punycode-converter', 'data-uri-generator', 'password-strength-analyzer',
+            'hash-comparator', 'sri-hash-generator', 'csp-generator', 'csp-validator',
+            'sensitive-data-redactor', 'meta-tag-generator',
+            // New Batch 4 Tools
+            'meta-tag-analyzer', 'serp-snippet-preview', 'open-graph-generator',
+            'twitter-card-generator', 'robots-txt-generator', 'robots-txt-validator',
+            'xml-sitemap-validator', 'schema-breadcrumb-generator', 'schema-faq-generator',
+            'keyword-density-analyzer', 'url-builder-utm', 'url-normalizer',
+            'url-validator', 'http-status-code-lookup', 'cookie-parser',
+            'http-request-builder', 'cors-header-generator', 'hex-to-hsl-converter',
+            'color-palette-generator',
+            // New Batch 5 Tools
+            'css-gradient-generator', 'wcag-contrast-checker', 'color-shades-tints-generator',
+            'css-variable-color-generator', 'svg-placeholder-generator', 'percentage-calculator',
+            'aspect-ratio-calculator', 'date-difference-calculator', 'data-storage-converter',
+            'download-time-calculator', 'ai-token-counter', 'ai-prompt-diff-checker',
+            'fine-tuning-jsonl-validator', 'rag-chunk-size-calculator', 'ai-prompt-formatter',
+            'llms-txt-generator'
         ];
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -584,7 +728,112 @@
                 'unicode-inspector': runUnicodeInspector,
                 'text-escape-unescape': runTextEscape,
                 'csv-viewer': runCsvViewer,
-                'tsv-to-csv-converter': runTsvToCsv
+                'tsv-to-csv-converter': runTsvToCsv,
+                // New 100 Tools - Batch 1
+                'json-tree-viewer': renderJsonTreeViewer,
+                'json-path-finder': runJsonPathFinder,
+                'json-flatten-unflatten': () => runJsonFlatten('flatten'),
+                'json-key-sorter': () => runJsonKeySorter('asc'),
+                'json-schema-generator': runJsonSchemaGenerator,
+                'json-schema-validator': runJsonSchemaValidator,
+                'jsonlines-validator-formatter': () => runJsonLinesTool('validate'),
+                'csv-validator': runCsvValidator,
+                'csv-column-extractor': runCsvColumnExtractor,
+                'csv-to-sql-converter': runCsvToSqlConverter,
+                'toml-formatter-validator': runTomlFormatterValidator,
+                'toml-to-json-converter': runTomlToJsonConverter,
+                'python-formatter': runPythonFormatter,
+                'php-formatter': runPhpFormatter,
+                'java-formatter': runJavaFormatter,
+                'csharp-formatter': runCSharpFormatter,
+                'cpp-formatter': runCppFormatter,
+                'go-formatter': runGoFormatter,
+                'sql-minifier': runSqlMinifier,
+                'uuid-v7-generator': generateUuidV7List,
+                // New 100 Tools - Batch 2
+                'uuid-validator': runUuidValidator,
+                'env-file-parser-formatter': runEnvFormatter,
+                'curl-to-fetch-converter': runCurlToFetch,
+                'curl-to-python-converter': runCurlToPython,
+                'user-agent-parser': runUserAgentParser,
+                'semver-validator-calculator': runSemverCalculator,
+                'dockerfile-formatter': runDockerfileFormatter,
+                'whitespace-cleaner': runWhitespaceCleaner,
+                'shuffle-lines': runShuffleLines,
+                'number-lines': () => runNumberLines('add'),
+                'prefix-suffix-lines': runPrefixSuffixLines,
+                'text-splitter': runTextSplitter,
+                'text-merger': runTextMerger,
+                'extract-emails': runExtractEmails,
+                'extract-urls': runExtractUrls,
+                'extract-ip-addresses': runExtractIpAddresses,
+                'extract-numbers': runExtractNumbers,
+                'word-frequency-counter': runWordFrequencyCounter,
+                'text-repeater': runTextRepeater,
+                'tabs-to-spaces-converter': () => runTabsToSpaces('tabs-to-spaces'),
+                // New 100 Tools - Batch 3
+                'markdown-table-generator': runMarkdownTableGenerator,
+                'base32-encode-decode': () => runBase32('encode'),
+                'base58-encode-decode': () => runBase58('encode'),
+                'base85-encode-decode': () => runBase85('encode'),
+                'hex-string-encode-decode': () => runHexString('encode'),
+                'ascii-to-decimal-converter': () => runAsciiDecimal('to_dec'),
+                'octal-to-text-converter': () => runOctalText('oct_to_txt'),
+                'rot13-encoder-decoder': runRot13,
+                'morse-code-translator': () => runMorseCode('to_morse'),
+                'punycode-converter': () => runPunycode('to_puny'),
+                'data-uri-generator': runDataUri,
+                'password-strength-analyzer': runPasswordStrengthAnalyzer,
+                'hash-comparator': runHashComparator,
+                'api-key-generator': generateApiKeys,
+                'sri-hash-generator': runSriHashGenerator,
+                'csp-generator': runCspGenerator,
+                'csp-validator': runCspValidator,
+                'sensitive-data-redactor': runSensitiveDataRedactor,
+                'meta-tag-generator': runMetaTagGenerator,
+                'file-checksum-verifier': verifyFileChecksum,
+                // New 100 Tools - Batch 4
+                'meta-tag-analyzer': runMetaTagAnalyzer,
+                'serp-snippet-preview': runSerpPreview,
+                'open-graph-generator': runOpenGraphGenerator,
+                'twitter-card-generator': runTwitterCardGenerator,
+                'robots-txt-generator': runRobotsTxtGenerator,
+                'robots-txt-validator': runRobotsTxtValidator,
+                'xml-sitemap-validator': runXmlSitemapValidator,
+                'schema-breadcrumb-generator': runSchemaBreadcrumbGenerator,
+                'schema-faq-generator': runSchemaFaqGenerator,
+                'keyword-density-analyzer': runKeywordDensityAnalyzer,
+                'url-builder-utm': runUtmUrlBuilder,
+                'url-normalizer': runUrlNormalizer,
+                'url-validator': runUrlValidator,
+                'http-status-code-lookup': runHttpStatusLookup,
+                'cookie-parser': runCookieParser,
+                'http-request-builder': runHttpRequestBuilder,
+                'cors-header-generator': runCorsHeaderGenerator,
+                'browser-info-detector': runBrowserInfoDetector,
+                'hex-to-hsl-converter': runHexToHsl,
+                'color-palette-generator': runColorPaletteGenerator,
+                // New 100 Tools - Batch 5
+                'css-gradient-generator': runCssGradientGenerator,
+                'wcag-contrast-checker': runWcagContrastChecker,
+                'color-shades-tints-generator': runColorShadesTints,
+                'css-variable-color-generator': runCssVariableGenerator,
+                'image-resizer': runImageResizer,
+                'image-cropper': runImageCropper,
+                'image-to-base64-converter': runImageToBase64,
+                'base64-to-image-converter': runBase64ToImage,
+                'svg-placeholder-generator': runSvgPlaceholderGenerator,
+                'percentage-calculator': runPercentageCalculator,
+                'aspect-ratio-calculator': runAspectRatioCalculator,
+                'date-difference-calculator': runDateDifferenceCalculator,
+                'data-storage-converter': runDataStorageConverter,
+                'download-time-calculator': runDownloadTimeCalculator,
+                'ai-token-counter': runAiTokenCounter,
+                'ai-prompt-diff-checker': runAiPromptDiff,
+                'fine-tuning-jsonl-validator': runFineTuningJsonlValidator,
+                'rag-chunk-size-calculator': runRagChunkCalculator,
+                'ai-prompt-formatter': runAiPromptFormatter,
+                'llms-txt-generator': runLlmsTxtGenerator
             };
             if (actionMap[currentToolSlug]) {
                 actionMap[currentToolSlug]();
@@ -1328,6 +1577,46 @@
             if (currentToolSlug === 'text-escape-unescape') loadTextEscapeSample();
             if (currentToolSlug === 'csv-viewer') loadCsvViewerSample();
             if (currentToolSlug === 'tsv-to-csv-converter') loadTsvToCsvSample();
+            // New Batch 1 auto-inits
+            if (currentToolSlug === 'uuid-v7-generator') generateUuidV7List();
+            // New Batch 2 auto-inits
+            if (currentToolSlug === 'user-agent-parser') runUserAgentParser();
+            // New Batch 3 auto-inits
+            if (currentToolSlug === 'api-key-generator') generateApiKeys();
+            if (currentToolSlug === 'meta-tag-generator') runMetaTagGenerator();
+            if (currentToolSlug === 'csp-generator') runCspGenerator();
+            if (currentToolSlug === 'markdown-table-generator') runMarkdownTableGenerator();
+            // New Batch 4 auto-inits
+            if (currentToolSlug === 'serp-snippet-preview') runSerpPreview();
+            if (currentToolSlug === 'open-graph-generator') runOpenGraphGenerator();
+            if (currentToolSlug === 'twitter-card-generator') runTwitterCardGenerator();
+            if (currentToolSlug === 'robots-txt-generator') runRobotsTxtGenerator();
+            if (currentToolSlug === 'schema-breadcrumb-generator') runSchemaBreadcrumbGenerator();
+            if (currentToolSlug === 'schema-faq-generator') runSchemaFaqGenerator();
+            if (currentToolSlug === 'url-builder-utm') runUtmUrlBuilder();
+            if (currentToolSlug === 'http-status-code-lookup') runHttpStatusLookup();
+            if (currentToolSlug === 'http-request-builder') runHttpRequestBuilder();
+            if (currentToolSlug === 'cors-header-generator') runCorsHeaderGenerator();
+            if (currentToolSlug === 'browser-info-detector') runBrowserInfoDetector();
+            if (currentToolSlug === 'hex-to-hsl-converter') runHexToHsl();
+            if (currentToolSlug === 'color-palette-generator') runColorPaletteGenerator();
+            // New Batch 5 auto-inits
+            if (currentToolSlug === 'css-gradient-generator') runCssGradientGenerator();
+            if (currentToolSlug === 'wcag-contrast-checker') runWcagContrastChecker();
+            if (currentToolSlug === 'color-shades-tints-generator') runColorShadesTints();
+            if (currentToolSlug === 'css-variable-color-generator') runCssVariableGenerator();
+            if (currentToolSlug === 'svg-placeholder-generator') runSvgPlaceholderGenerator();
+            if (currentToolSlug === 'percentage-calculator') runPercentageCalculator();
+            if (currentToolSlug === 'aspect-ratio-calculator') runAspectRatioCalculator();
+            if (currentToolSlug === 'date-difference-calculator') runDateDifferenceCalculator();
+            if (currentToolSlug === 'data-storage-converter') runDataStorageConverter();
+            if (currentToolSlug === 'download-time-calculator') runDownloadTimeCalculator();
+            if (currentToolSlug === 'ai-token-counter') runAiTokenCounter();
+            if (currentToolSlug === 'ai-prompt-diff-checker') runAiPromptDiff();
+            if (currentToolSlug === 'fine-tuning-jsonl-validator') runFineTuningJsonlValidator();
+            if (currentToolSlug === 'rag-chunk-size-calculator') runRagChunkCalculator();
+            if (currentToolSlug === 'ai-prompt-formatter') runAiPromptFormatter();
+            if (currentToolSlug === 'llms-txt-generator') runLlmsTxtGenerator();
         });
     </script>
 @endsection

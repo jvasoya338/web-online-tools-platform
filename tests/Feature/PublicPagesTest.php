@@ -22,6 +22,13 @@ class PublicPagesTest extends TestCase
             '/categories/image-tools',
             '/categories/security-tools',
             '/categories/pdf-tools',
+            '/categories/data-tools',
+            '/categories/encode-decode',
+            '/categories/seo-tools',
+            '/categories/web-tools',
+            '/categories/color-tools',
+            '/categories/calculators',
+            '/categories/ai-developer-tools',
             '/sitemap.xml',
             '/robots.txt',
         ];
@@ -118,10 +125,10 @@ class PublicPagesTest extends TestCase
             ->assertSee('find the page', false);
     }
 
-    public function test_all_seventy_four_tools_render_hero_and_editorial_sections(): void
+    public function test_all_tools_render_hero_and_editorial_sections(): void
     {
         $tools = require base_path('app/Data/tools.php');
-        $this->assertCount(74, $tools);
+        $this->assertCount(174, $tools);
 
         foreach ($tools as $tool) {
             $slug = $tool['slug'];

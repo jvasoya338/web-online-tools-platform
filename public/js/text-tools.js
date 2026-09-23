@@ -425,14 +425,14 @@ function sanitizeHtmlForPreview(html) {
     try {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
-        
+
         // Remove dangerous executable or embedding tags
         const dangerousTags = ['script', 'iframe', 'object', 'embed', 'style', 'link', 'meta', 'applet', 'form'];
         dangerousTags.forEach(tag => {
             const elements = doc.querySelectorAll(tag);
             elements.forEach(el => el.remove());
         });
-        
+
         // Strip event handlers (onclick, onerror, etc.) and dangerous protocols
         const allElements = doc.querySelectorAll('*');
         allElements.forEach(el => {
@@ -454,7 +454,7 @@ function sanitizeHtmlForPreview(html) {
                 }
             }
         });
-        
+
         return doc.body.innerHTML;
     } catch (e) {
         return escapeHtmlForMarkdown(html);

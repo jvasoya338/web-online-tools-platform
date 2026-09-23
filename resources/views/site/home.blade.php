@@ -20,7 +20,7 @@
                         <p>Total tools available today</p>
                     </div>
                     <div class="stat">
-                        <strong>5</strong>
+                        <strong>{{ count($categories) }}</strong>
                         <p>Focused categories</p>
                     </div>
                     <div class="stat">
@@ -31,7 +31,7 @@
             </div>
             <div class="hero-side">
                 <span class="mini-kicker">Platform Architecture</span>
-                <h2 style="margin:16px 0 12px; font-size:1.35rem;">Built for speed, accuracy, and data confidentiality</h2>
+                <h2 style="margin-top:16px; margin-bottom:12px; font-size:1.35rem;">Built for speed, accuracy, and data confidentiality</h2>
                 <p>
                     WebToolsStation is engineered to deliver immediate results directly in your browser without passing sensitive data to remote servers.
                 </p>
@@ -95,11 +95,9 @@
                 </div>
                 <div style="display:flex; flex-wrap:wrap; gap:8px;" id="filter-chips">
                     <button type="button" class="button button-primary filter-chip active" data-filter="all" style="font-size:0.88rem; padding:6px 14px;">All ({{ $toolCount }})</button>
-                    <button type="button" class="button button-ghost filter-chip" data-filter="developer-tools" style="font-size:0.88rem; padding:6px 14px;">Developer Tools</button>
-                    <button type="button" class="button button-ghost filter-chip" data-filter="text-tools" style="font-size:0.88rem; padding:6px 14px;">Text Tools</button>
-                    <button type="button" class="button button-ghost filter-chip" data-filter="image-tools" style="font-size:0.88rem; padding:6px 14px;">Image Tools</button>
-                    <button type="button" class="button button-ghost filter-chip" data-filter="security-tools" style="font-size:0.88rem; padding:6px 14px;">Security Tools</button>
-                    <button type="button" class="button button-ghost filter-chip" data-filter="pdf-tools" style="font-size:0.88rem; padding:6px 14px;">PDF Tools</button>
+                    @foreach ($categories as $cat)
+                        <button type="button" class="button button-ghost filter-chip" data-filter="{{ $cat['slug'] }}" style="font-size:0.88rem; padding:6px 14px;">{{ $cat['name'] }}</button>
+                    @endforeach
                 </div>
             </div>
 

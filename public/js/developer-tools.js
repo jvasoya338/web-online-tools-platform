@@ -306,7 +306,7 @@ function calculateSessionStatus(token, expiresAt) {
        Check if current timestamp exceeds expiration */
     const now = Math.floor(Date.now() / 1000);
     const isValid = Boolean(token) && expiresAt > now;
-    
+
     if (isValid) {
         return { active: true, remaining: expiresAt - now };
     } else {
@@ -763,7 +763,7 @@ function runValidator() {
         } catch (err) {
             if (succBox) succBox.style.display = 'none';
             if (failBox) failBox.style.display = 'block';
-            
+
             // Extract line/column from error
             let errorMsg = err.message;
             let lineNum = 1;

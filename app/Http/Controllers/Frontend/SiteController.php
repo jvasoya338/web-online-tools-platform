@@ -1118,8 +1118,24 @@ class SiteController extends Controller
             'Image Tools' => 'image-tools',
             'Security Tools' => 'security-tools',
             'PDF Tools' => 'pdf-tools',
+            'SEO Tools' => 'seo-tools',
+            'Web Tools' => 'web-tools',
+            'Color Tools' => 'color-tools',
+            'Calculators' => 'calculators',
+            'AI Developer Tools' => 'ai-developer-tools',
         ];
         $tool['category_slug'] = $categoryMap[$tool['category']] ?? 'developer-tools';
+
+        $tool['summary'] = $tool['summary'] ?? ($tool['meta_description'] ?? $tool['description'] ?? $tool['title']);
+        $tool['description'] = $tool['description'] ?? $tool['summary'];
+        $tool['seo_description'] = $tool['seo_description'] ?? ($tool['meta_description'] ?? $tool['summary']);
+        $tool['keywords'] = $tool['keywords'] ?? [strtolower($tool['title']), 'online tool', 'free utility', 'browser tool'];
+        $tool['details'] = $tool['details'] ?? [
+            '100% browser-based execution',
+            'Zero server upload or logging',
+            'Immediate real-time results'
+        ];
+        $tool['cta_text'] = $tool['cta_text'] ?? ('Run ' . $tool['title']);
 
         $tool['use_steps'] = $editorial['use_steps'] ?? [
             'Review the description so you know what the tool is meant to do before entering data.',
@@ -1187,7 +1203,8 @@ class SiteController extends Controller
 
     private function toolSeoDescription(array $tool): string
     {
-        return $tool['seo_description'] . ' Free browser tool with no sign-up, clear examples, and practical workflow notes.';
+        $desc = $tool['seo_description'] ?? $tool['meta_description'] ?? $tool['description'] ?? $tool['summary'] ?? $tool['title'];
+        return rtrim($desc, '.') . '. Free browser tool with no sign-up, clear examples, and practical workflow notes.';
     }
 
     private function guideSeoTitle(array $guide): string
