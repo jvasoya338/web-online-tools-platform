@@ -23,7 +23,11 @@
                 <button type="button" class="btn btn-ghost btn-sm" onclick="pasteConverterClipboard()" title="Paste from clipboard">Paste</button>
             </div>
         </div>
-        <textarea id="converter-input" class="editor-textarea" placeholder="Paste source payload to convert..." spellcheck="false"></textarea>
+        <textarea id="converter-input" class="editor-textarea" placeholder="Paste source payload to convert automatically..." spellcheck="false"></textarea>
+        <div style="padding:6px 12px; background:var(--surface-subtle); border-top:1px solid var(--border); font-size:0.75rem; color:var(--text-muted); display:flex; justify-content:space-between;">
+            <span>Source Ready</span>
+            <span>⚡ Live Auto-Convert</span>
+        </div>
     </div>
 
     <!-- Target Output Pane -->
@@ -56,32 +60,34 @@
             </div>
         </div>
         <textarea id="converter-output" class="editor-textarea" readonly placeholder="Converted data will appear here..." style="background:#fafafa;"></textarea>
+        <div style="padding:6px 12px; background:var(--surface-subtle); border-top:1px solid var(--border); font-size:0.75rem; color:var(--text-muted); display:flex; justify-content:space-between;">
+            <span>Target Output</span>
+            <span style="color:var(--brand-dark); font-weight:600;">Client-Side</span>
+        </div>
     </div>
 </div>
 
-<!-- Converter Options (Contextual) -->
-@if ($tool['slug'] === 'json-to-xml-converter')
-    <div style="display:flex; align-items:center; gap:12px; margin-top:16px; padding:12px 16px; background:var(--surface-subtle); border:1px solid var(--border); border-radius:var(--radius-md);">
-        <label for="xml-root-name" style="font-size:0.88rem; font-weight:600; color:var(--text);">XML Root Element:</label>
-        <input type="text" id="xml-root-name" value="root" style="height:36px; width:140px; font-family:var(--font-mono); font-weight:600;">
-        <span style="font-size:0.8rem; color:var(--text-muted);">Root wrapper tag for the converted XML document</span>
+<!-- Compact Action & Options Toolbar -->
+<div class="workspace-toolbar" style="margin-top:12px; padding:10px 14px; background:var(--surface-subtle); border:1px solid var(--border); border-radius:var(--radius-md);">
+    <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+        @if ($tool['slug'] === 'json-to-xml-converter')
+            <div style="display:flex; align-items:center; gap:6px;">
+                <label for="xml-root-name" style="font-size:0.82rem; font-weight:600; color:var(--text);">Root Tag:</label>
+                <input type="text" id="xml-root-name" value="root" oninput="runConverter()" style="height:32px; width:100px; font-family:var(--font-mono); font-size:0.84rem; font-weight:600; padding:0 8px; border-radius:var(--radius-sm); border:1px solid var(--border);">
+            </div>
+        @endif
     </div>
-@endif
 
-<!-- Error Notice -->
-<div id="converter-error" style="display:none; margin-top:12px; padding:12px 16px; background:var(--danger-bg); border:1px solid var(--danger); border-radius:var(--radius-sm); color:var(--danger); font-size:0.9rem;">
-    <strong>Conversion Error:</strong> <span id="converter-error-msg"></span>
-</div>
-
-<!-- Bottom Action Toolbar -->
-<div class="workspace-toolbar" style="margin-top:16px;">
     <div class="workspace-btn-group">
         <button type="button" class="btn btn-primary" onclick="runConverter()">
-            Convert to {{ explode(' to ', $tool['title'])[1] ?? 'Target' }}
+            {{ $tool['cta_text'] ?? 'Convert Data' }}
         </button>
-        <button type="button" class="btn btn-secondary" onclick="clearConverterInput()">Clear</button>
+        <button type="button" class="btn btn-ghost btn-sm" onclick="clearConverterInput()">Clear</button>
+        <span style="font-size:0.75rem; color:var(--text-muted); margin-left:4px;">Ctrl+Enter</span>
     </div>
-    <div class="workspace-hint">
-        <span>Keyboard: Press <kbd>Ctrl/Cmd+Enter</kbd> to convert</span>
-    </div>
+</div>
+
+<!-- Error Notice -->
+<div id="converter-error" style="display:none; margin-top:10px; padding:10px 14px; background:var(--danger-bg); border:1px solid var(--danger); border-radius:var(--radius-sm); color:var(--danger); font-size:0.88rem;">
+    <strong>Conversion Error:</strong> <span id="converter-error-msg"></span>
 </div>

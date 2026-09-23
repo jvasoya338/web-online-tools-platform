@@ -1,41 +1,38 @@
 @extends('site.layout')
 
 @section('content')
-    <div class="shell" style="padding-top:20px; padding-bottom:60px;">
+    <div class="shell" style="padding-top:12px; padding-bottom:48px;">
         <!-- Breadcrumb -->
-        <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <nav class="breadcrumbs" aria-label="Breadcrumb" style="font-size:0.78rem; margin-bottom:4px;">
             <a href="{{ url('/') }}">Home</a>
             <span aria-hidden="true">/</span>
             <a href="{{ url('/categories/' . $tool['category_slug']) }}">{{ $tool['category'] }}</a>
             <span aria-hidden="true">/</span>
-            <span style="color:var(--text); font-weight:500;">{{ $tool['title'] }}</span>
+            <span style="color:var(--text); font-weight:600;">{{ $tool['title'] }}</span>
         </nav>
 
         <!-- Tool Header -->
-        <header class="tool-header-block">
+        <header class="tool-header-block" style="padding:4px 0 8px;">
             <div class="tool-title-row">
                 <div class="tool-title-group">
-                    <div class="tool-page-icon">{{ $tool['icon'] }}</div>
+                    <div class="tool-page-icon" style="width:34px; height:34px; font-size:0.9rem;">{{ $tool['icon'] }}</div>
                     <div>
-                        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:4px;">
-                            <a href="{{ url('/categories/' . $tool['category_slug']) }}" class="badge" style="text-decoration:none; background:var(--surface-subtle); color:var(--text-muted); font-size:0.75rem; padding:2px 8px; border-radius:4px; border:1px solid var(--border);">
+                        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                            <h1 class="tool-page-title" style="font-size:1.4rem; display:inline;">{{ $tool['title'] }}</h1>
+                            <a href="{{ url('/categories/' . $tool['category_slug']) }}" class="badge" style="text-decoration:none; background:var(--surface-subtle); color:var(--text-muted); font-size:0.72rem; padding:1px 6px; border-radius:4px; border:1px solid var(--border);">
                                 {{ $tool['category'] }}
                             </a>
-                            <span style="font-size:0.78rem; color:var(--text-muted);">
-                                Updated {{ \Illuminate\Support\Carbon::parse($tool['updated_at'])->format('M j, Y') }}
-                            </span>
                         </div>
-                        <h1 class="tool-page-title">{{ $tool['title'] }}</h1>
                     </div>
                 </div>
 
                 <div class="privacy-badge" title="All operations run entirely in your web browser. No inputs or files are sent to any remote server.">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                    Processed locally in your browser — zero data uploaded
+                    🔒 Processed locally in your browser · Zero uploads
                 </div>
             </div>
 
-            <p class="tool-page-desc">{{ $tool['description'] }}</p>
+            <p class="tool-page-desc" style="margin:4px 0 0; font-size:0.88rem; color:var(--text-muted);">{{ $tool['description'] }}</p>
         </header>
 
         <!-- MAIN HERO TOOL WORKSPACE -->
@@ -476,6 +473,40 @@
             if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
                 e.preventDefault();
                 triggerPrimaryAction();
+            }
+        });
+
+        let debounceTimer;
+        function debounceTrigger(fn, delay = 300) {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(fn, delay);
+        }
+
+        const autoProcessTools = [
+            'json-formatter', 'base64-encode-decode', 'url-encode-decode', 'jwt-decoder',
+            'html-entity-encode-decode', 'text-to-binary-converter', 'binary-to-text-converter',
+            'text-case-converter', 'word-counter', 'color-converter', 'hex-to-rgb-converter',
+            'rgb-to-hex-converter', 'slug-generator', 'html-minifier', 'css-minifier',
+            'javascript-minifier', 'json-minifier', 'xml-minifier', 'html-formatter',
+            'css-formatter', 'javascript-formatter', 'xml-formatter', 'sql-formatter',
+            'json-validator', 'xml-validator', 'yaml-formatter', 'yaml-validator',
+            'remove-duplicate-lines', 'remove-empty-lines', 'find-and-replace',
+            'reverse-text', 'markdown-to-html', 'html-to-markdown', 'unicode-inspector',
+            'text-escape-unescape', 'csv-viewer', 'tsv-to-csv-converter', 'query-string-parser',
+            'csv-to-json-converter', 'json-to-xml-converter', 'xml-to-json-converter',
+            'json-to-csv-converter', 'yaml-to-json-converter', 'json-to-yaml-converter'
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (autoProcessTools.includes(currentToolSlug)) {
+                const workspace = document.getElementById('tool-workspace');
+                if (workspace) {
+                    workspace.addEventListener('input', (e) => {
+                        if (e.target && (e.target.tagName === 'TEXTAREA' || (e.target.tagName === 'INPUT' && e.target.type === 'text') || e.target.tagName === 'SELECT')) {
+                            debounceTrigger(triggerPrimaryAction, 300);
+                        }
+                    });
+                }
             }
         });
 

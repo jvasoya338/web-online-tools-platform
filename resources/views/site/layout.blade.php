@@ -636,42 +636,42 @@
 
         /* Tool Workspace Styles */
         .tool-header-block {
-            padding: 24px 0 16px;
+            padding: 10px 0 10px;
         }
 
         .breadcrumbs {
             display: flex;
             align-items: center;
             gap: 6px;
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
-            margin-bottom: 12px;
+            margin-bottom: 6px;
         }
 
         .breadcrumbs a:hover { color: var(--brand); }
 
         .tool-title-row {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: space-between;
-            gap: 20px;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
         .tool-title-group {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 10px;
         }
 
         .tool-page-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: var(--radius-md);
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
             background: var(--brand-light);
             color: var(--brand-dark);
             font-family: var(--font-mono);
-            font-size: 1.15rem;
+            font-size: 0.95rem;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -682,34 +682,35 @@
 
         .tool-page-title {
             margin: 0;
-            font-size: 1.75rem;
-            font-weight: 800;
+            font-size: 1.45rem;
+            font-weight: 750;
             color: var(--text);
-            letter-spacing: -0.02em;
+            letter-spacing: -0.015em;
         }
 
         .tool-page-desc {
-            margin: 6px 0 0;
+            margin: 4px 0 0;
             color: var(--text-muted);
-            font-size: 0.98rem;
-            max-width: 780px;
+            font-size: 0.9rem;
+            max-width: 800px;
+            line-height: 1.45;
         }
 
         .privacy-badge {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 4px 10px;
+            gap: 5px;
+            padding: 3px 8px;
             border-radius: 999px;
             background: var(--success-bg);
             color: var(--success);
-            font-size: 0.78rem;
+            font-size: 0.74rem;
             font-weight: 600;
             border: 1px solid rgba(22, 163, 74, 0.2);
             white-space: nowrap;
         }
 
-        .privacy-badge svg { width: 14px; height: 14px; }
+        .privacy-badge svg { width: 13px; height: 13px; }
 
         /* Main Tool Workspace Container */
         .tool-workspace-hero {
@@ -717,14 +718,14 @@
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-sm);
-            padding: 20px;
-            margin: 16px 0 36px;
+            padding: 16px;
+            margin: 10px 0 28px;
         }
 
         .workspace-split {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 18px;
+            gap: 14px;
         }
 
         .pane-card {
@@ -740,10 +741,10 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 8px 12px;
+            padding: 6px 12px;
             background: var(--surface-subtle);
             border-bottom: 1px solid var(--border);
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 600;
             color: var(--text-muted);
             text-transform: uppercase;
@@ -758,11 +759,12 @@
 
         .editor-textarea {
             width: 100%;
-            height: 360px;
+            height: 260px;
+            min-height: 200px;
             font-family: var(--font-mono);
             font-size: 0.88rem;
-            line-height: 1.55;
-            padding: 14px;
+            line-height: 1.5;
+            padding: 12px;
             border: none;
             outline: none;
             resize: vertical;
@@ -775,11 +777,12 @@
 
         .output-pre {
             width: 100%;
-            height: 360px;
+            height: 260px;
+            min-height: 200px;
             font-family: var(--font-mono);
             font-size: 0.88rem;
-            line-height: 1.55;
-            padding: 14px;
+            line-height: 1.5;
+            padding: 12px;
             margin: 0;
             overflow: auto;
             white-space: pre-wrap;
@@ -794,10 +797,10 @@
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 12px;
-            padding-top: 16px;
+            gap: 10px;
+            padding-top: 12px;
             border-top: 1px solid var(--border);
-            margin-top: 16px;
+            margin-top: 12px;
         }
 
         .workspace-btn-group {
